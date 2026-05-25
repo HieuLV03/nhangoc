@@ -10,6 +10,8 @@ export async function generateStaticParams() {
     .select("slug")
     .eq("status", "published");
 
+  if (!data || data.length === 0) return [];
+
   return data.map((item) => ({
     slug: item.slug,
   }));
@@ -17,8 +19,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }) {
-  const { slug } = params;
-
+const slug = params?.slug;
+if (!slug) return notFound();
   const { data } = await supabase
     .from("posts")
     .select("*")
@@ -92,7 +94,7 @@ export default async function PostPage({
         "status",
         "published"
       )
-      .single();
+      .maybeSingle();
 
   if (error || !data) {
     return (
