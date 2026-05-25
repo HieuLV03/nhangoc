@@ -16,10 +16,9 @@ export const metadata = {
   },
 
   description: "Thẩm mỹ công nghệ cao",
-
   verification: {
     google:
-      "iMhkqfnYHYPZ2e7ZhvNa8URs0nteVRjtS03F9CKa0sU",
+      "4mLd0Os-KkaDCT-MWvcardRaqRs4ARy18-EvKlD6fdU",
   },
 };
 
