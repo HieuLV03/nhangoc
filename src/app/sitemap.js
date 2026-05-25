@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase";
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 export default async function sitemap() {
   // POSTS
   const { data: posts, error: postError } =

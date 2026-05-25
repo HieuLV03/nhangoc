@@ -4,11 +4,19 @@ import { notFound } from "next/navigation";
 import BackButton from "@/components/BackButton/BackButton";
 
 // FIX CACHE
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 3600;
+export async function generateStaticParams() {
+  const { data } = await supabase
+    .from("services")
+    .select("slug")
+    .eq("status", "published");
 
+  return data.map((item) => ({
+    slug: item.slug,
+  }));
+}
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const { data } = await supabase
     .from("services")
@@ -66,7 +74,7 @@ export async function generateMetadata({ params }) {
 export default async function Page({
   params,
 }) {
-  const { slug } = params;
+  const { slug } =await params;
 
   const { data, error } =
     await supabase

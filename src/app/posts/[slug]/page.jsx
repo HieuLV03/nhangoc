@@ -1,13 +1,22 @@
 import { supabase } from "@/lib/supabase";
 import BackButton from "@/components/BackButton/BackButton";
 import "./page.css"
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 3600;
 
+export async function generateStaticParams() {
+  const { data } = await supabase
+    .from("posts")
+    .select("slug")
+    .eq("status", "published");
+
+  return data.map((item) => ({
+    slug: item.slug,
+  }));
+}
 export async function generateMetadata({
   params,
 }) {
-  const { slug } = params;
+  const { slug } =await params;
 
   const { data } = await supabase
     .from("posts")
@@ -71,7 +80,7 @@ export async function generateMetadata({
 export default async function PostPage({
   params,
 }) {
-  const { slug } = params;
+  const { slug } =await params;
 
   const { data, error } =
     await supabase

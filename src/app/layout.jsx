@@ -6,11 +6,20 @@ import ZaloButton from "@/components/ZaloButton/ZaloButton";
 import BookingButton from "@/components/BookingButton/BookingButton";
 
 export const metadata = {
-  title: "THẨM MỸ VIỆN HISU",
+  metadataBase: new URL(
+    "https://testhisu.vercel.app"
+  ),
+
+  title: {
+    default: "THẨM MỸ VIỆN HISU",
+    template: "%s | THẨM MỸ VIỆN HISU",
+  },
+
   description: "Thẩm mỹ công nghệ cao",
 
   verification: {
-    google: "iMhkqfnYHYPZ2e7ZhvNa8URs0nteVRjtS03F9CKa0sU",
+    google:
+      "iMhkqfnYHYPZ2e7ZhvNa8URs0nteVRjtS03F9CKa0sU",
   },
 };
 
