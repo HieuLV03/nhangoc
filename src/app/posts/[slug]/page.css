@@ -1,7 +1,7 @@
 .postPage {
   min-height: 100vh;
   background: #f6f7fb;
-  padding: 90px 20px 60px; /* 👈 FIX HEADER CHE TOP */
+  padding: 90px 20px 60px;
   display: flex;
   justify-content: center;
 }
@@ -12,6 +12,7 @@
   background: #fff;
   border-radius: 18px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  padding: 30px;
 }
 
 .postContainer h1 {
@@ -19,13 +20,6 @@
   margin-bottom: 10px;
   color: #111;
   line-height: 1.3;
-}
-
-.postImage {
-  width: 100%;
-  border-radius: 14px;
-  margin: 20px 0;
-  object-fit: cover;
 }
 
 .desc {
@@ -40,21 +34,33 @@
   line-height: 1.8;
   color: #222;
 }
+
+/* IMAGE */
 .postImageWrap {
-  position: relative;
-  width: 100%;
-  height: 500px;
-  border-radius: 14px;
-  overflow: hidden;
-  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  margin: 24px 0;
 }
-/* ✨ responsive */
+
+.postImage {
+  width: 100%;
+  max-width: 750px;
+  height: auto;
+  border-radius: 14px;
+  object-fit: contain;
+}
+
+/* MOBILE */
 @media (max-width: 768px) {
   .postContainer {
-    padding: 10px;
+    padding: 14px;
   }
 
   .postContainer h1 {
     font-size: 24px;
+  }
+
+  .postImage {
+    max-width: 100%;
   }
 }

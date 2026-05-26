@@ -181,19 +181,18 @@ export default async function Page({
     </div>
   </div>
 )}
-<div className="detailImage">
-  <Image
-    src={data.image}
-    alt={data.title}
-    fill
-    priority
-    sizes="100vw"
-    style={{
-      objectFit: "cover",
-    }}
-  />
-</div>
-
+{data.image && (
+  <div className="detailImageWrap">
+    <Image
+      src={data.image}
+      alt={data.title}
+      width={1200}
+      height={800}
+      priority
+      className="detailImage"
+    />
+  </div>
+)}
       <div
         className="content"
         dangerouslySetInnerHTML={{

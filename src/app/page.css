@@ -19,37 +19,39 @@ body {
 /* ================= HERO ================= */
 
 /* ================= CENTER CONTENT ================= */
-
+/* IMAGE WRAP */
 .serviceImg,
 .blogImg {
   position: relative;
-  overflow: hidden;
-}
-
-.serviceImg img,
-.blogImg img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: 0.4s ease;
+  display: flex;
+  justify-content: center;
 }
 
+.cardImage {
+  width: 100%;
+  height: auto;        /* 👈 giữ nguyên tỷ lệ gốc */
+  border-radius: 16px;
+}
+
+.serviceCard:hover .cardImage,
+.blogCard:hover .cardImage {
+  transform: scale(1.06);
+}
 /* overlay */
 .imgOverlay {
   position: absolute;
   inset: 0;
-
   background:
     linear-gradient(
       to top,
       rgba(0,0,0,0.65),
       rgba(0,0,0,0.15)
     );
-
   display: flex;
   align-items: center;
   justify-content: center;
-
+width: 100%;
   opacity: 0;
 
   transition: 0.35s ease;
@@ -207,12 +209,6 @@ body {
   color: inherit;
 }
 
-/* IMAGE */
-.serviceImg,
-.blogImg {
-  height: 260px;
-  overflow: hidden;
-}
 
 /* BODY */
 .serviceBody,

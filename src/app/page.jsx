@@ -73,29 +73,22 @@ export default async function HomePage() {
               href={`/services/${item.slug}`}
               className="serviceCard"
             >
+<div className="serviceImg">
+  <Image
+    src={item.image}
+    alt={item.title}
+     width={0}
+  height={0}
+  sizes="100vw"
+    className="cardImage"
+  />
 
-              <div className="serviceImg">
-
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  style={{
-                    objectFit: "cover",
-                  }}
-                />
-
-                <div className="imgOverlay">
-
-                  <div className="imgCta">
-                    <span>Xem chi tiết</span>
-                  </div>
-
-                </div>
-
-              </div>
-
+  <div className="imgOverlay">
+    <div className="imgCta">
+      <span>Xem chi tiết</span>
+    </div>
+  </div>
+</div>
               <div className="serviceBody">
 
                 <h3 className="serviceTitle">
@@ -153,29 +146,22 @@ export default async function HomePage() {
             >
 
               {post.image && (
+<div className="blogImg">
+  <Image
+    src={post.image}
+    alt={post.title}
+     width={0}
+  height={0}
+  sizes="100vw"
+    className="cardImage"
+  />
 
-                <div className="blogImg">
-
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    style={{
-                      objectFit: "cover",
-                    }}
-                  />
-
-                  <div className="imgOverlay">
-
-                    <div className="imgCta">
-                      <span>Xem bài viết</span>
-                    </div>
-
-                  </div>
-
-                </div>
-
+  <div className="imgOverlay">
+    <div className="imgCta">
+      <span>Xem bài viết</span>
+    </div>
+  </div>
+</div>
               )}
 
               <div className="blogBody">

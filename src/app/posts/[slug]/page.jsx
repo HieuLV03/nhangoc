@@ -163,19 +163,16 @@ return (
         {data.description}
       </p>
 
- <div className="postImageWrap">
+<div className="postImageWrap">
   <Image
     src={data.image}
     alt={data.title}
-    fill
+    width={1200}
+    height={800}
     priority
-    sizes="100vw"
-    style={{
-      objectFit: "cover",
-    }}
+    className="postImage"
   />
 </div>
-
       <div
         className="content"
         dangerouslySetInnerHTML={{
