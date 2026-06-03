@@ -1,5 +1,17 @@
 import { supabase } from "@/lib/supabase";
+
 export const revalidate = 3600;
+
+function safeDate(dateString) {
+  if (!dateString) return new Date().toISOString();
+
+  const date = new Date(dateString);
+
+  return isNaN(date.getTime())
+    ? new Date().toISOString()
+    : date.toISOString();
+}
+
 export default async function sitemap() {
   // POSTS
   const { data: posts, error: postError } =
@@ -22,49 +34,45 @@ export default async function sitemap() {
     return [
       {
         url: "https://thammyvienhisu.online",
-        lastModified: new Date(),
+        lastModified: new Date().toISOString(),
       },
     ];
   }
 
   // POSTS URLS
-  const postUrls = posts.map((post) => ({
+  const postUrls = (posts || []).map((post) => ({
     url: `https://thammyvienhisu.online/posts/${post.slug}`,
-    lastModified:
-      post.updated_at || new Date(),
+    lastModified: safeDate(post.updated_at),
     changeFrequency: "weekly",
     priority: 0.8,
   }));
 
   // SERVICES URLS
-  const serviceUrls = services.map(
-    (service) => ({
-      url: `https://thammyvienhisu.online/services/${service.slug}`,
-      lastModified:
-        service.updated_at || new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    })
-  );
+  const serviceUrls = (services || []).map((service) => ({
+    url: `https://thammyvienhisu.online/services/${service.slug}`,
+    lastModified: safeDate(service.updated_at),
+    changeFrequency: "weekly",
+    priority: 0.9,
+  }));
 
   return [
     {
       url: "https://thammyvienhisu.online",
-      lastModified: new Date(),
+      lastModified: new Date().toISOString(),
       changeFrequency: "daily",
       priority: 1,
     },
 
     {
       url: "https://thammyvienhisu.online/posts",
-      lastModified: new Date(),
+      lastModified: new Date().toISOString(),
       changeFrequency: "daily",
       priority: 0.9,
     },
 
     {
       url: "https://thammyvienhisu.online/services",
-      lastModified: new Date(),
+      lastModified: new Date().toISOString(),
       changeFrequency: "daily",
       priority: 0.9,
     },
