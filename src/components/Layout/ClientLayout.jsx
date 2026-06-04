@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 import Header from "@/components/Layout/Header/Header";
-import Footer from "@/components//LayoutFooter/Footer";
+import Footer from "@/components//Layout/Footer/Footer";
 import ZaloButton from "@/components/ZaloButton/ZaloButton";
 import BookingButton from "@/components/BookingButton/BookingButton";
 import BookingPopup from "@/components/BookingPopup/BookingPopup";
