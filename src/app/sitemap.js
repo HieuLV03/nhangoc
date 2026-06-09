@@ -55,29 +55,50 @@ export default async function sitemap() {
     priority: 0.9,
   }));
 
-  return [
-    {
-      url: "https://thammyvienhisu.online",
-      lastModified: new Date().toISOString(),
-      changeFrequency: "daily",
-      priority: 1,
-    },
+return [
+  {
+    url: "https://thammyvienhisu.online",
+    lastModified: new Date().toISOString(),
+    changeFrequency: "daily",
+    priority: 1,
+  },
 
-    {
-      url: "https://thammyvienhisu.online/posts",
-      lastModified: new Date().toISOString(),
-      changeFrequency: "daily",
-      priority: 0.9,
-    },
+  {
+    url: "https://thammyvienhisu.online/about",
+    lastModified: new Date().toISOString(),
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
 
-    {
-      url: "https://thammyvienhisu.online/services",
-      lastModified: new Date().toISOString(),
-      changeFrequency: "daily",
-      priority: 0.9,
-    },
+  {
+    url: "https://thammyvienhisu.online/contact",
+    lastModified: new Date().toISOString(),
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
 
-    ...postUrls,
-    ...serviceUrls,
-  ];
+  {
+    url: "https://thammyvienhisu.online/booking",
+    lastModified: new Date().toISOString(),
+    changeFrequency: "weekly",
+    priority: 0.9,
+  },
+
+  {
+    url: "https://thammyvienhisu.online/posts",
+    lastModified: new Date().toISOString(),
+    changeFrequency: "daily",
+    priority: 0.9,
+  },
+
+  {
+    url: "https://thammyvienhisu.online/services",
+    lastModified: new Date().toISOString(),
+    changeFrequency: "daily",
+    priority: 0.9,
+  },
+
+  ...postUrls,
+  ...serviceUrls,
+];
 }
