@@ -30,7 +30,7 @@ export default function Footer() {
       <h3>Liên kết</h3>
 
       <Link href="/">Trang chủ</Link>
-      <Link href="/services">Dịch vụ</Link>
+      <Link href="/products">Dịch vụ</Link>
       <Link href="/posts">Bài viết</Link>
     </div>
 

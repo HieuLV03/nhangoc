@@ -19,7 +19,7 @@ body {
 
 /* ================= CENTER CONTENT ================= */
 /* IMAGE WRAP */
-.serviceImg,
+.productImg,
 .blogImg {
   position: relative;
   width: 100%;
@@ -33,7 +33,7 @@ body {
   border-radius: 16px;
 }
 
-.serviceCard:hover .cardImage,
+.productCard:hover .cardImage,
 .blogCard:hover .cardImage {
   transform: scale(1.06);
 }
@@ -59,12 +59,12 @@ width: 100%;
 }
 
 /* hover hiện overlay */
-.serviceCard:hover .imgOverlay,
+.productCard:hover .imgOverlay,
 .blogCard:hover .imgOverlay {
   opacity: 1;
 }
 
-.serviceCard:hover .imgCta span,
+.productCard:hover .imgCta span,
 .blogCard:hover .imgCta span {
   transform: translateY(-3px) scale(1.03);
 
@@ -80,7 +80,7 @@ width: 100%;
     0 12px 30px rgba(212,175,55,0.35);
 }
 
-.serviceCard:hover .imgCta span::after,
+.productCard:hover .imgCta span::after,
 .blogCard:hover .imgCta span::after {
   transform: translateX(4px);
 }
@@ -139,14 +139,14 @@ width: 100%;
   /* CTA gọn lại */
 
 }
-.serviceTitle {
+.productTitle {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 8px;
   color: #111;
 }
 
-.serviceDesc {
+.productDesc {
   font-size: 14px;
   color: #666;
   margin-bottom: 14px;
@@ -154,7 +154,7 @@ width: 100%;
 }
 
 /* FOOTER */
-.serviceFooter {
+.productFooter {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -162,7 +162,7 @@ width: 100%;
 }
 
 /* GIÁ NỔI BẬT */
-.servicePrice {
+.productPrice {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -199,7 +199,7 @@ width: 100%;
 }
 
 /* GRID */
-.serviceGrid,
+.productGrid,
 .blogGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -207,7 +207,7 @@ width: 100%;
 }
 
 /* CARD */
-.serviceCard,
+.productCard,
 .blogCard {
   background: #fff;
   border-radius: 20px;
@@ -219,7 +219,7 @@ width: 100%;
 
 
 /* BODY */
-.serviceBody,
+.productBody,
 .blogBody {
   padding: 20px;
 }
@@ -230,7 +230,7 @@ width: 100%;
     font-size: 38px;
   }
 
-  .serviceGrid,
+  .productGrid,
   .blogGrid {
     grid-template-columns: 1fr;
   }

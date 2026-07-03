@@ -20,17 +20,16 @@ export default async function sitemap() {
       .select("slug, updated_at")
       .eq("status", "published");
 
-  // SERVICES
   const {
-    data: services,
-    error: serviceError,
+    data: products,
+    error: productError,
   } = await supabase
-    .from("services")
+    .from("products")
     .select("slug, updated_at")
     .eq("status", "published");
 
   // ERROR
-  if (postError || serviceError) {
+  if (postError || productError) {
     return [
       {
       url: "https://nhangoc.vercel.app",
@@ -47,10 +46,9 @@ export default async function sitemap() {
     priority: 0.8,
   }));
 
-  // SERVICES URLS
-  const serviceUrls = (services || []).map((service) => ({
-    url: `https://nhangoc.vercel.app/services/${service.slug}`,
-    lastModified: safeDate(service.updated_at),
+  const productUrls = (products || []).map((product) => ({
+    url: `https://nhangoc.vercel.app/products/${product.slug}`,
+    lastModified: safeDate(product.updated_at),
     changeFrequency: "weekly",
     priority: 0.9,
   }));
@@ -92,13 +90,13 @@ return [
   },
 
   {
-    url: "https://nhangoc.vercel.app/services",
+    url: "https://nhangoc.vercel.app/products",
     lastModified: new Date().toISOString(),
     changeFrequency: "daily",
     priority: 0.9,
   },
 
   ...postUrls,
-  ...serviceUrls,
+  ...productUrls,
 ];
 }

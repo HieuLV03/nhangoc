@@ -88,7 +88,7 @@ export default function Slider({
                     </Link>
 
                     <Link
-                      href="/services"
+                      href="/products"
                       className="btnOutline"
                         aria-label="Xem danh sách dịch vụ"
 

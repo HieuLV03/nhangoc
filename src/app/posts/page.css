@@ -133,7 +133,7 @@ body {
 }
 /* ================= IMAGE CTA ================= */
 
-.serviceImg,
+.productImg,
 .blogImg {
   position: relative;
   overflow: hidden;
@@ -163,7 +163,7 @@ body {
 }
 
 /* hover */
-.serviceCard:hover .imgOverlay,
+.productCard:hover .imgOverlay,
 .blogCard:hover .imgOverlay {
   opacity: 1;
 }
@@ -185,7 +185,7 @@ body {
     filter .5s ease;
 }
 
-.serviceCard:hover .cardImage,
+.productCard:hover .cardImage,
 .blogCard:hover .cardImage {
   transform: scale(1.08);
 }
@@ -222,7 +222,7 @@ body {
   animation:
     floatingBtn 2.5s ease-in-out infinite;
 }
-.serviceCard:hover .imgBtn,
+.productCard:hover .imgBtn,
 .blogCard:hover .imgBtn {
 
   background:
@@ -264,7 +264,7 @@ body {
   transition: 0.8s;
 }
 
-.serviceCard:hover .imgBtn::before,
+.productCard:hover .imgBtn::before,
 .blogCard:hover .imgBtn::before {
   left: 140%;
 }
@@ -309,7 +309,7 @@ body {
 }
 
 /* GRID */
-.serviceGrid,
+.productGrid,
 .blogGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -317,7 +317,7 @@ body {
 }
 
 /* CARD */
-.serviceCard,
+.productCard,
 .blogCard {
   background: white;
   border-radius: 18px;
@@ -328,17 +328,17 @@ body {
   transition: 0.3s;
 }
 
-.serviceCard:hover,
+.productCard:hover,
 .blogCard:hover {
   transform: translateY(-8px);
 }
 /* ================= PRICE ================= */
 
-.serviceBody {
+.productBody {
   padding: 18px;
 }
 
-.serviceBody h3 {
+.productBody h3 {
   font-size: 19px;
   font-weight: 700;
   line-height: 1.5;
@@ -388,12 +388,12 @@ body {
   margin-bottom: 3px;
 }
 /* BODY */
-.serviceBody,
+.productBody,
 .blogBody {
   padding: 16px;
 }
 
-.serviceBody h3,
+.productBody h3,
 .blogBody h3 {
   font-size: 18px;
   font-weight: 700;
@@ -409,7 +409,7 @@ body {
     height: 70dvh;
   }
 
-  .serviceGrid,
+  .productGrid,
   .blogGrid {
     grid-template-columns: 1fr;
   }

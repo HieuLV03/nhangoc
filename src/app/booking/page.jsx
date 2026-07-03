@@ -8,8 +8,8 @@ export default function BookingPage() {
     name: "",
     phone: "",
     email: "",
-services: [],
-      serviceType: "",
+products: [],
+      productType: "",
 
   });
   const [errorPopup, setErrorPopup] = useState("");
@@ -30,12 +30,12 @@ const handleCheckbox = (e) => {
   if (checked) {
     setForm({
       ...form,
-      services: [...form.services, value],
+      products: [...form.products, value],
     });
   } else {
     setForm({
       ...form,
-      services: form.services.filter(
+      vs: form.products.filter(
         (item) => item !== value
       ),
     });
@@ -44,7 +44,7 @@ const handleCheckbox = (e) => {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-if (form.services.length === 0) {
+if (form.products.length === 0) {
   showError("Vui lòng chọn ít nhất 1 dịch vụ để được tư vấn.");
   return;
 }
@@ -57,8 +57,8 @@ if (form.services.length === 0) {
     name: "",
     phone: "",
     email: "",
-    services: [],
-    serviceType: "",
+    products: [],
+    productType: "",
   });
 
   setLoading(false);
@@ -127,8 +127,8 @@ if (form.services.length === 0) {
             onChange={handleChange}
           />
 <select
-  name="serviceType"
-  value={form.serviceType}
+  name="productType"
+  value={form.productType}
   onChange={handleChange}
   required
 >
@@ -151,7 +151,7 @@ if (form.services.length === 0) {
     <input
       type="checkbox"
       value="Môi"
-      checked={form.services.includes("Môi")}
+      checked={form.products.includes("Môi")}
       onChange={handleCheckbox}
     />
     Môi
@@ -161,7 +161,7 @@ if (form.services.length === 0) {
     <input
       type="checkbox"
       value="Mày"
-      checked={form.services.includes("Mày")}
+      checked={form.products.includes("Mày")}
       onChange={handleCheckbox}
     />
     Mày
@@ -171,7 +171,7 @@ if (form.services.length === 0) {
     <input
       type="checkbox"
       value="Ti"
-      checked={form.services.includes("Ti")}
+      checked={form.products.includes("Ti")}
       onChange={handleCheckbox}
     />
     Ti
@@ -181,7 +181,7 @@ if (form.services.length === 0) {
     <input
       type="checkbox"
       value="Bikini"
-      checked={form.services.includes("Bikini")}
+      checked={form.products.includes("Bikini")}
       onChange={handleCheckbox}
     />
     Bikini
@@ -191,7 +191,7 @@ if (form.services.length === 0) {
     <input
       type="checkbox"
       value="Khử thâm"
-      checked={form.services.includes("Khử thâm")}
+      checked={form.products.includes("Khử thâm")}
       onChange={handleCheckbox}
     />
     Khử thâm

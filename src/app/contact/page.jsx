@@ -9,8 +9,8 @@ export default function ContactPage() {
     name: "",
     phone: "",
     email: "",
-    services: [],
-    serviceType: "",
+    products: [],
+    productType: "",
     message: "",
   });
 
@@ -31,12 +31,12 @@ export default function ContactPage() {
     if (checked) {
       setForm({
         ...form,
-        services: [...form.services, value],
+        products: [...form.vs, value],
       });
     } else {
       setForm({
         ...form,
-        services: form.services.filter((i) => i !== value),
+        products: form.products.filter((i) => i !== value),
       });
     }
   };
@@ -48,12 +48,12 @@ export default function ContactPage() {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  if (form.services.length === 0) {
+  if (form.products.length === 0) {
     showError("Vui lòng chọn ít nhất 1 dịch vụ.");
     return;
   }
 
-  if (!form.serviceType) {
+  if (!form.productType) {
     showError("Vui lòng chọn hình thức làm đẹp.");
     return;
   }
@@ -67,8 +67,8 @@ const handleSubmit = async (e) => {
     name: "",
     phone: "",
     email: "",
-    services: [],
-    serviceType: "",
+    products: [],
+    productType: "",
     message: "",
   });
 
@@ -156,10 +156,9 @@ const handleSubmit = async (e) => {
               onChange={handleChange}
             />
 
-            {/* serviceType */}
             <select
-              name="serviceType"
-              value={form.serviceType}
+              name="productType"
+              value={form.productType}
               onChange={handleChange}
               required
             >
@@ -168,7 +167,6 @@ const handleSubmit = async (e) => {
               <option value="Làm tại nhà">Làm tại nhà</option>
             </select>
 
-            {/* SERVICES */}
             <div className="checkboxGroup">
               <p className="checkboxTitle">Chọn dịch vụ</p>
 
@@ -176,7 +174,7 @@ const handleSubmit = async (e) => {
                 <input
                   type="checkbox"
                   value="Môi"
-                  checked={form.services.includes("Môi")}
+                  checked={form.products.includes("Môi")}
                   onChange={handleCheckbox}
                 />
                 Môi
@@ -186,7 +184,7 @@ const handleSubmit = async (e) => {
                 <input
                   type="checkbox"
                   value="Mày"
-                  checked={form.services.includes("Mày")}
+                  checked={form.products.includes("Mày")}
                   onChange={handleCheckbox}
                 />
                 Mày
@@ -196,7 +194,7 @@ const handleSubmit = async (e) => {
                 <input
                   type="checkbox"
                   value="Ti"
-                  checked={form.services.includes("Ti")}
+                  checked={form.products.includes("Ti")}
                   onChange={handleCheckbox}
                 />
                 Ti
@@ -206,7 +204,7 @@ const handleSubmit = async (e) => {
                 <input
                   type="checkbox"
                   value="Bikini"
-                  checked={form.services.includes("Bikini")}
+                  checked={form.products.includes("Bikini")}
                   onChange={handleCheckbox}
                 />
                 Bikini
@@ -216,7 +214,7 @@ const handleSubmit = async (e) => {
                 <input
                   type="checkbox"
                   value="Khử thâm"
-                  checked={form.services.includes("Khử thâm")}
+                  checked={form.products.includes("Khử thâm")}
                   onChange={handleCheckbox}
                 />
                 Khử thâm

@@ -5,7 +5,7 @@ export async function uploadImage(file) {
 
   const fileExt = file.name.split(".").pop();
   const fileName = `${Date.now()}-${Math.random()}.${fileExt}`;
-  const filePath = `services/${fileName}`;
+  const filePath = `products/${fileName}`;
 
   const { error } = await supabase.storage
     .from("images")

@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import "./page.css";
 
-export default function EditServicePage() {
+export default function EditProductPage() {
   const params = useParams();
   const router = useRouter();
 
@@ -18,27 +18,34 @@ export default function EditServicePage() {
 
   const [loading, setLoading] =
     useState(false);
-
-  const [content, setContent] =
-    useState("");
-
-  const [form, setForm] = useState({
-    title: "",
-    slug: "",
-    short_description: "",
-    category: "",
-    price: "",
-    image: "",
-    meta_title: "",
-    meta_description: "",
-    status: "published",
-    featured: false,
-  });
-
+const [categories, setCategories] = useState([]);
+const [form, setForm] = useState({
+  name: "",
+  slug: "",
+  price: "",
+  sale_price: "",
+  category_id: "",
+  description: "",
+  content: "",
+  image: "",
+  status: "available",
+  featured: false,
+});
   // =========================
   // SLUG
   // =========================
+useEffect(() => {
+  const fetchCategories = async () => {
+    const { data } = await supabase
+      .from("categories")
+      .select("id,name")
+      .order("name");
 
+    setCategories(data || []);
+  };
+
+  fetchCategories();
+}, []);
   const sanitize = (text) => {
     return text
       .toLowerCase()
@@ -66,7 +73,7 @@ export default function EditServicePage() {
 
       const { data, error } =
         await supabase
-          .from("services")
+          .from("products")
           .select("*")
           .eq("id", id)
           .maybeSingle();
@@ -77,39 +84,18 @@ export default function EditServicePage() {
       }
 
       if (data) {
-        setForm({
-          title: data.title || "",
-          slug: data.slug || "",
-          short_description:
-            data.short_description ||
-            "",
-
-          category:
-            data.category || "",
-
-          price: data.price || "",
-
-          image: data.image || "",
-
-          meta_title:
-            data.meta_title || "",
-
-          meta_description:
-            data.meta_description ||
-            "",
-
-          status:
-            data.status ||
-            "published",
-
-          featured:
-            data.featured ||
-            false,
-        });
-
-        setContent(
-          data.content || ""
-        );
+   setForm({
+  name: data.name || "",
+  slug: data.slug || "",
+  price: data.price || "",
+  sale_price: data.sale_price || "",
+  category_id: data.category_id || "",
+   description: data.description || "",
+  content: data.content || "",
+  image: data.image || "",
+  status: data.status || "available",
+  featured: data.featured || false,
+});
       }
     };
 
@@ -136,13 +122,13 @@ export default function EditServicePage() {
             .pop();
 
         const fileName = `${
-          form.slug || "service"
+          form.slug || "product"
         }-${Date.now()}-${randomString()}.${fileExt}`;
 
         const { error } =
           await supabase.storage
             .from(
-              "images_service"
+              "images_product"
             )
             .upload(
               fileName,
@@ -160,7 +146,7 @@ export default function EditServicePage() {
         const { data } =
           supabase.storage
             .from(
-              "images_service"
+              "images_product"
             )
             .getPublicUrl(
               fileName
@@ -190,48 +176,25 @@ export default function EditServicePage() {
     try {
       setLoading(true);
 
-      console.log(content);
-
       const { error } =
-        await supabase
-          .from("services")
-          .update({
-            title: form.title,
-
-            slug: form.slug,
-
-            short_description:
-              form.short_description,
-
-            // HTML CONTENT
-            content: content,
-
-            category:
-              form.category,
-
-            price: Number(
-              form.price || 0
-            ),
-
-            image: form.image,
-
-            meta_title:
-              form.meta_title,
-
-            meta_description:
-              form.meta_description,
-
-            status:
-              form.status,
-
-            featured:
-              form.featured,
-
-            updated_at:
-              new Date().toISOString(),
-          })
-          .eq("id", id);
-
+      await supabase
+  .from("products")
+  .update({
+    name: form.name,
+    slug: form.slug,
+    price: Number(form.price),
+    sale_price: form.sale_price
+      ? Number(form.sale_price)
+      : null,
+    category_id: form.category_id || null,
+    description: form.description,
+    content: form.content,
+    image: form.image,
+    status: form.status,
+    featured: form.featured,
+    updated_at: new Date().toISOString(),
+  })
+  .eq("id", id);
       if (error) {
         console.log(error);
 
@@ -259,25 +222,24 @@ export default function EditServicePage() {
   // =========================
 
   return (
-    <div className="editServicePage">
-      <div className="editServiceCard">
+    <div className="editProductPage">
+      <div className="editProductCard">
         <h1>Sửa dịch vụ</h1>
 
-        {/* TITLE */}
 
         <input
-          placeholder="Title"
-          value={form.title}
+          placeholder="Name"
+          value={form.name}
           onChange={(e) => {
-            const title =
+            const name =
               e.target.value;
 
             setForm({
               ...form,
-              title,
+              name,
               slug:
                 sanitize(
-                  title
+                  name
                 ),
             });
           }}
@@ -301,17 +263,23 @@ export default function EditServicePage() {
 
         {/* CATEGORY */}
 
-        <input
-          placeholder="Category"
-          value={form.category}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              category:
-                e.target.value,
-            })
-          }
-        />
+       <select
+  value={form.category_id}
+  onChange={(e) =>
+    setForm({
+      ...form,
+      category_id: e.target.value,
+    })
+  }
+>
+  <option value="">-- Chọn danh mục --</option>
+
+  {categories.map((item) => (
+    <option key={item.id} value={item.id}>
+      {item.name}
+    </option>
+  ))}
+</select>
 
         {/* PRICE */}
 
@@ -326,7 +294,38 @@ export default function EditServicePage() {
             })
           }
         />
-
+<input
+    type="number"
+    placeholder="Giá khuyến mãi"
+    value={form.sale_price}
+    onChange={(e)=>
+        setForm({
+            ...form,
+            sale_price:e.target.value
+        })
+    }
+/>
+<textarea
+  placeholder="Mô tả ngắn"
+  value={form.description}
+  onChange={(e) =>
+    setForm({
+      ...form,
+      description: e.target.value,
+    })
+  }
+/>
+<textarea
+  className="editor"
+  placeholder="Nội dung HTML"
+  value={form.content}
+  onChange={(e) =>
+    setForm({
+      ...form,
+      content: e.target.value,
+    })
+  }
+/>
         {/* IMAGE */}
 
         <div className="uploadBox">
@@ -352,85 +351,25 @@ export default function EditServicePage() {
           )}
         </div>
 
-        {/* SHORT DESCRIPTION */}
-
-        <textarea
-          placeholder="Short description"
-          value={
-            form.short_description
-          }
-          onChange={(e) =>
-            setForm({
-              ...form,
-              short_description:
-                e.target.value,
-            })
-          }
-        />
-
-        {/* HTML EDITOR */}
-
-       {/* HTML EDITOR */}
-
-<textarea
-  className="editor"
-  value={content}
-  onChange={(e) =>
-    setContent(e.target.value)
-  }
-/>
-
-        {/* META */}
-
-        <input
-          placeholder="Meta title"
-          value={
-            form.meta_title
-          }
-          onChange={(e) =>
-            setForm({
-              ...form,
-              meta_title:
-                e.target.value,
-            })
-          }
-        />
-
-        <input
-          placeholder="Meta description"
-          value={
-            form.meta_description
-          }
-          onChange={(e) =>
-            setForm({
-              ...form,
-              meta_description:
-                e.target.value,
-            })
-          }
-        />
-
         {/* STATUS */}
 
-        <select
-          value={form.status}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              status:
-                e.target.value,
-            })
-          }
-        >
-          <option value="published">
-            Hiển thị
-          </option>
+    <select
+    value={form.status}
+    onChange={(e)=>
+        setForm({
+            ...form,
+            status:e.target.value
+        })
+    }
+>
+    <option value="available">
+        Còn hàng
+    </option>
 
-          <option value="hidden">
-            Ẩn
-          </option>
-        </select>
-
+    <option value="out_of_stock">
+        Hết hàng
+    </option>
+</select>
         {/* FEATURED */}
 
         <label className="checkbox">

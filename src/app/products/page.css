@@ -22,13 +22,13 @@ body {
   color: var(--text);
 }
 
-.serviceCard,
+.productCard,
 .blogCard {
   display: flex;
   flex-direction: column;
 }
 
-.serviceBody,
+.productBody,
 .blogBody {
   flex: 1;
 }
@@ -52,7 +52,7 @@ body {
 
 /* ================= GRID ================= */
 
-.serviceGrid,
+.productGrid,
 .blogGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -61,7 +61,7 @@ body {
 
 /* ================= CARD ================= */
 
-.serviceCard,
+.productCard,
 .blogCard {
   background: white;
   border-radius: 20px;
@@ -76,7 +76,7 @@ body {
     box-shadow 0.35s ease;
 }
 
-.serviceCard:hover,
+.productCard:hover,
 .blogCard:hover {
   transform: translateY(-8px);
 
@@ -86,7 +86,7 @@ body {
 
 /* ================= IMAGE ================= */
 
-.serviceImg,
+.productImg,
 .blogImg {
   position: relative;
   overflow: hidden;
@@ -105,7 +105,7 @@ body {
     filter 0.5s ease;
 }
 /* image hover */
-.serviceCard:hover .cardImage,
+.productCard:hover .cardImage,
 .blogCard:hover .cardImage {
   transform: scale(1.08);
   filter: brightness(1.05);
@@ -136,7 +136,7 @@ body {
 }
 
 /* overlay hover */
-.serviceCard:hover .imgOverlay,
+.productCard:hover .imgOverlay,
 .blogCard:hover .imgOverlay {
   opacity: 1;
 }
@@ -215,7 +215,7 @@ body {
 }
 
 /* button hover */
-.serviceCard:hover .imgBtn,
+.productCard:hover .imgBtn,
 .blogCard:hover .imgBtn {
   transform:
     translateY(-4px)
@@ -237,13 +237,13 @@ body {
 }
 
 /* arrow move */
-.serviceCard:hover .imgBtn::after,
+.productCard:hover .imgBtn::after,
 .blogCard:hover .imgBtn::after {
   transform: translateX(5px);
 }
 
 /* shine move */
-.serviceCard:hover .imgBtn::before,
+.productCard:hover .imgBtn::before,
 .blogCard:hover .imgBtn::before {
   left: 140%;
 }
@@ -265,13 +265,13 @@ body {
 
 /* ================= BODY ================= */
 
-.serviceBody,
+.productBody,
 .blogBody {
   padding: 18px;
 }
 
 /* title */
-.serviceBody h3,
+.productBody h3,
 .blogBody h3 {
   font-size: 20px;
   font-weight: 700;
@@ -349,7 +349,7 @@ body {
     font-size: 32px;
   }
 
-  .serviceGrid,
+  .productGrid,
   .blogGrid {
     grid-template-columns: 1fr;
     gap: 18px;
@@ -373,7 +373,7 @@ body {
     backdrop-filter: blur(10px);
   }
 
-  .serviceBody h3,
+  .productBody h3,
   .blogBody h3 {
     font-size: 18px;
   }

@@ -10,7 +10,7 @@ export const revalidate = 3600;
 export const dynamicParams = true;
 export async function generateStaticParams() {
   const { data, error } = await supabase
-    .from("services")
+    .from("products")
     .select("slug")
     .eq("status", "published");
 
@@ -28,38 +28,38 @@ export async function generateMetadata({
   const { slug } = params;
 
   const { data } = await supabase
-    .from("services")
+    .from("products")
     .select("*")
     .eq("slug", slug)
-    .eq("status", "published")
+    .eq("status", "available")
     .maybeSingle();
 
   if (!data) {
     return {
-      title: "Không tìm thấy dịch vụ",
+      name: "Không tìm thấy sản phẩm",
     };
   }
 
-  const title =
-    data.meta_title || data.title;
+  const name =
+    data.meta_name || data.name;
 
   const description =
     data.meta_description ||
     data.short_description;
 
-  const url = `/services/${data.slug}`;
+  const url = `/products/${data.slug}`;
 
   return {
     metadataBase: new URL(
       "https://thammyvienhisu.online"
     ),
 
-    title,
+    name,
 
     description,
 
     keywords: [
-      data.title,
+      data.name,
       "phun môi",
       "phun mày",
       "phun xăm thẩm mỹ",
@@ -84,7 +84,7 @@ export async function generateMetadata({
     },
 
     openGraph: {
-      title,
+      name,
 
       description,
 
@@ -109,7 +109,7 @@ export async function generateMetadata({
               url: data.image,
               width: 1200,
               height: 630,
-              alt: data.title,
+              alt: data.name,
             },
           ]
         : [],
@@ -119,7 +119,7 @@ export async function generateMetadata({
       card:
         "summary_large_image",
 
-      title,
+      name,
 
       description,
 
@@ -137,10 +137,10 @@ export default async function Page({
 
   const { data, error } =
     await supabase
-      .from("services")
+      .from("products")
       .select("*")
       .eq("slug", slug)
-      .eq("status", "published")
+      .eq("status", "available")
       .maybeSingle();
 
   if (error || !data) {
@@ -156,21 +156,21 @@ export default async function Page({
       "@context":
         "https://schema.org",
 
-      "@type": "Service",
+      "@type": "Product",
 
-      name: data.title,
+      name: data.name,
 
       description:
         data.short_description,
 
       image: [data.image],
 
-      url: `https://thammyvienhisu.online/services/${data.slug}`,
+      url: `https://thammyvienhisu.online/products/${data.slug}`,
 
-      serviceType:
-        data.title,
+      productType:
+        data.name,
 
-      areaServed: {
+      areaProducted: {
         "@type": "City",
         name: "TP.HCM",
       },
@@ -211,15 +211,15 @@ export default async function Page({
         "@type":
           "WebPage",
 
-        "@id": `https://thammyvienhisu.online/services/${data.slug}`,
+        "@id": `https://thammyvienhisu.online/products/${data.slug}`,
       },
     }),
   }}
 />
       <BackButton />
 
-      <h1 className="title">
-        {data.title}
+      <h1 className="name">
+        {data.name}
       </h1>
 
   <p className="desc">
@@ -243,14 +243,14 @@ export default async function Page({
   </div>
 )}
 {data.image && (
-  <div className="serviceImageWrap">
+  <div className="productImageWrap">
     <Image
       src={data.image}
-      alt={data.title}
+      alt={data.name}
       width={1200}
       height={800}
       priority
-      className="serviceImage"
+      className="productImage"
     />
   </div>
 )}
@@ -261,37 +261,6 @@ export default async function Page({
             data.content || "",
         }}
       />
-<div className="ctaBox">
-  <div className="ctaBadge">
-    ✨ Ưu đãi đặc biệt hôm nay
-  </div>
-
-  <h2 className="ctaTitle">
-    Đặt lịch ngay hôm nay để nhận ưu đãi hấp dẫn
-  </h2>
-
-  <p className="ctaText">
-    Đặt lịch cùng HISU Beauty để được tư vấn miễn phí, 
-    chọn tone phù hợp khuôn mặt và nhận ưu đãi dành riêng hôm nay.
-  </p>
-
-  <div className="ctaButtons">
-    <Link
-      href="/booking"
-      className="ctaBtn primary"
-    >
-      📅 Đặt lịch ngay
-    </Link>
-
-    <a
-      href="https://zalo.me/0372089821"
-      target="_blank"
-      className="ctaBtn secondary"
-    >
-      💬 Tư vấn qua Zalo
-    </a>
-  </div>
-</div>
     </div>
   );
 }

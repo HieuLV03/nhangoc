@@ -20,12 +20,18 @@ export default function Dashboard() {
     <span>0</span>
   </div>
 </Link>
-
-    <Link href="/admin/services" className="card">
-  <div className="cardIcon">🛠️</div>
+  <Link href="/admin/categories" className="card">
+          <div className="cardIcon">📂</div>
+          <div>
+            <h3>Danh mục</h3>
+            <span>0</span>
+          </div>
+        </Link>
+ <Link href="/admin/products" className="card">
+  <div className="cardIcon">📦</div>
 
   <div>
-    <h3>Dịch vụ</h3>
+    <h3>Sản phẩm</h3>
     <span>0</span>
   </div>
 </Link>

@@ -112,7 +112,6 @@ a {
   font-weight: 800;
 }
 
-/* ================= GRID 2 CỘT SERVICES ================= */
 
 .grid {
   display: grid;
@@ -120,7 +119,6 @@ a {
   gap: 22px;
 }
 
-/* ================= SERVICE CARD (VUÔNG ẢNH) ================= */
 
 .card {
   background: white;
@@ -263,7 +261,7 @@ a {
 
 @media (max-width: 900px) {
   .grid {
-    grid-template-columns: 1fr; /* mobile services */
+    grid-template-columns: 1fr;
   }
 
   .blogGrid {

@@ -10,13 +10,13 @@ export const revalidate = 3600;
 export default async function HomePage() {
 
   const [
-    serviceRes,
+    productRes,
     postRes,
   ] = await Promise.all([
     supabase
-      .from("services")
+      .from("products")
       .select("*")
-      .eq("status", "published")
+      .eq("status", "available")
         .eq("featured", true)
 
       .order("created_at", {
@@ -33,8 +33,8 @@ export default async function HomePage() {
       .limit(3),
 
   ]);
-  const services =
-    serviceRes.data || [];
+  const products =
+    productRes.data || [];
 
   const posts =
     postRes.data || [];
@@ -97,7 +97,6 @@ export default async function HomePage() {
 
       </section>
 
-      {/* SERVICES */}
       <section className="section">
 
         <div className="sectionHeader">
@@ -106,17 +105,17 @@ export default async function HomePage() {
           <h2>Dịch vụ nổi bật</h2>
         </div>
 
-        <div className="serviceGrid">
+        <div className="productGrid">
 
-          {services.map((s) => (
+          {products.map((s) => (
 
             <Link
               key={s.id}
-              href={`/services/${s.slug}`}
-              className="serviceCard"
+              href={`/products/${s.slug}`}
+              className="productCard"
             >
 
-              <div className="serviceImg">
+              <div className="productImg">
 <Image
   src={s.image}
   alt={s.title}
@@ -136,7 +135,7 @@ export default async function HomePage() {
 
               </div>
 
-              <div className="serviceBody">
+              <div className="productBody">
 
                 <h3>{s.title}</h3>
                 <p>{s.short_description}</p>

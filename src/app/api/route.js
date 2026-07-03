@@ -5,7 +5,7 @@ export const runtime = "nodejs";
 // 🔥 FIX: tạo transporter trong function để tránh cache lỗi env
 const createTransporter = () =>
   nodemailer.createTransport({
-    service: "gmail",
+    product: "gmail",
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS, // APP PASSWORD (KHÔNG phải password thường)
@@ -47,13 +47,13 @@ await transporter.sendMail({
       }</p>
 
       <p><b>🏠 Hình thức:</b> ${
-        body.serviceType
+        body.productType
       }</p>
 
       <p><b>💅 Dịch vụ:</b></p>
 
       <ul>
-        ${body.services
+        ${body.products
           ?.map((item) => `<li>${item}</li>`)
           .join("")}
       </ul>

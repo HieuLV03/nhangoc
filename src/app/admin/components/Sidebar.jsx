@@ -29,7 +29,7 @@ export default function Sidebar() {
         },
         {
             name: "Dịch vụ",
-            href: "/admin/services",
+            href: "/admin/products",
             icon: <FiGrid />
         },
         {

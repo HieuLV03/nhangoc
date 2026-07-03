@@ -8,7 +8,7 @@ export const revalidate = 3600;
 
 export default async function HomePage() {
 
-  const [sliderRes, serviceRes, postRes] =
+  const [sliderRes, productRes, postRes] =
     await Promise.all([
 
       supabase
@@ -21,9 +21,9 @@ export default async function HomePage() {
         .limit(5),
 
       supabase
-        .from("services")
+        .from("products")
         .select("*")
-        .eq("status", "published")
+        .eq("status", "available")
         .eq("featured", true)
         .order("created_at", {
           ascending: false,
@@ -42,7 +42,7 @@ export default async function HomePage() {
     ]);
 
   const sliders = sliderRes.data || [];
-  const services = serviceRes.data || [];
+  const products = productRes.data || [];
   const posts = postRes.data || [];
 
   return (
@@ -50,30 +50,29 @@ export default async function HomePage() {
 
       {/* HERO */}
 <Slider sliders={sliders} />
-      {/* SERVICES */}
       <section className="section">
 
         <div className="sectionHeader">
 
           <span className="sectionTag">
-            DỊCH VỤ
+            SẢN PHẨM
           </span>
 
-          <h2>Dịch vụ nổi bật</h2>
+          <h2>Best Seller</h2>
 
         </div>
 
-        <div className="serviceGrid">
+        <div className="productGrid">
 
-          {services.map((item) => (
+          {products.map((item) => (
 
             <Link
               prefetch={true}
               key={item.id}
-              href={`/services/${item.slug}`}
-              className="serviceCard"
+              href={`/products/${item.slug}`}
+              className="productCard"
             >
-<div className="serviceImg">
+<div className="productImg">
   <Image
     src={item.image}
     alt={item.title}
@@ -89,19 +88,19 @@ export default async function HomePage() {
     </div>
   </div>
 </div>
-              <div className="serviceBody">
+              <div className="productBody">
 
-                <h3 className="serviceTitle">
+                <h3 className="productTitle">
                   {item.title}
                 </h3>
 
-                <p className="serviceDesc">
+                <p className="productDesc">
                   {item.short_description}
                 </p>
 
-                <div className="serviceFooter">
+                <div className="productFooter">
 
-        <span className="servicePrice">
+        <span className="productPrice">
   <span className="priceLabel">Giá Ưu đãi</span>
   <span className="priceValue">
     {Number(item.price || 0).toLocaleString("vi-VN")}₫

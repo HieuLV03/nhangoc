@@ -1,72 +1,88 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import "./page.css";
 import BackButton from "../../components/BackButton/BackButton";
 
-export default function CreateServicePage() {
+export default function CreateProductPage() {
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
+  const [categories, setCategories] = useState([]);
 
   const [form, setForm] = useState({
-    title: "",
+    name: "",
     slug: "",
+    price: "",
+    sale_price: "",
+    category_id: "",
     short_description: "",
     content: "",
-    category: "",
-    price: "",
-    meta_title: "",
-    meta_description: "",
-    status: "published",
+    status: "available",
     featured: false,
   });
 
   // =========================
-  // SEO SLUG / SANITIZE
-const sanitize = (text) => {
-  return text
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "") // bỏ dấu
-    .replace(/đ/g, "d")
-    .replace(/[^a-z0-9\s-]/g, "") // chỉ giữ chữ + số
-    .trim()
-    .replace(/\s+/g, "-") // space → -
-    .replace(/-+/g, "-"); // tránh ---
-};
+  // SLUG
+  // =========================
+  const sanitize = (text) => {
+    return text
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/đ/g, "d")
+      .replace(/[^a-z0-9\s-]/g, "")
+      .trim()
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-");
+  };
+
   const randomString = () =>
     Math.random().toString(36).substring(2, 8);
 
   // =========================
-  // UPLOAD IMAGE (SEO NAME)
+  // UPLOAD IMAGE
   // =========================
   const uploadImage = async (file, slug) => {
     const fileExt = file.name.split(".").pop();
-
-    const cleanSlug = sanitize(slug || "service");
-
-    const fileName = `${cleanSlug}-${Date.now()}-${randomString()}.${fileExt}`;
+    const fileName = `${sanitize(slug)}-${Date.now()}-${randomString()}.${fileExt}`;
 
     const { error } = await supabase.storage
-      .from("images_service")
+      .from("images_product")
       .upload(fileName, file);
 
     if (error) throw error;
 
     const { data } = supabase.storage
-      .from("images_service")
+      .from("images_product")
       .getPublicUrl(fileName);
 
     return data.publicUrl;
   };
 
   // =========================
-  // CREATE SERVICE
+  // GET CATEGORIES
   // =========================
-  const createService = async () => {
-    if (!form.title.trim()) {
-      return alert("Nhập tên dịch vụ");
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const { data, error } = await supabase
+        .from("categories")
+        .select("id,name")
+        .order("name");
+
+      if (!error) setCategories(data || []);
+      else console.log(error);
+    };
+
+    fetchCategories();
+  }, []);
+
+  // =========================
+  // CREATE PRODUCT
+  // =========================
+  const createProduct = async () => {
+    if (!form.name.trim()) {
+      return alert("Nhập tên sản phẩm");
     }
 
     setLoading(true);
@@ -74,23 +90,22 @@ const sanitize = (text) => {
     try {
       let imageUrl = null;
 
-      // upload image nếu có
       if (file) {
         imageUrl = await uploadImage(file, form.slug);
       }
 
-      const { error } = await supabase.from("services").insert([
+      const { error } = await supabase.from("products").insert([
         {
-          title: form.title,
+          name: form.name,
           slug: form.slug,
+          price: Number(form.price),
+          sale_price: form.sale_price
+            ? Number(form.sale_price)
+            : null,
+          category_id: form.category_id || null,
           short_description: form.short_description,
           content: form.content,
-          category: form.category,
-          price: Number(form.price || 0),
           image: imageUrl,
-
-          meta_title: form.meta_title,
-          meta_description: form.meta_description,
           status: form.status,
           featured: form.featured,
         },
@@ -98,19 +113,17 @@ const sanitize = (text) => {
 
       if (error) throw error;
 
-      alert("Tạo dịch vụ thành công!");
+      alert("Tạo sản phẩm thành công!");
 
-      // reset form
       setForm({
-        title: "",
+        name: "",
         slug: "",
+        price: "",
+        sale_price: "",
+        category_id: "",
         short_description: "",
         content: "",
-        category: "",
-        price: "",
-        meta_title: "",
-        meta_description: "",
-        status: "published",
+        status: "available",
         featured: false,
       });
 
@@ -129,31 +142,27 @@ const sanitize = (text) => {
   return (
     <div className="createPostPage">
       <div className="createPostCard">
-<div className="headerRow">
-  <div className="headerLeft">
-    <BackButton />
 
-    <div className="pageTitle">
-      <h1>Tạo dịch vụ</h1>
-    </div>
-  </div>
-</div>
-        {/* TITLE + AUTO SLUG */}
+        <div className="headerRow">
+          <BackButton />
+          <h1>Tạo sản phẩm</h1>
+        </div>
+
+        {/* NAME */}
         <input
-          placeholder="Tên dịch vụ"
-          value={form.title}
+          placeholder="Tên sản phẩm"
+          value={form.name}
           onChange={(e) => {
-            const title = e.target.value;
-
+            const name = e.target.value;
             setForm({
               ...form,
-              title,
-              slug: sanitize(title),
+              name,
+              slug: sanitize(name),
             });
           }}
         />
 
-        {/* FILE UPLOAD */}
+        {/* IMAGE */}
         <input
           type="file"
           accept="image/*"
@@ -169,14 +178,25 @@ const sanitize = (text) => {
           }
         />
 
-        <input
-          placeholder="Danh mục"
-          value={form.category}
+        {/* CATEGORY */}
+        <select
+          value={form.category_id}
           onChange={(e) =>
-            setForm({ ...form, category: e.target.value })
+            setForm({
+              ...form,
+              category_id: e.target.value,
+            })
           }
-        />
+        >
+          <option value="">-- Chọn danh mục --</option>
+          {categories.map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.name}
+            </option>
+          ))}
+        </select>
 
+        {/* PRICE */}
         <input
           type="number"
           placeholder="Giá"
@@ -186,6 +206,17 @@ const sanitize = (text) => {
           }
         />
 
+        {/* SALE PRICE */}
+        <input
+          type="number"
+          placeholder="Giá khuyến mãi"
+          value={form.sale_price}
+          onChange={(e) =>
+            setForm({ ...form, sale_price: e.target.value })
+          }
+        />
+
+        {/* SHORT DESC */}
         <textarea
           placeholder="Mô tả ngắn"
           value={form.short_description}
@@ -197,37 +228,20 @@ const sanitize = (text) => {
           }
         />
 
-<textarea
-  className="editor"
-  placeholder="Nhập HTML..."
-  value={form.content}
-  onChange={(e) =>
-    setForm({
-      ...form,
-      content: e.target.value,
-    })
-  }
-/>
-
-        <input
-          placeholder="Meta title"
-          value={form.meta_title}
-          onChange={(e) =>
-            setForm({ ...form, meta_title: e.target.value })
-          }
-        />
-
+        {/* CONTENT */}
         <textarea
-          placeholder="Meta description"
-          value={form.meta_description}
+          className="editor"
+          placeholder="Nhập HTML..."
+          value={form.content}
           onChange={(e) =>
             setForm({
               ...form,
-              meta_description: e.target.value,
+              content: e.target.value,
             })
           }
         />
 
+        {/* FEATURED */}
         <label style={{ display: "flex", gap: 8 }}>
           <input
             type="checkbox"
@@ -242,13 +256,14 @@ const sanitize = (text) => {
           Nổi bật
         </label>
 
-    <button
-  className="submitBtn"
-  onClick={createService}
-  disabled={loading}
->
-  {loading ? "Đang upload..." : "Tạo dịch vụ"}
-</button>
+        {/* BUTTON */}
+        <button
+          className="submitBtn"
+          onClick={createProduct}
+          disabled={loading}
+        >
+          {loading ? "Đang upload..." : "Tạo sản phẩm"}
+        </button>
       </div>
     </div>
   );

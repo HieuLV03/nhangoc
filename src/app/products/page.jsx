@@ -11,13 +11,13 @@ export const revalidate = 3600;
 
 export default async function HomePage() {
 
-  const [ serviceRes, postRes] =
+  const [ productRes, postRes] =
     await Promise.all([
 
       supabase
-        .from("services")
+        .from("products")
         .select("*")
-        .eq("status", "published")
+        .eq("status", "available")
         .order("created_at", {
           ascending: false,
         }),
@@ -32,7 +32,7 @@ export default async function HomePage() {
         .limit(5),
     ]);
 
-  const services = serviceRes.data || [];
+  const products = productRes.data || [];
   const posts = postRes.data || [];
 
   return (
@@ -40,26 +40,25 @@ export default async function HomePage() {
 
       {/* HERO */}
 
-      {/* SERVICES */}
       <section className="section">
 
         <div className="sectionHeader">
               <BackButton />
           
-          <h2>Dịch vụ</h2>
+          <h2>Sản phẩm</h2>
         </div>
 
-        <div className="serviceGrid">
+        <div className="productGrid">
 
-          {services.map((s) => (
+          {products.map((s) => (
 
             <Link
               key={s.id}
-              href={`/services/${s.slug}`}
-              className="serviceCard"
+              href={`/products/${s.slug}`}
+              className="productCard"
             >
 
-              <div className="serviceImg">
+              <div className="productImg">
 
          <Image
   src={s.image}
@@ -80,9 +79,9 @@ export default async function HomePage() {
 
               </div>
 
-              <div className="serviceBody">
+              <div className="productBody">
 
-                <h3>{s.title}</h3>
+                <h3>{s.name}</h3>
                 <p>{s.short_description}</p>
                 <div className="priceBox">
 
@@ -153,7 +152,7 @@ export default async function HomePage() {
 
               <div className="blogBody">
 
-                <h3>{p.title}</h3>
+                <h3>{p.name}</h3>
 
                 <p>{p.description}</p>
 
