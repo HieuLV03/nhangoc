@@ -16,7 +16,7 @@ export default function CreateProductPage() {
     price: "",
     sale_price: "",
     category_id: "",
-    short_description: "",
+    description: "",
     content: "",
     status: "available",
     featured: false,
@@ -103,7 +103,7 @@ export default function CreateProductPage() {
             ? Number(form.sale_price)
             : null,
           category_id: form.category_id || null,
-          short_description: form.short_description,
+          description: form.description,
           content: form.content,
           image: imageUrl,
           status: form.status,
@@ -121,7 +121,7 @@ export default function CreateProductPage() {
         price: "",
         sale_price: "",
         category_id: "",
-        short_description: "",
+        description: "",
         content: "",
         status: "available",
         featured: false,
@@ -216,14 +216,13 @@ export default function CreateProductPage() {
           }
         />
 
-        {/* SHORT DESC */}
         <textarea
-          placeholder="Mô tả ngắn"
-          value={form.short_description}
+          placeholder="Mô tả"
+          value={form.description}
           onChange={(e) =>
             setForm({
               ...form,
-              short_description: e.target.value,
+              description: e.target.value,
             })
           }
         />

@@ -5,11 +5,18 @@ import "./page.css";
 export const revalidate = 0;
 
 export default async function CategoriesPage() {
-  const { data: categories } = await supabase
-    .from("categories")
-    .select("*")
-    .order("created_at", { ascending: false });
+const {
+  data: categories,
+  error,
+} = await supabase
+  .from("categories")
+  .select("*")
+  .order("created_at", { ascending: false });
 
+console.log("categories =", categories);
+console.log("error =", error);
+console.log("categories:", categories);
+console.log("error:", error);
   return (
     <div className="categoriesPage">
       <div className="pageHeader">
