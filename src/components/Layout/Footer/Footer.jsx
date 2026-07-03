@@ -10,26 +10,19 @@ export default function Footer() {
 
     {/* BRAND */}
     <div className="footerBrand">
-      <h2>MIREC</h2>
-      <p>
-        Trung tâm kiểm định bản đồ & tư vấn tài nguyên - môi trường.
-      </p>
+      <h2>Tiệm nhà Ngọc</h2>
     </div>
 
     {/* INFO */}
     <div className="footerBox">
-      <h3>Thông tin công ty</h3>
+      <h3>Thông tin quán</h3>
 
       <p><strong>🏢 Trụ sở:</strong><br />
-        Số 18 Alexander De Rhodes, TP.HCM
+        16 Ấp Tường Thắng B, xã Phước Long, tỉnh Cà Mau
       </p>
 
-      <p><strong>🏥 Cơ sở:</strong><br />
-        286 Quách Điêu, TP.HCM
-      </p>
-
-      <p><strong>📞 Hotline:</strong> (028) 73 034 268</p>
-      <p><strong>📧 Email:</strong> info@mirec.vn</p>
+      <p><strong>📞 Hotline:</strong>0332 605 121 </p>
+      <p><strong>📧 Email:</strong> nguyentinhngoc@gmail.com</p>
     </div>
 
     {/* LINKS */}
@@ -54,7 +47,7 @@ export default function Footer() {
   </div>
 
   <div className="footerBottom">
-    © {new Date().getFullYear()} MIREC. All rights reserved.
+    © {new Date().getFullYear()} Tiệm nhà Ngọc. All rights reserved.
   </div>
 </footer>
   );
