@@ -18,7 +18,7 @@ export default function Footer() {
       <h3>Thông tin quán</h3>
 
       <p><strong>🏢 Trụ sở:</strong><br />
-        16 Ấp Tường Thắng B, xã Phước Long, tỉnh Cà Mau
+        16 Ấp Tường Thắng B, xã Phước Long, tỉnh Cà Mau (Chợ Trưởng Tòa)
       </p>
 
       <p><strong>📞 Hotline:</strong>0332 605 121 </p>
@@ -32,14 +32,13 @@ export default function Footer() {
       <Link href="/">Trang chủ</Link>
       <Link href="/services">Dịch vụ</Link>
       <Link href="/posts">Bài viết</Link>
-      <Link href="/booking">Đặt lịch</Link>
     </div>
 
     {/* SOCIAL */}
     <div className="footerBox">
       <h3>Kết nối</h3>
       <div className="social">
-        <a href="#">Facebook</a>
+        <a href="https://www.facebook.com/tinh.ngoc.240401">Facebook</a>
         <a href="#">Zalo</a>
       </div>
     </div>
