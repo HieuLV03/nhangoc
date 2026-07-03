@@ -112,7 +112,7 @@ if (loading || isAdminPage) {
     src="/logokhongnen.png"
     alt="MIREC"
     width={72}
-    height={63}
+    height={54}
     priority
   />
 </Link>
