@@ -64,7 +64,7 @@ export default async function CategoriesPage() {
             ) : (
               <tr>
                 <td
-                  colSpan={5}
+                  colSpan={4}
                   style={{
                     textAlign: "center",
                     padding: 30,

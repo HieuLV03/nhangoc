@@ -51,7 +51,7 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(
-      "https://thammyvienhisu.online"
+      "https://nhangoc.vercel.app"
     ),
 
     name,
@@ -91,7 +91,7 @@ export async function generateMetadata({
       url,
 
       siteName:
-        "Thẩm mỹ viện HiSu",
+        "Nhà Ngọc",
 
       locale: "vi_VN",
 
@@ -165,7 +165,7 @@ export default async function Page({
 
       image: [data.image],
 
-      url: `https://thammyvienhisu.online/products/${data.slug}`,
+      url: `https://nhangoc.vercel.app/products/${data.slug}`,
 
       productType:
         data.name,
@@ -180,17 +180,17 @@ export default async function Page({
           "BeautySalon",
 
         name:
-          "Thẩm mỹ viện HiSu",
+          "Nhà Ngọc",
 
         url:
-          "https://thammyvienhisu.online",
+          "https://nhangoc.vercel.app",
 
         logo: {
           "@type":
             "ImageObject",
 
           url:
-            "https://thammyvienhisu.online/logo.png",
+            "https://nhangoc.vercel.app/logo.png",
         },
       },
 
@@ -211,7 +211,7 @@ export default async function Page({
         "@type":
           "WebPage",
 
-        "@id": `https://thammyvienhisu.online/products/${data.slug}`,
+        "@id": `https://nhangoc.vercel.app/products/${data.slug}`,
       },
     }),
   }}
