@@ -5,7 +5,26 @@
   padding: 40px 20px;
   box-sizing: border-box;
 }
+.categoryBox {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
+.categoryItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.categoryItem input {
+    width: 18px;
+    height: 18px;
+} 
 .createPostCard {
   max-width: 900px;
   margin: auto;

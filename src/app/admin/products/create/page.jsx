@@ -15,7 +15,7 @@ export default function CreateProductPage() {
     slug: "",
     price: "",
     sale_price: "",
-    category_id: "",
+    category_ids: [],
     description: "",
     content: "",
     status: "available",
@@ -102,8 +102,8 @@ export default function CreateProductPage() {
           sale_price: form.sale_price
             ? Number(form.sale_price)
             : null,
-          category_id: form.category_id || null,
-          description: form.description,
+category_ids: form.category_ids,
+            description: form.description,
           content: form.content,
           image: imageUrl,
           status: form.status,
@@ -120,7 +120,7 @@ export default function CreateProductPage() {
         slug: "",
         price: "",
         sale_price: "",
-        category_id: "",
+        category_ids: [],
         description: "",
         content: "",
         status: "available",
@@ -178,24 +178,35 @@ export default function CreateProductPage() {
           }
         />
 
-        {/* CATEGORY */}
-        <select
-          value={form.category_id}
-          onChange={(e) =>
+    <div className="categoryBox">
+  <h4>Danh mục</h4>
+
+  {categories.map((cat) => (
+    <label key={cat.id} className="categoryItem">
+      <input
+        type="checkbox"
+        checked={form.category_ids.includes(cat.id)}
+        onChange={(e) => {
+          if (e.target.checked) {
             setForm({
               ...form,
-              category_id: e.target.value,
-            })
+              category_ids: [...form.category_ids, cat.id],
+            });
+          } else {
+            setForm({
+              ...form,
+              category_ids: form.category_ids.filter(
+                (id) => id !== cat.id
+              ),
+            });
           }
-        >
-          <option value="">-- Chọn danh mục --</option>
-          {categories.map((c) => (
-            <option key={c.id} value={c.id}>
-              {c.name}
-            </option>
-          ))}
-        </select>
+        }}
+      />
 
+      {cat.name}
+    </label>
+  ))}
+</div>
         {/* PRICE */}
         <input
           type="number"

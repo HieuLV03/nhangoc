@@ -91,11 +91,11 @@ export default async function HomePage() {
               <div className="productBody">
 
                 <h3 className="productTitle">
-                  {item.title}
+                  {item.name}
                 </h3>
 
                 <p className="productDesc">
-                  {item.short_description}
+                  {item.description}
                 </p>
 
                 <div className="productFooter">

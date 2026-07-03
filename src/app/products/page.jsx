@@ -11,30 +11,29 @@ export const revalidate = 3600;
 
 export default async function HomePage() {
 
-  const [ productRes, postRes] =
-    await Promise.all([
+ const [productRes, postRes] = await Promise.all([
+  supabase
+    .from("products")
+    .select("*")
+    .eq("status", "available")
+    .order("created_at", { ascending: false }),
 
-      supabase
-        .from("products")
-        .select("*")
-        .eq("status", "available")
-        .order("created_at", {
-          ascending: false,
-        }),
+  supabase
+    .from("posts")
+    .select("*")
+    .eq("status", "published")
+    .order("created_at", { ascending: false })
+    .limit(5),
+]);
 
-      supabase
-        .from("posts")
-        .select("*")
-        .eq("status", "published")
-        .order("created_at", {
-          ascending: false,
-        })
-        .limit(5),
-    ]);
+console.log("PRODUCT ERROR:", productRes.error);
+console.log("POST ERROR:", postRes.error);
 
-  const products = productRes.data || [];
-  const posts = postRes.data || [];
+console.log("PRODUCT DATA:", productRes.data);
+console.log("POST DATA:", postRes.data);
 
+const products = productRes.data || [];
+const posts = postRes.data || [];
   return (
     <main className="home">
 
@@ -82,7 +81,7 @@ export default async function HomePage() {
               <div className="productBody">
 
                 <h3>{s.name}</h3>
-                <p>{s.short_description}</p>
+                <p>{s.description}</p>
                 <div className="priceBox">
 
                   <span className="priceLabel">
