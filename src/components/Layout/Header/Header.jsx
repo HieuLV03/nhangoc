@@ -2,13 +2,15 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 import "./Header.css";
 
 export default function Header() {
   const router = useRouter();
+  const pathname = usePathname();
+const isAdminPage = pathname.startsWith("/admin");
   const [menuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
@@ -80,8 +82,9 @@ useEffect(() => {
     router.push("/");
   };
 
-  if (loading) return null;
-
+if (loading || isAdminPage) {
+  return null;
+}
   return (
     <>
       {/* ADMIN BAR */}
@@ -108,8 +111,8 @@ useEffect(() => {
   <Image
     src="/logokhongnen.png"
     alt="MIREC"
-    width={79}
-    height={69}
+    width={72}
+    height={63}
     priority
   />
 </Link>
@@ -128,24 +131,7 @@ useEffect(() => {
           <Link href="/posts" onClick={() => setMenuOpen(false)}>Bài viết</Link>
           <Link href="/about" onClick={() => setMenuOpen(false)}>Giới thiệu</Link>
           <Link href="/contact" onClick={() => setMenuOpen(false)}>Liên hệ</Link>
-                    <Link href="/booking" onClick={() => setMenuOpen(false)}>Đặt lịch</Link>
-
         </nav>
-
-        <div className="headerRight">
-          {!user && (
-            <Link href="/auth" className="loginBtn">
-              Đăng nhập
-            </Link>
-          )}
-
-          {user && (
-            <div className="userBox">
-              <span>{profile?.name || user.email}</span>
-              <button onClick={handleLogout}>Đăng xuất</button>
-            </div>
-          )}
-        </div>
       </header>
     </>
   );

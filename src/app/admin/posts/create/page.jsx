@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import "./page.css";
+import BackButton from "../../components/BackButton/BackButton";
 
 export default function CreatePostPage() {
   const [loading, setLoading] = useState(false);
@@ -123,10 +124,15 @@ export default function CreatePostPage() {
   };
 
   return (
-    <div className="createPostPage">
-      <div className="createPostCard">
-        <h1>Tạo bài viết</h1>
+ <div className="createPostPage">
+  <div className="createPostCard">
 
+    <div className="headerRow">
+      <div className="headerLeft">
+        <BackButton />
+        <h1>Tạo bài viết</h1>
+      </div>
+    </div>
         {/* TITLE → AUTO SLUG */}
         <input
           placeholder="Title"
@@ -228,10 +234,13 @@ export default function CreatePostPage() {
           />
           Featured
         </label>
-
-        <button onClick={createPost} disabled={loading}>
-          {loading ? "Đang lưu..." : "Đăng bài"}
-        </button>
+<button
+  className="submitBtn"
+  onClick={createPost}
+  disabled={loading}
+>
+  {loading ? "Đang lưu..." : "Đăng bài"}
+</button>
       </div>
     </div>
   );

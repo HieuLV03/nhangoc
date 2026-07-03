@@ -1,34 +1,33 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 export default function AdminLayout({ children }) {
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const check = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
 
       if (!user) {
-        router.push("/");
+        router.replace("/login");
         return;
       }
 
-      const { data } = await supabase
-        .from("users")
-        .select("role")
-        .eq("id", user.id)
-        .single();
-
-      if (data?.role !== "admin") {
-        router.push("/");
-      }
+      setLoading(false);
     };
 
     check();
-  }, []);
+  }, [router]);
+
+  if (loading) {
+    return <div>Đang kiểm tra...</div>;
+  }
 
   return <>{children}</>;
 }

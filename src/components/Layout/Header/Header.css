@@ -55,7 +55,6 @@
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(16px);
 
-  border-bottom: 1px solid rgba(58, 160, 255, 0.12);
 
   transition: transform 0.3s ease;
 }
@@ -117,10 +116,6 @@
 
 /* ================= RIGHT ================= */
 
-.headerRight {
-  display: flex;
-  align-items: center;
-}
 
 /* LOGIN */
 

@@ -20,7 +20,6 @@
 .createPostCard h1 {
   font-size: 32px;
   font-weight: 700;
-  margin-bottom: 30px;
   color: #111827;
   letter-spacing: -0.5px;
 }
@@ -76,7 +75,7 @@
 }
 
 /* BUTTON */
-.createPostCard button {
+.submitBtn {
   width: 100%;
   height: 52px;
   background: linear-gradient(135deg, #111, #333);
@@ -88,6 +87,17 @@
   cursor: pointer;
   transition: 0.2s ease;
   letter-spacing: 0.3px;
+}
+
+.submitBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.15);
+}
+
+.submitBtn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 /* HOVER */

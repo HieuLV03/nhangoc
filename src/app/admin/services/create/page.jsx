@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import "./page.css";
+import BackButton from "../../components/BackButton/BackButton";
 
 export default function CreateServicePage() {
   const [loading, setLoading] = useState(false);
@@ -128,8 +129,15 @@ const sanitize = (text) => {
   return (
     <div className="createPostPage">
       <div className="createPostCard">
-        <h1>Tạo dịch vụ</h1>
+<div className="headerRow">
+  <div className="headerLeft">
+    <BackButton />
 
+    <div className="pageTitle">
+      <h1>Tạo dịch vụ</h1>
+    </div>
+  </div>
+</div>
         {/* TITLE + AUTO SLUG */}
         <input
           placeholder="Tên dịch vụ"
@@ -234,10 +242,13 @@ const sanitize = (text) => {
           Nổi bật
         </label>
 
-        {/* BUTTON */}
-        <button onClick={createService} disabled={loading}>
-          {loading ? "Đang upload..." : "Tạo dịch vụ"}
-        </button>
+    <button
+  className="submitBtn"
+  onClick={createService}
+  disabled={loading}
+>
+  {loading ? "Đang upload..." : "Tạo dịch vụ"}
+</button>
       </div>
     </div>
   );

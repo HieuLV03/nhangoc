@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import "./page.css";
+import BackButton from "../components/BackButton/BackButton";
 
 export default function PostsPage() {
   const [posts, setPosts] = useState([]);
@@ -111,14 +112,19 @@ const extractPath = (url) => {
       <div className="adminCard">
 
         {/* HEADER */}
-        <div className="headerRow">
-          <h1>Danh sách bài viết</h1>
+    <div className="headerRow">
+  <div className="headerLeft">
+    <BackButton />
+    <h1>Danh sách bài viết</h1>
+  </div>
 
-          <Link href="/admin/posts/create" className="addBtn">
-            + Thêm bài viết
-          </Link>
-        </div>
-
+  <Link
+    href="/admin/posts/create"
+    className="addBtn"
+  >
+    + Thêm bài viết
+  </Link>
+</div>
         {/* CONTENT */}
         {loading ? (
           <p>Đang tải...</p>

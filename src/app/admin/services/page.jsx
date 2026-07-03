@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import "./page.css";
+import BackButton from "../components/BackButton/BackButton";
 
 export default function ServicesPage() {
   const [services, setServices] = useState([]);
@@ -117,102 +118,87 @@ export default function ServicesPage() {
     }
   };
 
-  return (
-    <div className="adminPage">
-      <div className="adminCard">
+return (
+  <div className="adminPage">
+    <div className="adminCard">
 
-        <div className="headerRow">
-          <h1>Danh sách dịch vụ</h1>
+ <div className="headerRow">
+  <div className="headerLeft">
+    <BackButton />
+    <h1>Danh sách dịch vụ</h1>
+  </div>
 
-          <Link
-            href="/admin/services/create"
-            className="addBtn"
-          >
-            + Thêm dịch vụ
-          </Link>
-        </div>
+  <Link
+    href="/admin/services/create"
+    className="addBtn"
+  >
+    + Thêm dịch vụ
+  </Link>
+</div>
 
-        {loading ? (
-          <p>Đang tải...</p>
-        ) : services.length === 0 ? (
-          <p>Chưa có dịch vụ nào</p>
-        ) : (
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Tên</th>
-                <th>Slug</th>
-                <th>Giá</th>
-                <th>Trạng thái</th>
-                <th>Ngày tạo</th>
-                <th>Hành động</th>
+      {/* CONTENT */}
+      {loading ? (
+        <p>Đang tải...</p>
+      ) : services.length === 0 ? (
+        <p>Chưa có dịch vụ nào</p>
+      ) : (
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Tên</th>
+              <th>Slug</th>
+              <th>Giá</th>
+              <th>Ngày tạo</th>
+              <th>Trạng thái</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {services.map((service) => (
+              <tr key={service.id}>
+                <td>{service.title}</td>
+
+                <td>{service.slug}</td>
+
+                <td>
+                  {Number(service.price).toLocaleString("vi-VN")}đ
+                </td>
+
+                <td>
+                  {service.created_at
+                    ? new Date(service.created_at).toLocaleDateString()
+                    : ""}
+                </td>
+
+                <td>
+                  <span className="status">
+                    {service.status}
+                  </span>
+                </td>
+
+                <td className="action">
+                  <Link
+                    href={`/admin/services/edit/${service.id}`}
+                    className="editBtn"
+                  >
+                    Sửa
+                  </Link>
+
+                  <button
+                    onClick={() => deleteService(service)}
+                    className="deleteBtn"
+                  >
+                    Xoá
+                  </button>
+                </td>
               </tr>
-            </thead>
+            ))}
+          </tbody>
+        </table>
+      )}
 
-            <tbody>
-              {services.map((s) => (
-                <tr key={s.id}>
-                  <td data-label="Tên">
-                    {s.title}
-                  </td>
-
-                  <td data-label="Slug">
-                    {s.slug}
-                  </td>
-
-                  <td
-                    data-label="Giá"
-                    className="price"
-                  >
-                    {Number(s.price).toLocaleString(
-                      "vi-VN"
-                    )}
-                    đ
-                  </td>
-
-                  <td data-label="Trạng thái">
-                    <span
-                      className={`status ${s.status}`}
-                    >
-                      {s.status}
-                    </span>
-                  </td>
-
-                  <td data-label="Ngày tạo">
-                    {s.created_at
-                      ? new Date(
-                          s.created_at
-                        ).toLocaleDateString()
-                      : ""}
-                  </td>
-
-                  <td
-                    data-label="Hành động"
-                    className="action"
-                  >
-                    <Link
-                      href={`/admin/services/edit/${s.id}`}
-                      className="editBtn"
-                    >
-                      Sửa
-                    </Link>
-
-                    <button
-                      onClick={() =>
-                        deleteService(s)
-                      }
-                      className="deleteBtn"
-                    >
-                      Xoá
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-
-      </div>
     </div>
-  );
+  </div>
+);
 }

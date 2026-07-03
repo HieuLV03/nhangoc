@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { supabase } from "@/lib/supabase";
 import "./page.css";
+import BackButton from "../components/BackButton/BackButton";
 
 export default function AdminSlidersPage() {
   const [sliders, setSliders] = useState([]);
@@ -179,9 +180,14 @@ export default function AdminSlidersPage() {
   // UI
   // =========================
   return (
-    <main className="adminSliderPage">
-      <h1>Quản lý Slider</h1>
+  <main className="adminSliderPage">
 
+  <div className="headerRow">
+    <div className="headerLeft">
+      <BackButton />
+      <h1>Quản lý Slider</h1>
+    </div>
+  </div>
       {/* FORM */}
       <form onSubmit={handleAddSlider} className="sliderForm">
         <input

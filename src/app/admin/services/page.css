@@ -4,96 +4,90 @@
   --gradient: linear-gradient(135deg, #3aa0ff, #ff4d8d);
 }
 
-/* ================= BACKGROUND ================= */
-
 .adminPage {
-  padding: 15px;
+  padding: 20px;
   min-height: 100vh;
 
   background:
-    radial-gradient(circle at top, rgba(58,160,255,0.08), transparent 40%),
-    radial-gradient(circle at bottom, rgba(255,77,141,0.08), transparent 40%);
-
-  box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+    radial-gradient(circle at top, rgba(58,160,255,.08), transparent 40%),
+    radial-gradient(circle at bottom, rgba(255,77,141,.08), transparent 40%);
 }
 
-/* ================= CARD ================= */
-
 .adminCard {
-  background: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,.9);
   backdrop-filter: blur(14px);
 
-  padding: 9px;
   border-radius: 20px;
+  padding: 24px;
 
-  box-shadow: 0 20px 60px rgba(58,160,255,0.08);
-  border: 1px solid rgba(58,160,255,0.12);
+  border: 1px solid rgba(58,160,255,.12);
+  box-shadow: 0 20px 60px rgba(0,0,0,.06);
 }
 
 /* ================= HEADER ================= */
 
 .headerRow {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 
-  margin-bottom: 20px;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .headerRow h1 {
-  font-size: 26px;
-  font-weight: 800;
+  flex: 1;
 
-  font-family: "Playfair Display", serif;
+  font-size: 28px;
+  font-weight: 800;
 
   background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* ================= ADD BUTTON ================= */
-
 .addBtn {
   background: var(--gradient);
-  color: white;
-
-  padding: 10px 16px;
-  border-radius: 12px;
+  color: #fff;
 
   text-decoration: none;
   font-weight: 600;
 
-  box-shadow: 0 10px 25px rgba(58,160,255,0.25);
-  transition: 0.3s;
+  padding: 12px 18px;
+  border-radius: 12px;
+
+  transition: .25s;
+  white-space: nowrap;
 }
 
 .addBtn:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
-/* ================= TABLE DESKTOP ================= */
+/* ================= TABLE ================= */
 
 .table {
   width: 100%;
   border-collapse: collapse;
-  border-radius: 14px;
-  overflow: hidden;
 }
 
 .table th {
-  text-align: left;
-  font-size: 13px;
-  padding: 14px;
+  background: rgba(58,160,255,.06);
 
-  background: rgba(58,160,255,0.06);
+  text-align: left;
+
+  padding: 14px;
+  font-size: 14px;
   font-weight: 700;
 }
 
 .table td {
   padding: 14px;
-  border-bottom: 1px solid rgba(58,160,255,0.1);
-  font-size: 14px;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+.table tr:hover {
+  background: rgba(58,160,255,.03);
 }
 
 /* ================= PRICE ================= */
@@ -106,54 +100,83 @@
 /* ================= STATUS ================= */
 
 .status {
-  padding: 4px 10px;
+  display: inline-block;
+
+  padding: 5px 12px;
   border-radius: 999px;
+
   font-size: 12px;
   font-weight: 600;
+
+  background: rgba(58,160,255,.12);
+  color: #2563eb;
 }
 
-.status.published {
-  background: rgba(58,160,255,0.12);
-  color: #3aa0ff;
+.status.draft {
+  background: rgba(255,77,141,.12);
+  color: #ff4d8d;
 }
 
 /* ================= ACTION ================= */
 
 .action {
   display: flex;
+  align-items: center;
   gap: 12px;
 }
 
-/* ================= BUTTONS ================= */
-
 .editBtn {
-  color: #3aa0ff;
+  color: #2563eb;
+  text-decoration: none;
   font-weight: 600;
 }
 
 .deleteBtn {
+  background: none;
   border: none;
-  background: transparent;
-  color: #ff4d8d;
+
+  color: #ef4444;
   font-weight: 600;
+
   cursor: pointer;
 }
 
-/* ================= RESPONSIVE FIX ================= */
+.editBtn:hover,
+.deleteBtn:hover {
+  opacity: .8;
+}
+.headerLeft{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.headerLeft h1{
+  margin:0;
+}
+/* ================= MOBILE ================= */
+
 @media (max-width: 768px) {
 
   .adminPage {
-    padding: 6px;
+    padding: 8px;
   }
 
   .adminCard {
-    padding: 12px;
+    padding: 14px;
   }
 
   .headerRow {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    align-items: stretch;
+  }
+
+  .headerRow h1 {
+    font-size: 24px;
+  }
+
+  .addBtn {
+    text-align: center;
   }
 
   .table thead {
@@ -167,55 +190,36 @@
     width: 100%;
   }
 
-  /* ✅ FIX QUAN TRỌNG: row rõ ràng + không bị đè */
   .table tr {
-    background: #fff;
+    background: white;
+
     margin-bottom: 14px;
+    padding: 12px;
 
     border-radius: 14px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+
+    box-shadow: 0 8px 20px rgba(0,0,0,.05);
   }
 
-  /* ✅ FIX: td không flex full nữa */
   .table td {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
 
-    padding: 6px 0;
     border: none;
-
-    font-size: 13px;
-    line-height: 1.4;
-
-    word-break: break-word; /* 🔥 QUAN TRỌNG */
+    padding: 8px 0;
   }
 
-  /* label bên trái */
   .table td::before {
     content: attr(data-label);
+
     font-weight: 600;
     color: #666;
+
     min-width: 90px;
-    flex-shrink: 0;
   }
 
-  /* value bên phải */
-  .table td > * {
-    text-align: right;
-    flex: 1;
-  }
-
-  /* ✅ FIX ACTION KHÔNG BỊ ĐÈ */
   .action {
-    display: flex;
     justify-content: flex-end;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .editBtn,
-  .deleteBtn {
-    white-space: nowrap;
   }
 }
