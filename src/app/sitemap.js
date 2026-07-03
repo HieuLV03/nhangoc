@@ -33,7 +33,7 @@ export default async function sitemap() {
   if (postError || serviceError) {
     return [
       {
-      url: "https://mirec.vercel.app",
+      url: "https://nhangoc.vercel.app",
         lastModified: new Date().toISOString(),
       },
     ];
@@ -41,7 +41,7 @@ export default async function sitemap() {
 
   // POSTS URLS
   const postUrls = (posts || []).map((post) => ({
-    url: `https://mirec.vercel.app/posts/${post.slug}`,
+    url: `https://nhangoc.vercel.app/posts/${post.slug}`,
     lastModified: safeDate(post.updated_at),
     changeFrequency: "weekly",
     priority: 0.8,
@@ -49,7 +49,7 @@ export default async function sitemap() {
 
   // SERVICES URLS
   const serviceUrls = (services || []).map((service) => ({
-    url: `https://mirec.vercel.app/services/${service.slug}`,
+    url: `https://nhangoc.vercel.app/services/${service.slug}`,
     lastModified: safeDate(service.updated_at),
     changeFrequency: "weekly",
     priority: 0.9,
@@ -57,42 +57,42 @@ export default async function sitemap() {
 
 return [
   {
-    url: "https://mirec.vercel.app",
+    url: "https://nhangoc.vercel.app",
     lastModified: new Date().toISOString(),
     changeFrequency: "daily",
     priority: 1,
   },
 
   {
-    url: "https://mirec.vercel.app/about",
+    url: "https://nhangoc.vercel.app/about",
     lastModified: new Date().toISOString(),
     changeFrequency: "monthly",
     priority: 0.8,
   },
 
   {
-    url: "https://mirec.vercel.app/contact",
+    url: "https://nhangoc.vercel.app/contact",
     lastModified: new Date().toISOString(),
     changeFrequency: "monthly",
     priority: 0.8,
   },
 
   {
-    url: "https://mirec.vercel.app/booking",
+    url: "https://nhangoc.vercel.app/booking",
     lastModified: new Date().toISOString(),
     changeFrequency: "weekly",
     priority: 0.9,
   },
 
   {
-    url: "https://mirec.vercel.app/posts",
+    url: "https://nhangoc.vercel.app/posts",
     lastModified: new Date().toISOString(),
     changeFrequency: "daily",
     priority: 0.9,
   },
 
   {
-    url: "https://mirec.vercel.app/services",
+    url: "https://nhangoc.vercel.app/services",
     lastModified: new Date().toISOString(),
     changeFrequency: "daily",
     priority: 0.9,
