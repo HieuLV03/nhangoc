@@ -4,9 +4,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import "./BookingButton.css";
 
-// export ref global đơn giản
-export const bookingBtnRef = { current: null };
-
 export default function BookingButton() {
   const [burst, setBurst] = useState(false);
 
@@ -15,17 +12,12 @@ export default function BookingButton() {
     setTimeout(() => setBurst(false), 500);
   };
 
-  // expose function để popup gọi
   useEffect(() => {
-    window.__bookingBurst = triggerBurst;
+    window.triggerBookingBurst = triggerBurst;
   }, []);
 
   return (
-    <Link
-      href="/booking"
-      className="bookingFloat"
-      ref={(el) => (bookingBtnRef.current = el)}
-    >
+    <Link href="/booking" className="bookingFloat">
       <div className={`bookingIcon ${burst ? "burst" : ""}`}>
         📅
       </div>
