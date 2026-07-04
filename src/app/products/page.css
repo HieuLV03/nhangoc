@@ -300,17 +300,14 @@ body {
   gap: 4px;
 }
 
-.priceLabel {
-  font-size: 11px;
-
-  letter-spacing: 1.5px;
-
-  color: #999;
-
-  text-transform: uppercase;
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.priceValue {
+.priceSale {
   display: flex;
   align-items: flex-end;
   gap: 3px;
@@ -318,15 +315,26 @@ body {
   font-size: 28px;
   font-weight: 800;
 
-  background:
-    linear-gradient(
-      135deg,
-      #3aa0ff,
-      #ff4d8d
-    );
+  background: linear-gradient(
+    135deg,
+    #3aa0ff,
+    #ff4d8d
+  );
 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.priceOld {
+  font-size: 17px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.currency {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 3px;
 }
 
 .currency {

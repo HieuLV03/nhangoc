@@ -5,7 +5,7 @@ import Image from "next/image";
 import "./page.css";
 import BackButton from "@/components/BackButton/BackButton";
 
-export const revalidate = 3600;
+export const revalidate = 600;
 
 export default async function HomePage() {
 

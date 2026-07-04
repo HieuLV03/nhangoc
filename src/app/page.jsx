@@ -4,7 +4,7 @@ import Image from "next/image";
 import "./page.css";
 import Slider from "@/components/Slider/Slider";
 
-export const revalidate = 3600;
+export const revalidate = 600;
 
 export default async function HomePage() {
 
@@ -100,12 +100,23 @@ export default async function HomePage() {
 
                 <div className="productFooter">
 
-        <span className="productPrice">
-  <span className="priceLabel">Giá Ưu đãi</span>
-  <span className="priceValue">
-    {Number(item.price || 0).toLocaleString("vi-VN")}₫
-  </span>
-</span>
+<div className="productPrice">
+  {item.sale_price ? (
+    <>
+      <span className="priceSale">
+        {Number(item.sale_price).toLocaleString("vi-VN")}₫
+      </span>
+
+      <span className="priceOld">
+        {Number(item.price).toLocaleString("vi-VN")}₫
+      </span>
+    </>
+  ) : (
+    <span className="priceSale">
+      {Number(item.price).toLocaleString("vi-VN")}₫
+    </span>
+  )}
+</div>
                 </div>
 
               </div>

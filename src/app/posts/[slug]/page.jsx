@@ -2,7 +2,7 @@ import { supabase } from "@/lib/supabase";
 import BackButton from "@/components/BackButton/BackButton";
 import "./page.css"
 import Image from "next/image";
-export const revalidate = 3600;
+export const revalidate = 600;
 export const dynamicParams = true;
 export async function generateStaticParams() {
   const { data, error } = await supabase

@@ -6,13 +6,13 @@ import BackButton from "@/components/BackButton/BackButton";
 import Link from "next/link";
 
 // FIX CACHE
-export const revalidate = 3600;
+export const revalidate = 600;
 export const dynamicParams = true;
 export async function generateStaticParams() {
   const { data, error } = await supabase
     .from("products")
     .select("slug")
-    .eq("status", "published");
+    .eq("status", "available");
 
   if (error || !Array.isArray(data)) {
     return [];
@@ -41,11 +41,10 @@ export async function generateMetadata({
   }
 
   const name =
-    data.meta_name || data.name;
+    data.name;
 
   const description =
-    data.meta_description ||
-    data.short_description;
+    data.description;
 
   const url = `/products/${data.slug}`;
 
@@ -54,23 +53,13 @@ export async function generateMetadata({
       "https://nhangoc.vercel.app"
     ),
 
-    name,
+    title:name,
 
     description,
 
-    keywords: [
-      data.name,
-      "phun môi",
-      "phun mày",
-      "phun xăm thẩm mỹ",
-      "thẩm mỹ viện HISU",
-      "phun môi collagen",
-      "phun môi TP.HCM",
-    ],
-
     authors: [
       {
-        name: "HISU Beauty",
+        name: "Nhà Ngọc",
       },
     ],
 
@@ -84,7 +73,7 @@ export async function generateMetadata({
     },
 
     openGraph: {
-      name,
+      title:name,
 
       description,
 
@@ -119,7 +108,7 @@ export async function generateMetadata({
       card:
         "summary_large_image",
 
-      name,
+      title:name,
 
       description,
 
@@ -161,7 +150,7 @@ export default async function Page({
       name: data.name,
 
       description:
-        data.short_description,
+        data.description,
 
       image: [data.image],
 
@@ -193,18 +182,17 @@ export default async function Page({
             "https://nhangoc.vercel.app/logo.png",
         },
       },
-
-      offers: {
-        "@type": "Offer",
-
-        price:
-          data.price || 0,
+offers: {
+  "@type": "Offer",
+  price: data.sale_price || data.price || 0,
 
         priceCurrency:
           "VND",
 
-        availability:
-          "https://schema.org/InStock",
+  availability:
+data.status === "available"
+? "https://schema.org/InStock"
+: "https://schema.org/OutOfStock",
       },
 
       mainEntityOfPage: {
@@ -218,29 +206,52 @@ export default async function Page({
 />
       <BackButton />
 
-      <h1 className="name">
+      <h1 className="title">
         {data.name}
       </h1>
 
   <p className="desc">
-  {data.short_description}
+  {data.description}
 </p>
 
 {/* PRICE */}
 {data.price && (
-  <div className="priceBox">
-    <span className="priceLabel">
-      Giá chỉ
-    </span>
+<div className="priceBox">
 
-    <div className="priceValue">
-      {Number(data.price).toLocaleString("vi-VN")}
-
-      <span className="currency">
-        đ
+  {data.sale_price !== null &&
+  Number(data.sale_price) > 0 ? (
+    <>
+      <span className="priceLabel">
+        Giá khuyến mãi
       </span>
-    </div>
-  </div>
+
+      <div className="priceRow">
+
+        <div className="priceSale">
+          {Number(data.sale_price).toLocaleString("vi-VN")}
+          <span className="currency">đ</span>
+        </div>
+
+        <div className="priceOld">
+          {Number(data.price).toLocaleString("vi-VN")}đ
+        </div>
+
+      </div>
+    </>
+  ) : (
+    <>
+      <span className="priceLabel">
+        Giá
+      </span>
+
+      <div className="priceSale">
+        {Number(data.price).toLocaleString("vi-VN")}
+        <span className="currency">đ</span>
+      </div>
+    </>
+  )}
+
+</div>
 )}
 {data.image && (
   <div className="productImageWrap">

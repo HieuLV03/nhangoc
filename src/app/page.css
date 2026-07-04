@@ -168,15 +168,23 @@ width: 100%;
   gap: 4px;
 }
 
-.priceLabel {
-  font-size: 12px;
-  color: #888;
+.productPrice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.priceValue {
-  font-size: 18px;
-  font-weight: 600;
-  color: #c8a96b; /* hoặc màu chủ đạo của bạn */
+.priceSale {
+  font-size: 22px;
+  font-weight: 700;
+  color: #d40000;
+}
+
+.priceOld {
+  font-size: 16px;
+  color: #999;
+  text-decoration: line-through;
 }
 /* BUTTON nhỏ sang */
 .section {

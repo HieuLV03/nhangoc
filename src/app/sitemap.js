@@ -1,6 +1,6 @@
 import { supabase } from "@/lib/supabase";
 
-export const revalidate = 3600;
+export const revalidate = 600;
 
 function safeDate(dateString) {
   if (!dateString) return new Date().toISOString();

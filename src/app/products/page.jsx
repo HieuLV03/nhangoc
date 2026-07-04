@@ -7,7 +7,7 @@ import Image from "next/image";
 import "./page.css";
 import BackButton from "@/components/BackButton/BackButton";
 
-export const revalidate = 3600;
+export const revalidate = 600;
 
 export default async function HomePage() {
 
@@ -61,7 +61,7 @@ const posts = postRes.data || [];
 
          <Image
   src={s.image}
-  alt={s.title}
+  alt={s.name}
   width={600}
   height={400}
   sizes="(max-width:768px) 100vw, 33vw"
@@ -82,26 +82,39 @@ const posts = postRes.data || [];
 
                 <h3>{s.name}</h3>
                 <p>{s.description}</p>
-                <div className="priceBox">
+            <div className="priceBox">
 
-                  <span className="priceLabel">
-                    Giá chỉ
-                  </span>
+  {s.sale_price !== null && Number(s.sale_price) > 0 ? (
+    <>
+      <span className="priceLabel">
+        Giá khuyến mãi
+      </span>
 
-                  <div className="priceValue">
+      <div className="priceRow">
+        <div className="priceSale">
+          {Number(s.sale_price).toLocaleString("vi-VN")}
+          <span className="currency">đ</span>
+        </div>
 
-                    {Number(
-                      s.price || 0
-                    ).toLocaleString("vi-VN")}
+        <div className="priceOld">
+          {Number(s.price).toLocaleString("vi-VN")}đ
+        </div>
+      </div>
+    </>
+  ) : (
+    <>
+      <span className="priceLabel">
+        Giá
+      </span>
 
-                    <span className="currency">
-                      đ
-                    </span>
+      <div className="priceSale">
+        {Number(s.price).toLocaleString("vi-VN")}
+        <span className="currency">đ</span>
+      </div>
+    </>
+  )}
 
-                  </div>
-
-                </div>
-
+</div>
               </div>
 
             </Link>

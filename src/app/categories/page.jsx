@@ -2,7 +2,7 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import "./page.css";
 
-export const revalidate = 0;
+export const revalidate = 600;
 
 export default async function CategoriesPage() {
   const { data: categories, error } = await supabase
