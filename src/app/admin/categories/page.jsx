@@ -5,7 +5,7 @@ import "./page.css";
 export const revalidate = 0;
 
 export default async function CategoriesPage() {
-  const { data, error } = await supabase
+  const { data: categories, error } = await supabase
     .from("categories")
     .select("*")
     .order("created_at", { ascending: false });
@@ -13,12 +13,12 @@ export default async function CategoriesPage() {
   if (error) {
     return (
       <div className="categoriesPage">
-        <p>❌ Lỗi Supabase: {error.message}</p>
+        <p>❌ Lỗi: {error.message}</p>
       </div>
     );
   }
 
-  const categories = data || [];
+  const list = categories || [];
 
   return (
     <div className="categoriesPage">
@@ -33,65 +33,45 @@ export default async function CategoriesPage() {
         </Link>
       </div>
 
-      <div className="tableWrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Tên</th>
-              <th>Slug</th>
-              <th>Ảnh</th>
-              <th>Ngày tạo</th>
-              <th>Hành động</th>
-            </tr>
-          </thead>
-<tbody>
-  {categories.length > 0 ? (
-    categories.map((item) => (
-      <tr key={item.id}>
-        
-        {/* LEFT TD - INFO */}
-        <td className="infoTd">
-          <div className="name">{item.name}</div>
+      <div className="grid">
+        {list.length > 0 ? (
+          list.map((item) => (
+            <div
+              key={item.id}
+              className="card"
+              style={{
+                backgroundImage: item.img
+                  ? `url(${item.img})`
+                  : "none",
+              }}
+            >
+              <div className="overlay" />
 
-          <div className="slug">
-            <b>Slug:</b> {item.slug}
-          </div>
+              <div className="content">
+                <h2>{item.name}</h2>
 
-          <div className="date">
-            <b>Ngày:</b>{" "}
-            {item.created_at
-              ? new Date(item.created_at).toLocaleDateString("vi-VN")
-              : "-"}
-          </div>
+                <p>Slug: {item.slug}</p>
 
-          <Link
-            href={`/admin/categories/edit/${item.id}`}
-            className="editBtn"
-          >
-            Sửa
-          </Link>
-        </td>
+                <p>
+                  {item.created_at
+                    ? new Date(item.created_at).toLocaleDateString(
+                        "vi-VN"
+                      )
+                    : "-"}
+                </p>
 
-        {/* RIGHT TD - IMAGE */}
-        <td className="imageTd">
-          {item.img ? (
-            <img src={item.img} className="categoryImg" />
-          ) : (
-            "-"
-          )}
-        </td>
-
-      </tr>
-    ))
-  ) : (
-    <tr>
-      <td colSpan={2} style={{ textAlign: "center", padding: 20 }}>
-        Không có dữ liệu
-      </td>
-    </tr>
-  )}
-</tbody>
-        </table>
+                <Link
+                  href={`/admin/categories/edit/${item.id}`}
+                  className="editBtn"
+                >
+                  Sửa
+                </Link>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>Không có dữ liệu</p>
+        )}
       </div>
     </div>
   );
