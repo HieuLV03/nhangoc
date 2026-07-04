@@ -100,7 +100,6 @@ export default function AdminSlidersPage() {
       // =========================
       const { error: insertErr } = await supabase.from("sliders").insert([
         {
-          title,
           image_desktop: desktopUrl.publicUrl,
           image_mobile: mobileUrl,
 
@@ -108,7 +107,7 @@ export default function AdminSlidersPage() {
           desktop_path: fileDesktop,
           mobile_path: fileMobile,
 
-          status: "published",
+          status: true,
         },
       ]);
 
