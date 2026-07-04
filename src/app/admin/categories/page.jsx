@@ -5,18 +5,21 @@ import "./page.css";
 export const revalidate = 0;
 
 export default async function CategoriesPage() {
-const {
-  data: categories,
-  error,
-} = await supabase
-  .from("categories")
-  .select("*")
-  .order("created_at", { ascending: false });
+  const { data, error } = await supabase
+    .from("categories")
+    .select("*")
+    .order("created_at", { ascending: false });
 
-console.log("categories =", categories);
-console.log("error =", error);
-console.log("categories:", categories);
-console.log("error:", error);
+  if (error) {
+    return (
+      <div className="categoriesPage">
+        <p>❌ Lỗi Supabase: {error.message}</p>
+      </div>
+    );
+  }
+
+  const categories = data || [];
+
   return (
     <div className="categoriesPage">
       <div className="pageHeader">
@@ -25,10 +28,7 @@ console.log("error:", error);
           <p>Quản lý danh mục sản phẩm</p>
         </div>
 
-        <Link
-          href="/admin/categories/create"
-          className="createBtn"
-        >
+        <Link href="/admin/categories/create" className="createBtn">
           + Thêm danh mục
         </Link>
       </div>
@@ -39,62 +39,58 @@ console.log("error:", error);
             <tr>
               <th>Tên</th>
               <th>Slug</th>
-                            <th>Ảnh</th>
-
+              <th>Ảnh</th>
               <th>Ngày tạo</th>
-              <th></th>
+              <th>Hành động</th>
             </tr>
           </thead>
+<tbody>
+  {categories.length > 0 ? (
+    categories.map((item) => (
+      <tr key={item.id}>
+        
+        {/* LEFT TD - INFO */}
+        <td className="infoTd">
+          <div className="name">{item.name}</div>
 
-          <tbody>
-            {categories?.length ? (
-              categories.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.name}</td>
+          <div className="slug">
+            <b>Slug:</b> {item.slug}
+          </div>
 
-                  <td>{item.slug}</td>
-  <td>
-    {item.img ? (
-      <img
-        src={item.img}
-        alt={item.name}
-        className="categoryImg"
-      />
-    ) : (
-      "-"
-    )}
-  </td>
+          <div className="date">
+            <b>Ngày:</b>{" "}
+            {item.created_at
+              ? new Date(item.created_at).toLocaleDateString("vi-VN")
+              : "-"}
+          </div>
 
-                  <td>
-                    {new Date(
-                      item.created_at
-                    ).toLocaleDateString("vi-VN")}
-                  </td>
+          <Link
+            href={`/admin/categories/edit/${item.id}`}
+            className="editBtn"
+          >
+            Sửa
+          </Link>
+        </td>
 
-                  <td>
-                    <Link
-                      href={`/admin/categories/edit/${item.id}`}
-                      className="editBtn"
-                    >
-                      Sửa
-                    </Link>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td
-                  colSpan={5}
-                  style={{
-                    textAlign: "center",
-                    padding: 30,
-                  }}
-                >
-                  Chưa có danh mục nào.
-                </td>
-              </tr>
-            )}
-          </tbody>
+        {/* RIGHT TD - IMAGE */}
+        <td className="imageTd">
+          {item.img ? (
+            <img src={item.img} className="categoryImg" />
+          ) : (
+            "-"
+          )}
+        </td>
+
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan={2} style={{ textAlign: "center", padding: 20 }}>
+        Không có dữ liệu
+      </td>
+    </tr>
+  )}
+</tbody>
         </table>
       </div>
     </div>

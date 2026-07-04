@@ -1,114 +1,323 @@
 .categoriesPage {
   padding: 35px;
+  background: #f6f7fb;
+  min-height: 100vh;
 }
 
+/* HEADER */
 .pageHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
+  gap: 12px;
 }
 
 .pageHeader h1 {
-  font-size: 30px;
-  margin-bottom: 6px;
+  font-size: 28px;
+  margin-bottom: 4px;
+  color: #111;
 }
 
 .pageHeader p {
-  color: #777;
+  color: #6b7280;
+  font-size: 14px;
 }
 
+/* BUTTON */
 .createBtn {
-  background: #111;
+  background: linear-gradient(135deg, #111827, #1f2937);
   color: white;
   text-decoration: none;
-  padding: 12px 22px;
+  padding: 10px 18px;
   border-radius: 10px;
   font-weight: 600;
-  transition: .2s;
+  transition: 0.2s;
+  white-space: nowrap;
 }
 
 .createBtn:hover {
+  transform: translateY(-1px);
   background: #000;
 }
 
+/* TABLE WRAPPER */
 .tableWrapper {
   background: white;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  border: 1px solid #eee;
 }
 
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+thead {
+  background: #f3f4f6;
+}
+
+th {
+  text-align: left;
+  padding: 14px;
+  font-size: 13px;
+  color: #374151;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 14px;
+  border-top: 1px solid #f0f0f0;
+  font-size: 14px;
+  color: #111;
+}
+
+tr:hover {
+  background: #fafafa;
+}
+
+/* IMAGE */
+.categoryImg {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+
+/* LINK */
+.editBtn {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+.categoryCardRow td {
+  padding: 0;
+  border: none;
+}
+
+.categoryCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 16px;
+  margin: 12px 0;
+
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* LEFT SIDE */
+.categoryInfo {
+  flex: 1;
+}
+
+.categoryInfo h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #111;
+}
+
+.categoryInfo p {
+  font-size: 14px;
+  color: #555;
+  margin: 4px 0;
+}
+
+/* RIGHT SIDE */
+.categoryImageBox {
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+}
+
+.categoryImageBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #eee;
+}
+
+.noImage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  border-radius: 12px;
+  color: #888;
+}
+
+/* EDIT BUTTON */
+.editBtn {
+  display: inline-block;
+  margin-top: 10px;
+  color: #2563eb;
+  font-weight: 600;
+}
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-thead {
-  background: #f7f7f7;
+tr {
+  background: #fff;
+  border-bottom: 1px solid #eee;
 }
 
-th {
-  text-align: left;
-  padding: 18px;
+/* LEFT TD */
+.infoTd {
+  width: 70%;
+  vertical-align: top;
+  padding: 16px;
+}
+
+.infoTd .name {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #111;
+}
+
+.infoTd .slug,
+.infoTd .date {
   font-size: 14px;
+  color: #555;
+  margin-bottom: 4px;
 }
 
-td {
-  padding: 18px;
-  border-top: 1px solid #eee;
+/* RIGHT TD */
+.imageTd {
+  width: 30%;
+  text-align: right;
+  padding: 16px;
+  vertical-align: middle;
 }
 
-.status {
-  display: inline-block;
-  padding: 5px 12px;
-  border-radius: 999px;
-  font-size: 13px;
+.categoryImg {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #eee;
 }
 
-.active {
-  background: #d1fae5;
-  color: #047857;
-}
-
-.hidden {
-  background: #fee2e2;
-  color: #b91c1c;
-}
-
+/* BUTTON */
 .editBtn {
-  text-decoration: none;
+  display: inline-block;
+  margin-top: 8px;
   color: #2563eb;
   font-weight: 600;
 }
 
-.editBtn:hover {
-  text-decoration: underline;
+/* MOBILE */
+@media (max-width: 768px) {
+  td {
+    display: block;
+    width: 100%;
+  }
+
+  .imageTd {
+    text-align: left;
+  }
+
+  .categoryImg {
+    width: 100%;
+    height: 180px;
+  }
 }
-.categoryImg{
-  width:70px;
-  height:70px;
-  object-fit:cover;
-  border-radius:10px;
-  display:block;
-  border:1px solid #eee;
+/* MOBILE */
+@media (max-width: 768px) {
+  .categoryCard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .categoryImageBox {
+    width: 100%;
+    height: 180px;
+  }
 }
-@media (max-width:768px) {
+/* ================= MOBILE FIX ================= */
+@media (max-width: 768px) {
   .categoriesPage {
-    padding: 20px;
+    padding: 15px;
   }
 
   .pageHeader {
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px;
   }
 
-  table {
-    min-width: 700px;
+  /* ❌ KHÔNG dùng * selector nữa */
+  /* 👉 FIX TEXT RÕ RÀNG */
+  td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px 0;
+    border: none;
+
+    color: #111 !important;
+    font-weight: 500;
+
+    gap: 10px;
   }
 
-  .tableWrapper {
-    overflow-x: auto;
+  td span,
+  td div,
+  td a {
+    color: #111 !important;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #374151;
+    flex-shrink: 0;
+  }
+
+  table,
+  thead,
+  tbody,
+  tr,
+  th,
+  td {
+    display: block;
+    width: 100%;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    background: white;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+  }
+
+  .categoryImg {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+  }
+
+  a {
+    color: #2563eb !important;
   }
 }
