@@ -357,7 +357,11 @@ body {
     font-size: 32px;
   }
 
-  .productGrid,
+  .productGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
   .blogGrid {
     grid-template-columns: 1fr;
     gap: 18px;

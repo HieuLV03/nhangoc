@@ -96,17 +96,37 @@
 
 @media (max-width:768px){
 
-.pageTitle{
-font-size:32px;
-}
+  .pageTitle{
+    font-size:32px;
+  }
 
-.pageDesc{
-font-size:15px;
-}
+  .pageDesc{
+    font-size:15px;
+  }
 
-.categoryImage,
-.categoryPlaceholder{
-height:180px;
-}
+  .categoryGrid{
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap:12px;
+  }
+
+  .categoryImage,
+  .categoryPlaceholder{
+    height:120px;
+  }
+
+  .categoryContent{
+    padding:12px;
+  }
+
+  .categoryContent h2{
+    font-size:16px;
+    margin-bottom:6px;
+    line-height:1.4;
+  }
+
+  .categoryContent p{
+    font-size:13px;
+    line-height:1.5;
+  }
 
 }

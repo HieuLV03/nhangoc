@@ -401,6 +401,7 @@ body {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
+
   .heroContent h1 {
     font-size: 34px;
   }
@@ -409,14 +410,53 @@ body {
     height: 70dvh;
   }
 
-  .productGrid,
+  /* Dịch vụ: 2 cột */
+  .productGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  /* Bài viết vẫn 1 cột */
   .blogGrid {
     grid-template-columns: 1fr;
+    gap: 18px;
   }
 
   .heroContent p {
     font-size: 15px;
   }
+
+  .productBody {
+    padding: 12px;
+  }
+
+  .productBody h3 {
+    font-size: 15px;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+
+  .productBody p {
+    display: none; /* Ẩn mô tả để card gọn hơn */
+  }
+
+  .priceLabel {
+    font-size: 10px;
+  }
+
+  .priceValue {
+    font-size: 20px;
+  }
+
+  .currency {
+    font-size: 12px;
+  }
+
+  .imgBtn {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+
 }
 
 
