@@ -36,100 +36,78 @@ export default function AdminSlidersPage() {
   // =========================
   // ADD SLIDER
   // =========================
-  async function handleAddSlider(e) {
-    e.preventDefault();
+ const handleAddSlider = async (e) => {
+  e.preventDefault();
 
-    if (!imageDesktop) {
-      alert("Vui lòng chọn ảnh desktop");
-      return;
-    }
+  if (!imageDesktop || !imageMobile) {
+    alert("Vui lòng chọn đủ ảnh Desktop và Mobile");
+    return;
+  }
 
-    try {
-      setUploading(true);
+  try {
+    setUploading(true);
 
-      const cleanName = (file) =>
-        file.name.replace(/\s+/g, "-").replace(/[^\w.-]/g, "");
+    const uid = Date.now();
 
-      const uid = Math.random().toString(36).slice(2, 8);
+    const desktopName = `${uid}-desktop-${imageDesktop.name}`;
+    const mobileName = `${uid}-mobile-${imageMobile.name}`;
 
-      const fileDesktop = `${Date.now()}-${uid}-desktop-${cleanName(imageDesktop)}`;
-      const fileMobile = imageMobile
-        ? `${Date.now()}-${uid}-mobile-${cleanName(imageMobile)}`
-        : null;
+    // Upload desktop
+    const { error: desktopError } = await supabase.storage
+      .from("images_slider")
+      .upload(desktopName, imageDesktop);
 
-      // =========================
-      // UPLOAD DESKTOP
-      // =========================
-      const { error: upErr1 } = await supabase.storage
-        .from("images_slider")
-        .upload(fileDesktop, imageDesktop);
+    if (desktopError) throw desktopError;
 
-      if (upErr1) {
-        alert(upErr1.message);
-        return;
-      }
+    // Upload mobile
+    const { error: mobileError } = await supabase.storage
+      .from("images_slider")
+      .upload(mobileName, imageMobile);
 
-      const { data: desktopUrl } = supabase.storage
-        .from("images_slider")
-        .getPublicUrl(fileDesktop);
+    if (mobileError) throw mobileError;
 
-      // =========================
-      // UPLOAD MOBILE
-      // =========================
-      let mobileUrl = null;
+    const {
+      data: { publicUrl: desktopUrl },
+    } = supabase.storage
+      .from("images_slider")
+      .getPublicUrl(desktopName);
 
-      if (imageMobile) {
-        const { error: upErr2 } = await supabase.storage
-          .from("images_slider")
-          .upload(fileMobile, imageMobile);
+    const {
+      data: { publicUrl: mobileUrl },
+    } = supabase.storage
+      .from("images_slider")
+      .getPublicUrl(mobileName);
 
-        if (upErr2) {
-          alert(upErr2.message);
-          return;
-        }
-
-        const { data: mUrl } = supabase.storage
-          .from("images_slider")
-          .getPublicUrl(fileMobile);
-
-        mobileUrl = mUrl.publicUrl;
-      }
-
-      // =========================
-      // INSERT DB (IMPORTANT FIX)
-      // =========================
-      const { error: insertErr } = await supabase.from("sliders").insert([
+    const { error: insertError } = await supabase
+      .from("sliders")
+      .insert([
         {
-          image_desktop: desktopUrl.publicUrl,
+          image_desktop: desktopUrl,
           image_mobile: mobileUrl,
-
-          // 🔥 PATH (dùng để xóa storage)
-          desktop_path: fileDesktop,
-          mobile_path: fileMobile,
-
+          desktop_path: desktopName,
+          mobile_path: mobileName,
           status: true,
         },
       ]);
 
-      if (insertErr) {
-        alert(insertErr.message);
-        return;
-      }
+    if (insertError) throw insertError;
 
-      // reset form
-      setTitle("");
-      setImageDesktop(null);
-      setImageMobile(null);
+    alert("Thêm slider thành công");
 
-      if (desktopRef.current) desktopRef.current.value = "";
-      if (mobileRef.current) mobileRef.current.value = "";
+    setImageDesktop(null);
+    setImageMobile(null);
 
-      fetchSliders();
-      alert("Thêm slider thành công");
-    } finally {
-      setUploading(false);
-    }
+    desktopRef.current.value = "";
+    mobileRef.current.value = "";
+
+    fetchSliders();
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  } finally {
+    setUploading(false);
   }
+};
 
   // =========================
   // DELETE SLIDER (FIXED)
@@ -189,12 +167,7 @@ export default function AdminSlidersPage() {
   </div>
       {/* FORM */}
       <form onSubmit={handleAddSlider} className="sliderForm">
-        <input
-          type="text"
-          placeholder="Tiêu đề slider"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+  
 
         <label>Ảnh Desktop</label>
         <input
@@ -223,7 +196,6 @@ export default function AdminSlidersPage() {
           <div key={item.id} className="sliderCard">
             <img
               src={item.image_desktop}
-              alt={item.title}
               className="sliderImg"
             />
 
@@ -236,7 +208,6 @@ export default function AdminSlidersPage() {
             )}
 
             <div className="sliderBody">
-              <h3>{item.title}</h3>
 
               <button
                 className="deleteBtn"
