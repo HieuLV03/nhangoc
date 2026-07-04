@@ -49,7 +49,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   if (form.products.length === 0) {
-    showError("Vui lòng chọn ít nhất 1 dịch vụ.");
+    showError("Vui lòng chọn ít nhất 1 sản phẩm.");
     return;
   }
 
@@ -168,7 +168,7 @@ const handleSubmit = async (e) => {
             </select>
 
             <div className="checkboxGroup">
-              <p className="checkboxTitle">Chọn dịch vụ</p>
+              <p className="checkboxTitle">Chọn sản phẩm</p>
 
               <label>
                 <input

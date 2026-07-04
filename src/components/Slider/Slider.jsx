@@ -90,10 +90,10 @@ export default function Slider({
                     <Link
                       href="/products"
                       className="btnOutline"
-                        aria-label="Xem danh sách dịch vụ"
+                        aria-label="Xem danh sách sản phẩm"
 
                     >
-                      Xem dịch vụ
+                      Xem sản phẩm
                     </Link>
 
                     <Link

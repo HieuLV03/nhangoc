@@ -12,7 +12,11 @@
     radial-gradient(circle at top, rgba(58,160,255,.08), transparent 40%),
     radial-gradient(circle at bottom, rgba(255,77,141,.08), transparent 40%);
 }
-
+.productGrid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+    gap:20px;
+}
 .adminCard {
   background: rgba(255,255,255,.9);
   backdrop-filter: blur(14px);
@@ -154,72 +158,191 @@
 .headerLeft h1{
   margin:0;
 }
+.productCardTd{
+  padding:0 !important;
+  border:none !important;
+}
+
+.productCard{
+  position:relative;
+  min-height:260px;
+
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+
+  border-radius:18px;
+  overflow:hidden;
+
+  margin-bottom:18px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  box-shadow:0 15px 35px rgba(0,0,0,.12);
+}
+
+.productOverlay{
+  position:absolute;
+  inset:0;
+
+  background:linear-gradient(
+      rgba(0,0,0,.25),
+      rgba(0,0,0,.65)
+  );
+}
+
+.productContent{
+  position:relative;
+  z-index:2;
+
+  color:#fff;
+  text-align:center;
+
+  width:100%;
+  padding:25px;
+}
+
+.productContent h2{
+  font-size:24px;
+  margin-bottom:15px;
+}
+
+.productContent p{
+  margin:6px 0;
+    font-size:18px;
+
+}
+
+.productActions{
+  margin-top:18px;
+
+  display:flex;
+  justify-content:center;
+  gap:12px;
+}
+
+.productActions .editBtn{
+  background:#2563eb;
+  color:#fff;
+  padding:10px 20px;
+  border-radius:999px;
+}
+
+.productActions .deleteBtn{
+  background:#ef4444;
+  color:#fff;
+  border:none;
+  padding:10px 20px;
+  border-radius:999px;
+  cursor:pointer;
+}
+.productActions .cardEditBtn{
+    background:#2563eb;
+    color:#fff;
+    padding:10px 20px;
+    border-radius:999px;
+    text-decoration:none;
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    transition:.25s;
+}
+
+.productActions .cardEditBtn:hover{
+    background:#1d4ed8;
+    transform:translateY(-2px);
+}
 /* ================= MOBILE ================= */
+@media (max-width:768px){
 
-@media (max-width: 768px) {
-
-  .adminPage {
-    padding: 8px;
+  .adminPage{
+    padding:15px;
   }
 
-  .adminCard {
-    padding: 14px;
+  .adminCard{
+    padding:18px;
   }
 
-  .headerRow {
-    flex-direction: column;
-    align-items: stretch;
+  .headerRow{
+    flex-direction:column;
+    align-items:stretch;
+    gap:15px;
   }
 
-  .headerRow h1 {
-    font-size: 24px;
-  }
-
-  .addBtn {
-    text-align: center;
-  }
-
-  .table thead {
-    display: none;
+  .addBtn{
+    text-align:center;
   }
 
   .table,
+  .table thead,
   .table tbody,
-  .table tr {
-    display: block;
-    width: 100%;
+  .table tr,
+  .table td{
+    display:block;
+    width:100%;
   }
 
-  .table tr {
-    background: white;
-
-    margin-bottom: 14px;
-    padding: 12px;
-
-    border-radius: 14px;
-
-    box-shadow: 0 8px 20px rgba(0,0,0,.05);
+  .table thead{
+    display:none;
   }
 
-  .table td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    border: none;
-    padding: 8px 0;
+  .table tr{
+    background:#fff;
+    border:1px solid #eee;
+    border-radius:16px;
+    padding:14px;
+    margin-bottom:16px;
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
   }
 
-  .table td::before {
-    content: attr(data-label);
+  .table td{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 
-    font-weight: 600;
-    color: #666;
+    gap:15px;
 
-    min-width: 90px;
+    padding:10px 0;
+    border:none;
   }
 
-  .action {
-    justify-content: flex-end;
+  .table td::before{
+    content:attr(data-label);
+    font-weight:700;
+    color:#555;
+    min-width:90px;
+  }
+
+  .table td:last-child{
+    padding-top:15px;
+    border-top:1px solid #eee;
+  }
+
+  .action{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+  }
+
+  .editBtn,
+  .deleteBtn{
+    padding:8px 14px;
+    border-radius:8px;
+    font-size:14px;
+  }
+
+  .editBtn{
+    background:#2563eb;
+    color:#fff;
+    text-decoration:none;
+  }
+
+  .deleteBtn{
+    background:#ef4444;
+    color:#fff;
+    border:none;
   }
 }

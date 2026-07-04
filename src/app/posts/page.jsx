@@ -102,7 +102,7 @@ export default async function HomePage() {
         <div className="sectionHeader">
               <BackButton />
           
-          <h2>Dịch vụ nổi bật</h2>
+          <h2>Sản phẩm bán chạy</h2>
         </div>
 
         <div className="productGrid">

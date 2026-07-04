@@ -28,7 +28,7 @@ export default function Sidebar() {
             icon: <FiFileText />
         },
         {
-            name: "Dịch vụ",
+            name: "Sản phẩm",
             href: "/admin/products",
             icon: <FiGrid />
         },

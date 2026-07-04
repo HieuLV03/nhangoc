@@ -38,62 +38,92 @@
 }
 
 /* CARD */
+/* CARD */
 .card {
   position: relative;
   height: 220px;
 
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+
   border-radius: 16px;
   overflow: hidden;
 
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,.08);
 
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
 
-  transition: 0.2s;
+  transition: .25s;
 }
 
 .card:hover {
   transform: translateY(-4px);
 }
 
-/* DARK OVERLAY */
+/* Overlay */
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,.45);
 }
 
 /* CONTENT */
 .content {
   position: relative;
   z-index: 2;
-  padding: 14px;
+
+  width: 100%;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
   color: #fff;
 }
 
 .content h2 {
-  font-size: 18px;
-  margin-bottom: 6px;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
 .content p {
-  font-size: 13px;
-  opacity: 0.9;
-  margin: 3px 0;
+  margin: 4px 0;
+  font-size: 14px;
+  opacity: .95;
 }
 
-/* EDIT BUTTON */
+/* BUTTON */
 .editBtn {
-  display: inline-block;
-  margin-top: 8px;
+  margin-top: 14px;
+  padding: 10px 22px;
+
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 999px;
+
   color: #fff;
+  text-decoration: none;
   font-weight: 600;
-  text-decoration: underline;
+
+  backdrop-filter: blur(8px);
+  transition: .25s;
 }
 
+.editBtn:hover {
+  background: #fff;
+  color: #111827;
+}
+.card:hover {
+  transform: translateY(-4px);
+}
 /* MOBILE */
 @media (max-width: 768px) {
   .categoriesPage {

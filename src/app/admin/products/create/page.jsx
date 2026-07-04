@@ -178,34 +178,43 @@ category_ids: form.category_ids,
           }
         />
 
-    <div className="categoryBox">
+<div className="categoryBox">
   <h4>Danh mục</h4>
 
-  {categories.map((cat) => (
-    <label key={cat.id} className="categoryItem">
-      <input
-        type="checkbox"
-        checked={form.category_ids.includes(cat.id)}
-        onChange={(e) => {
-          if (e.target.checked) {
-            setForm({
-              ...form,
-              category_ids: [...form.category_ids, cat.id],
-            });
-          } else {
-            setForm({
-              ...form,
-              category_ids: form.category_ids.filter(
-                (id) => id !== cat.id
-              ),
-            });
-          }
-        }}
-      />
+  <div className="categoryGrid">
+    {categories.map((cat) => (
+      <label
+        key={cat.id}
+        className="categoryItem"
+      >
+        <input
+          type="checkbox"
+          checked={form.category_ids.includes(cat.id)}
+          onChange={(e) => {
+            if (e.target.checked) {
+              setForm({
+                ...form,
+                category_ids: [
+                  ...form.category_ids,
+                  cat.id,
+                ],
+              });
+            } else {
+              setForm({
+                ...form,
+                category_ids:
+                  form.category_ids.filter(
+                    (id) => id !== cat.id
+                  ),
+              });
+            }
+          }}
+        />
 
-      {cat.name}
-    </label>
-  ))}
+        <span>{cat.name}</span>
+      </label>
+    ))}
+  </div>
 </div>
         {/* PRICE */}
         <input

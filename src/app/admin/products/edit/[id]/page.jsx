@@ -224,7 +224,7 @@ category_ids: form.category_ids,
   return (
     <div className="editProductPage">
       <div className="editProductCard">
-        <h1>Sửa dịch vụ</h1>
+        <h1>Sửa sản phẩm</h1>
 
 
         <input

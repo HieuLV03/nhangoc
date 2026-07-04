@@ -148,73 +148,69 @@ return (
       ) : products.length === 0 ? (
         <p>Chưa có sản phẩm nào</p>
       ) : (
-        <table className="table">
-      <thead>
-<tr>
-  <th>Tên</th>
-  <th>Slug</th>
-  <th>Giá</th>
-  <th>Giá KM</th>
-  <th>Nổi bật</th>
-  <th>Trạng thái</th>
-  <th>Ngày tạo</th>
-  <th>Hành động</th>
-</tr>
-</thead>
-
-          <tbody>
-            {products.map((product) => (
-           <tr key={product.id}>
-  <td>{product.name}</td>
-
-  <td>{product.slug}</td>
-
-  <td>
-    {Number(product.price).toLocaleString("vi-VN")}đ
-  </td>
-
-  <td>
-    {product.sale_price
-      ? Number(product.sale_price).toLocaleString("vi-VN") + "đ"
-      : "-"}
-  </td>
-
-  <td>
-    {product.featured ? "⭐ Có" : "-"}
-  </td>
-
-  <td>
-    <span className="status">
-      {product.status}
-    </span>
-  </td>
-
-
-  <td>
-    {product.created_at
-      ? new Date(product.created_at).toLocaleDateString()
-      : ""}
-  </td>
-
-  <td className="action">
-    <Link
-      href={`/admin/products/edit/${product.id}`}
-      className="editBtn"
+     <div className="productGrid">
+  {products.map((product) => (
+    <div
+      key={product.id}
+      className="productCard"
+      style={{
+        backgroundImage: product.image
+          ? `url(${product.image})`
+          : "linear-gradient(135deg,#334155,#111827)",
+      }}
     >
-      Sửa
-    </Link>
+      <div className="productOverlay" />
 
-    <button
-      onClick={() => deleteProduct(product)}
-      className="deleteBtn"
-    >
-      Xóa
-    </button>
-  </td>
-</tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="productContent">
+        <h2>{product.name}</h2>
+
+        <p><strong>Slug:</strong> {product.slug}</p>
+
+        <p>
+          <strong>Giá:</strong>{" "}
+          {Number(product.price).toLocaleString("vi-VN")}đ
+        </p>
+
+        <p>
+          <strong>Giá KM:</strong>{" "}
+          {product.sale_price
+            ? Number(product.sale_price).toLocaleString("vi-VN") + "đ"
+            : "-"}
+        </p>
+
+        <p>
+          <strong>Nổi bật:</strong>{" "}
+          {product.featured ? "⭐ Có" : "Không"}
+        </p>
+
+        <p>
+          <strong>Trạng thái:</strong> {product.status}
+        </p>
+
+        <p>
+          <strong>Ngày tạo:</strong>{" "}
+          {new Date(product.created_at).toLocaleDateString("vi-VN")}
+        </p>
+
+        <div className="productActions">
+        <Link
+  href={`/admin/products/edit/${product.id}`}
+  className="cardEditBtn"
+>
+  Sửa
+</Link>
+
+          <button
+            className="deleteBtn"
+            onClick={() => deleteProduct(product)}
+          >
+            Xóa
+          </button>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
       )}
 
     </div>

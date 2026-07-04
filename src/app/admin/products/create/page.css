@@ -5,26 +5,65 @@
   padding: 40px 20px;
   box-sizing: border-box;
 }
-.categoryBox {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+
+/* ================= DANH MỤC ================= */
+
+.categoryBox{
+  margin:18px 0;
+  padding:18px;
+  background:#fafafa;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
 }
 
-.categoryItem {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
+.categoryBox h4{
+  margin:0 0 16px;
+  font-size:16px;
+  font-weight:700;
+  color:#111827;
 }
 
-.categoryItem input {
-    width: 18px;
-    height: 18px;
-} 
+.categoryGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:12px;
+}
+
+.categoryItem{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  padding:12px 14px;
+
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+
+  background:#fff;
+
+  cursor:pointer;
+  transition:.25s;
+}
+
+.categoryItem:hover{
+  border-color:#2563eb;
+  background:#eff6ff;
+  transform:translateY(-2px);
+}
+
+.categoryItem input{
+  width:18px;
+  height:18px;
+  accent-color:#2563eb;
+  flex-shrink:0;
+}
+
+.categoryItem span{
+  font-size:14px;
+  color:#111827;
+  font-weight:500;
+}
 .createPostCard {
   max-width: 900px;
   margin: auto;
@@ -92,7 +131,7 @@
 }
 
 /* INPUT + TEXTAREA + SELECT */
-.createPostCard input,
+.createPostCard input:not([type="checkbox"]),
 .createPostCard textarea,
 .createPostCard select {
   width: 100%;

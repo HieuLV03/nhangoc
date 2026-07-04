@@ -22,11 +22,11 @@ export default async function CategoriesPage() {
     <div className="categoriesPage">
       <div className="container">
         <h1 className="pageTitle">
-          Danh mục dịch vụ
+          Danh mục sản phẩm
         </h1>
 
         <p className="pageDesc">
-          Chọn danh mục để xem các dịch vụ phù hợp.
+          Chọn danh mục để xem các sản phẩm phù hợp.
         </p>
 
         <div className="categoryGrid">

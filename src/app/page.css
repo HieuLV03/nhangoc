@@ -234,16 +234,47 @@ width: 100%;
 
 /* MOBILE */
 @media (max-width: 768px) {
-  .heroContent h1 {
-    font-size: 38px;
+
+  .section{
+    padding:24px 16px;
+  }
+
+  .sectionHeader h2{
+    font-size:32px;
   }
 
   .productGrid,
-  .blogGrid {
-    grid-template-columns: 1fr;
+  .blogGrid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:14px;
   }
 
-  .sectionHeader h2 {
-    font-size: 32px;
+  .productBody,
+  .blogBody{
+    padding:12px;
   }
+
+  .productTitle{
+    font-size:15px;
+  }
+
+  .productDesc{
+    display:none;
+  }
+
+  .priceSale{
+    font-size:16px;
+  }
+
+  .priceOld{
+    font-size:13px;
+  }
+
+  .cardImage{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+  }
+
 }
