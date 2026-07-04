@@ -85,7 +85,14 @@ td {
 .editBtn:hover {
   text-decoration: underline;
 }
-
+.categoryImg{
+  width:70px;
+  height:70px;
+  object-fit:cover;
+  border-radius:10px;
+  display:block;
+  border:1px solid #eee;
+}
 @media (max-width:768px) {
   .categoriesPage {
     padding: 20px;

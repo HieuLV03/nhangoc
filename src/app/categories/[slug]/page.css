@@ -56,11 +56,8 @@ transform:translateY(-6px);
 }
 
 .productImg{
-
-aspect-ratio:4/3;
-
-overflow:hidden;
-
+  aspect-ratio:3/2;
+  overflow:hidden;
 }
 
 .productImg img{
@@ -134,5 +131,49 @@ border-radius:16px;
 text-align:center;
 
 font-size:18px;
+
+}
+@media (max-width:768px){
+
+  .categoryPage{
+    padding:30px 12px;
+  }
+
+  .categoryPage h1{
+    font-size:30px;
+  }
+
+  .description{
+    font-size:14px;
+    margin-bottom:24px;
+  }
+
+  .productGrid{
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:12px;
+  }
+
+  .productContent{
+    padding:12px;
+  }
+
+  .productContent h2{
+    font-size:15px;
+    line-height:1.4;
+    margin-bottom:8px;
+  }
+
+  .sale{
+    font-size:16px;
+  }
+
+  .old{
+    font-size:12px;
+  }
+
+  .price{
+    gap:6px;
+    flex-wrap:wrap;
+  }
 
 }

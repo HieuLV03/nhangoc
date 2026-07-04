@@ -36,9 +36,9 @@ export default async function CategoriesPage() {
               href={`/categories/${item.slug}`}
               className="categoryCard"
             >
-              {item.image ? (
+              {item.img ? (
                 <img
-                  src={item.image}
+                  src={item.img}
                   alt={item.name}
                   className="categoryImage"
                 />

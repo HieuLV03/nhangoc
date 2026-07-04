@@ -39,6 +39,8 @@ console.log("error:", error);
             <tr>
               <th>Tên</th>
               <th>Slug</th>
+                            <th>Ảnh</th>
+
               <th>Ngày tạo</th>
               <th></th>
             </tr>
@@ -51,6 +53,17 @@ console.log("error:", error);
                   <td>{item.name}</td>
 
                   <td>{item.slug}</td>
+  <td>
+    {item.img ? (
+      <img
+        src={item.img}
+        alt={item.name}
+        className="categoryImg"
+      />
+    ) : (
+      "-"
+    )}
+  </td>
 
                   <td>
                     {new Date(
@@ -71,7 +84,7 @@ console.log("error:", error);
             ) : (
               <tr>
                 <td
-                  colSpan={4}
+                  colSpan={5}
                   style={{
                     textAlign: "center",
                     padding: 30,

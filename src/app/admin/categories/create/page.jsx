@@ -32,43 +32,69 @@ export default function CreateCategoryPage() {
   // ======================
   // CREATE
   // ======================
+  
+const [imageFile, setImageFile] = useState(null);
+const createCategory = async () => {
+  if (!form.name.trim()) {
+    return alert("Vui lòng nhập tên danh mục");
+  }
 
-  const createCategory = async () => {
-    if (!form.name.trim()) {
-      return alert("Vui lòng nhập tên danh mục");
-    }
+  try {
+    setLoading(true);
 
-    try {
-      setLoading(true);
+    let imageUrl = "";
 
-      const { error } = await supabase
-        .from("categories")
-        .insert([
-          {
-            name: form.name,
-            slug: form.slug,
-          },
-        ]);
+    // Upload ảnh nếu có
+    if (imageFile) {
+      const fileName = `${Date.now()}-${imageFile.name}`;
 
-      if (error) {
-        alert(error.message);
+      const { error: uploadError } = await supabase.storage
+        .from("categories") // tên bucket
+        .upload(fileName, imageFile);
+
+      if (uploadError) {
+        alert(uploadError.message);
         return;
       }
 
-      alert("Thêm danh mục thành công!");
+      const { data } = supabase.storage
+        .from("categories")
+        .getPublicUrl(fileName);
 
-      setForm({
-        name: "",
-        slug: "",
-      });
-    } catch (err) {
-      console.log(err);
-      alert("Có lỗi xảy ra");
-    } finally {
-      setLoading(false);
+      imageUrl = data.publicUrl;
     }
-  };
 
+    const { error } = await supabase
+      .from("categories")
+      .insert([
+        {
+          name: form.name,
+          slug: form.slug,
+          img: imageUrl,
+        },
+      ]);
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    alert("Thêm danh mục thành công!");
+
+    setForm({
+      name: "",
+      slug: "",
+    });
+
+    setImageFile(null);
+
+  } catch (err) {
+    console.log(err);
+    alert("Có lỗi xảy ra");
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <div className="createCategoryPage">
       <div className="createCategoryCard">
@@ -106,6 +132,13 @@ export default function CreateCategoryPage() {
             })
           }
         />
+        <input
+  type="file"
+  accept="image/*"
+  onChange={(e) =>
+    setImageFile(e.target.files?.[0] || null)
+  }
+/>
         <button
           onClick={createCategory}
           disabled={loading}
