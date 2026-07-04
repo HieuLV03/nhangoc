@@ -128,6 +128,8 @@ if (loading || isAdminPage) {
         <nav className={`nav ${menuOpen ? "active" : ""}`}>
           <Link href="/" onClick={() => setMenuOpen(false)}>Trang chủ</Link>
           <Link href="/products" onClick={() => setMenuOpen(false)}>Sản phẩm</Link>
+                    <Link href="/categories" onClick={() => setMenuOpen(false)}>Danh mục</Link>
+
           <Link href="/posts" onClick={() => setMenuOpen(false)}>Bài viết</Link>
           <Link href="/about" onClick={() => setMenuOpen(false)}>Giới thiệu</Link>
           <Link href="/contact" onClick={() => setMenuOpen(false)}>Liên hệ</Link>
