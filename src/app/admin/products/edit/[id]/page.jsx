@@ -24,7 +24,7 @@ const [form, setForm] = useState({
   slug: "",
   price: "",
   sale_price: "",
-  category_id: "",
+  category_ids: [],
   description: "",
   content: "",
   image: "",
@@ -89,8 +89,8 @@ useEffect(() => {
   slug: data.slug || "",
   price: data.price || "",
   sale_price: data.sale_price || "",
-  category_id: data.category_id || "",
-   description: data.description || "",
+category_ids: data.category_ids || [],
+  description: data.description || "",
   content: data.content || "",
   image: data.image || "",
   status: data.status || "available",
@@ -186,8 +186,8 @@ useEffect(() => {
     sale_price: form.sale_price
       ? Number(form.sale_price)
       : null,
-    category_id: form.category_id || null,
-    description: form.description,
+category_ids: form.category_ids,
+      description: form.description,
     content: form.content,
     image: form.image,
     status: form.status,
@@ -263,23 +263,40 @@ useEffect(() => {
 
         {/* CATEGORY */}
 
-       <select
-  value={form.category_id}
-  onChange={(e) =>
-    setForm({
-      ...form,
-      category_id: e.target.value,
-    })
-  }
->
-  <option value="">-- Chọn danh mục --</option>
-
+      <div className="categoryBox">
   {categories.map((item) => (
-    <option key={item.id} value={item.id}>
+    <label
+      key={item.id}
+      className="categoryItem"
+    >
+      <input
+        type="checkbox"
+        checked={form.category_ids.includes(item.id)}
+        onChange={(e) => {
+          if (e.target.checked) {
+            setForm({
+              ...form,
+              category_ids: [
+                ...form.category_ids,
+                item.id,
+              ],
+            });
+          } else {
+            setForm({
+              ...form,
+              category_ids:
+                form.category_ids.filter(
+                  (id) => id !== item.id
+                ),
+            });
+          }
+        }}
+      />
+
       {item.name}
-    </option>
+    </label>
   ))}
-</select>
+</div>
 
         {/* PRICE */}
 
