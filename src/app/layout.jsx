@@ -23,7 +23,12 @@ const playfair = Playfair_Display({
   display: "swap",
   variable: "--font-playfair",
 });
-
+export const metadata = {
+  title: "Nhà Ngọc",
+  verification: {
+    google: "iMhkqfnYHYPZ2e7ZhvNa8URs0nteVRjtS03F9CKa0sU",
+  },
+};
 export default function RootLayout({ children }) {
   return (
     <html
