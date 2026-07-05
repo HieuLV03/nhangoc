@@ -74,8 +74,6 @@ export default function Slider({
 
                 <div className="heroContent">
 
-                  <h1>{item.title}</h1>
-
                   <div className="heroActions">
 
                     <Link

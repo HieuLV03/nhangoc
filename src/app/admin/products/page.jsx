@@ -104,7 +104,9 @@ export default function ProductsPage() {
       const { error } = await supabase
         .from("products")
         .delete()
-        .eq("id", product.id);
+        .eq("id", product.id)
+          .select();
+
 
       if (error) {
         alert(error.message);

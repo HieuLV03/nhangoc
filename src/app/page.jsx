@@ -14,7 +14,6 @@ export default async function HomePage() {
       supabase
         .from("sliders")
         .select("*")
-        .eq("status", "published")
         .order("created_at", {
           ascending: false,
         })
@@ -40,7 +39,9 @@ export default async function HomePage() {
         })
         .limit(5),
     ]);
-
+console.log("sliderRes", sliderRes);
+console.log("sliderData", sliderRes.data);
+console.log("sliderError", sliderRes.error);
   const sliders = sliderRes.data || [];
   const products = productRes.data || [];
   const posts = postRes.data || [];

@@ -16,7 +16,14 @@ export default function AdminSlidersPage() {
 
   const desktopRef = useRef();
   const mobileRef = useRef();
-
+const cleanFileName = (name) =>
+  name
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D")
+    .replace(/\s+/g, "-")
+    .replace(/[^a-zA-Z0-9.-]/g, "");
   useEffect(() => {
     fetchSliders();
   }, []);
@@ -49,9 +56,8 @@ export default function AdminSlidersPage() {
 
     const uid = Date.now();
 
-    const desktopName = `${uid}-desktop-${imageDesktop.name}`;
-    const mobileName = `${uid}-mobile-${imageMobile.name}`;
-
+const desktopName = `${uid}-desktop-${cleanFileName(imageDesktop.name)}`;
+const mobileName = `${uid}-mobile-${cleanFileName(imageMobile.name)}`;
     // Upload desktop
     const { error: desktopError } = await supabase.storage
       .from("images_slider")
