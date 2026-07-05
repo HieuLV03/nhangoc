@@ -83,6 +83,7 @@ console.log("sliderError", sliderRes.error);
     className="cardImage"
   />
 
+
   <div className="imgOverlay">
     <div className="imgCta">
       <span>Xem chi tiết</span>
