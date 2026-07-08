@@ -139,7 +139,8 @@ body {
   overflow: hidden;
 
   aspect-ratio: 3 / 2;
-  height: auto;
+    height: 234px;      /* chiều cao khung ảnh */
+
 }
 
 
@@ -165,7 +166,6 @@ body {
 /* hover */
 .productCard:hover .imgOverlay,
 .blogCard:hover .imgOverlay {
-  opacity: 1;
 }
 .cardImage {
   width: 100%;
@@ -287,7 +287,6 @@ body {
 @media (max-width: 768px) {
 
   .imgOverlay {
-    opacity: 1;
   }
 
   .imgBtn {
@@ -368,7 +367,7 @@ body {
   align-items: flex-end;
   gap: 3px;
 
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 800;
 
   background: linear-gradient(

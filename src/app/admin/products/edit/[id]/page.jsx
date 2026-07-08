@@ -19,6 +19,7 @@ export default function EditProductPage() {
   const [loading, setLoading] =
     useState(false);
 const [categories, setCategories] = useState([]);
+const [oldImage, setOldImage] = useState("");
 const [form, setForm] = useState({
   name: "",
   slug: "",
@@ -66,7 +67,15 @@ useEffect(() => {
   // =========================
   // FETCH DATA
   // =========================
+const getStoragePath = (url) => {
+  if (!url) return null;
 
+  const parts = url.split("/images_product/");
+
+  return parts.length > 1
+    ? decodeURIComponent(parts[1])
+    : null;
+};
   useEffect(() => {
     const fetchData = async () => {
       if (!id) return;
@@ -83,8 +92,11 @@ useEffect(() => {
         return;
       }
 
-      if (data) {
-   setForm({
+  if (data) {
+
+  setOldImage(data.image || "");
+
+  setForm({
   name: data.name || "",
   slug: data.slug || "",
   price: data.price || "",
@@ -202,7 +214,23 @@ category_ids: form.category_ids,
 
         return;
       }
+// Nếu đã đổi ảnh thì xóa ảnh cũ
+if (oldImage && oldImage !== form.image) {
+  const oldPath = getStoragePath(oldImage);
 
+  if (oldPath) {
+    const { error: removeError } =
+      await supabase.storage
+        .from("images_product")
+        .remove([oldPath]);
+
+    if (removeError) {
+      console.log("Lỗi xóa ảnh:", removeError);
+    }
+  }
+
+  setOldImage(form.image);
+}
       alert(
         "Cập nhật thành công!"
       );

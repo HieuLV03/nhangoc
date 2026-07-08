@@ -90,7 +90,8 @@ body {
 .blogImg {
   position: relative;
   overflow: hidden;
-  height: auto;
+    height: 234px;      /* chiều cao khung ảnh */
+
     aspect-ratio: 3 / 2;
 
 }
@@ -368,7 +369,6 @@ body {
   }
 
   .imgOverlay {
-    opacity: 1;
 
     background:
       linear-gradient(

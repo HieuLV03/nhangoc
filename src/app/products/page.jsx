@@ -81,7 +81,6 @@ const posts = postRes.data || [];
               <div className="productBody">
 
                 <h3>{s.name}</h3>
-                <p>{s.description}</p>
             <div className="priceBox">
 
   {s.sale_price !== null && Number(s.sale_price) > 0 ? (

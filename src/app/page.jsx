@@ -77,8 +77,8 @@ console.log("sliderError", sliderRes.error);
   <Image
     src={item.image}
     alt={item.title}
-     width={0}
-  height={0}
+     width={1000}
+  height={1500}
   sizes="100vw"
     className="cardImage"
   />

@@ -137,19 +137,20 @@ export default async function HomePage() {
 
               <div className="productBody">
 
-                <h3>{s.title}</h3>
-                <p>{s.short_description}</p>
+                <h3>{s.name}</h3>
 
                 <div className="priceBox">
-
+    <div className="priceOld">
+          {Number(s.price).toLocaleString("vi-VN")}đ
+        </div>
                   <span className="priceLabel">
-                    Giá chỉ
+                    Giá khuyến mãi
                   </span>
 
                   <div className="priceValue">
 
                     {Number(
-                      s.price || 0
+                      s.sale_price || 0
                     ).toLocaleString("vi-VN")}
 
                     <span className="currency">

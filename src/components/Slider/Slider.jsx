@@ -77,15 +77,6 @@ export default function Slider({
                   <div className="heroActions">
 
                     <Link
-                      href="/booking"
-                      className="btnPrimary"
-                        aria-label="Đặt lịch làm đẹp tại HISU"
-
-                    >
-                      Đặt lịch ngay
-                    </Link>
-
-                    <Link
                       href="/products"
                       className="btnOutline"
                         aria-label="Xem danh sách sản phẩm"

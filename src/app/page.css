@@ -24,12 +24,19 @@ body {
   position: relative;
   width: 100%;
   display: flex;
+    justify-content: center;
+  height: 234px;      /* chiều cao khung ảnh */
+
+  align-items: center;
+
   justify-content: center;
 }
 
 .cardImage {
   width: 100%;
-  height: auto;        /* 👈 giữ nguyên tỷ lệ gốc */
+    display: block;
+
+  height: 100%;        /* 👈 giữ nguyên tỷ lệ gốc */
   border-radius: 16px;
 }
 
@@ -61,7 +68,6 @@ width: 100%;
 /* hover hiện overlay */
 .productCard:hover .imgOverlay,
 .blogCard:hover .imgOverlay {
-  opacity: 1;
 }
 
 .productCard:hover .imgCta span,
@@ -127,8 +133,6 @@ width: 100%;
 @media (max-width: 768px) {
 
   .imgOverlay {
-    opacity: 1 !important;
-
     background:
       linear-gradient(
         to top,
