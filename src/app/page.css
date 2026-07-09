@@ -25,7 +25,7 @@ body {
   width: 100%;
   display: flex;
     justify-content: center;
-  height: 234px;      /* chiều cao khung ảnh */
+  aspect-ratio: 4/5; /* hoặc 4/5 nếu thích */
 
   align-items: center;
 
@@ -281,4 +281,20 @@ width: 100%;
     object-fit:cover;
   }
 
+}
+.homeContent {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: pageIn .45s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

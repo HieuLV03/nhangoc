@@ -346,3 +346,52 @@
     border:none;
   }
 }
+@media (max-width:768px){
+
+  .productGrid{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+
+  .productCard{
+    min-height:220px;
+    margin-bottom:0;
+  }
+
+  .productContent{
+    padding:14px;
+  }
+
+  .productContent h2{
+    font-size:18px;
+    margin-bottom:8px;
+  }
+
+  .productContent p{
+    font-size:13px;
+    margin:4px 0;
+  }
+
+  .productActions{
+    flex-direction:column;
+    gap:8px;
+    margin-top:12px;
+  }
+
+  .productActions .cardEditBtn,
+  .productActions .deleteBtn{
+    width:100%;
+    padding:8px 0;
+    font-size:13px;
+  }
+
+  .headerRow{
+    flex-direction:column;
+    align-items:stretch;
+    gap:14px;
+  }
+
+  .addBtn{
+    text-align:center;
+  }
+}

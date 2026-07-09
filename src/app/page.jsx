@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import Image from "next/image";
+import ListProduct from "../components/ProductList/ProductList";
 import "./page.css";
 import Slider from "@/components/Slider/Slider";
 
@@ -63,71 +64,7 @@ console.log("sliderError", sliderRes.error);
 
         </div>
 
-        <div className="productGrid">
-
-          {products.map((item) => (
-
-            <Link
-              prefetch={true}
-              key={item.id}
-              href={`/products/${item.slug}`}
-              className="productCard"
-            >
-<div className="productImg">
-  <Image
-    src={item.image}
-    alt={item.title}
-     width={1000}
-  height={1500}
-  sizes="100vw"
-    className="cardImage"
-  />
-
-
-  <div className="imgOverlay">
-    <div className="imgCta">
-      <span>Xem chi tiết</span>
-    </div>
-  </div>
-</div>
-              <div className="productBody">
-
-                <h3 className="productTitle">
-                  {item.name}
-                </h3>
-
-                <p className="productDesc">
-                  {item.description}
-                </p>
-
-                <div className="productFooter">
-
-<div className="productPrice">
-  {item.sale_price ? (
-    <>
-      <span className="priceSale">
-        {Number(item.sale_price).toLocaleString("vi-VN")}₫
-      </span>
-
-      <span className="priceOld">
-        {Number(item.price).toLocaleString("vi-VN")}₫
-      </span>
-    </>
-  ) : (
-    <span className="priceSale">
-      {Number(item.price).toLocaleString("vi-VN")}₫
-    </span>
-  )}
-</div>
-                </div>
-
-              </div>
-
-            </Link>
-
-          ))}
-
-        </div>
+      <ListProduct products={products} />
 
       </section>
 

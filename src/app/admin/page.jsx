@@ -3,18 +3,17 @@ import { supabase } from "@/lib/supabase";
 import "./admin.css";
 
 export default async function Dashboard() {
-  const [
-    { count: postCount },
-    { count: categoryCount },
-    { count: productCount },
-    { count: sliderCount },
-  ] = await Promise.all([
-    supabase.from("posts").select("*", { count: "exact", head: true }),
-    supabase.from("categories").select("*", { count: "exact", head: true }),
-    supabase.from("products").select("*", { count: "exact", head: true }),
-    supabase.from("sliders").select("*", { count: "exact", head: true }),
-  ]);
-
+const [
+  { count: postCount },
+  { count: categoryCount },
+  { count: productCount },
+  { count: sliderCount },
+] = await Promise.all([
+  supabase.from("posts").select("id", { count: "exact", head: true }),
+  supabase.from("categories").select("id", { count: "exact", head: true }),
+  supabase.from("products").select("id", { count: "exact", head: true }),
+  supabase.from("sliders").select("id", { count: "exact", head: true }),
+]);
   return (
     <div className="dashboard">
       <div className="dashboardHeader">

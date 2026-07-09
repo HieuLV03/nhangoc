@@ -3,7 +3,7 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 
 import Image from "next/image";
-
+import ListProduct from "../../components/ProductList/ProductList"
 import "./page.css";
 import BackButton from "@/components/BackButton/BackButton";
 
@@ -47,81 +47,8 @@ const posts = postRes.data || [];
           <h2>Sản phẩm</h2>
         </div>
 
-        <div className="productGrid">
-
-          {products.map((s) => (
-
-            <Link
-              key={s.id}
-              href={`/products/${s.slug}`}
-              className="productCard"
-            >
-
-              <div className="productImg">
-
-         <Image
-  src={s.image}
-  alt={s.name}
-  width={600}
-  height={400}
-  sizes="(max-width:768px) 100vw, 33vw"
-  className="cardImage"
-/>
-
-                <div className="imgOverlay">
-
-                  <span className="imgBtn">
-                    Xem chi tiết
-                  </span>
-
-                </div>
-
-              </div>
-
-              <div className="productBody">
-
-                <h3>{s.name}</h3>
-            <div className="priceBox">
-
-  {s.sale_price !== null && Number(s.sale_price) > 0 ? (
-    <>
-      <span className="priceLabel">
-        Giá khuyến mãi
-      </span>
-
-      <div className="priceRow">
-        <div className="priceSale">
-          {Number(s.sale_price).toLocaleString("vi-VN")}
-          <span className="currency">đ</span>
-        </div>
-
-        <div className="priceOld">
-          {Number(s.price).toLocaleString("vi-VN")}đ
-        </div>
-      </div>
-    </>
-  ) : (
-    <>
-      <span className="priceLabel">
-        Giá
-      </span>
-
-      <div className="priceSale">
-        {Number(s.price).toLocaleString("vi-VN")}
-        <span className="currency">đ</span>
-      </div>
-    </>
-  )}
-
-</div>
-              </div>
-
-            </Link>
-
-          ))}
-
-        </div>
-
+         <ListProduct products={products} />
+      
       </section>
 
       {/* BLOG */}

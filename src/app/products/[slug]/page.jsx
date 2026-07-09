@@ -136,142 +136,117 @@ export default async function Page({
     notFound();
   }
 
-  return (
-    <div className="page">
-<script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context":
-        "https://schema.org",
+return (
+  <div className="page">
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: data.name,
+          description: data.description,
+          image: [data.image],
+          url: `https://nhangoc.vercel.app/products/${data.slug}`,
+          productType: data.name,
+          areaProducted: {
+            "@type": "City",
+            name: "TP.HCM",
+          },
+          provider: {
+            "@type": "BeautySalon",
+            name: "Nhà Ngọc",
+            url: "https://nhangoc.vercel.app",
+            logo: {
+              "@type": "ImageObject",
+              url: "https://nhangoc.vercel.app/logo.png",
+            },
+          },
+          offers: {
+            "@type": "Offer",
+            price: data.sale_price || data.price || 0,
+            priceCurrency: "VND",
+            availability:
+              data.status === "available"
+                ? "https://schema.org/InStock"
+                : "https://schema.org/OutOfStock",
+          },
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": `https://nhangoc.vercel.app/products/${data.slug}`,
+          },
+        }),
+      }}
+    />
 
-      "@type": "Product",
+    <BackButton />
 
-      name: data.name,
-
-      description:
-        data.description,
-
-      image: [data.image],
-
-      url: `https://nhangoc.vercel.app/products/${data.slug}`,
-
-      productType:
-        data.name,
-
-      areaProducted: {
-        "@type": "City",
-        name: "TP.HCM",
-      },
-
-      provider: {
-        "@type":
-          "BeautySalon",
-
-        name:
-          "Nhà Ngọc",
-
-        url:
-          "https://nhangoc.vercel.app",
-
-        logo: {
-          "@type":
-            "ImageObject",
-
-          url:
-            "https://nhangoc.vercel.app/logo.png",
-        },
-      },
-offers: {
-  "@type": "Offer",
-  price: data.sale_price || data.price || 0,
-
-        priceCurrency:
-          "VND",
-
-  availability:
-data.status === "available"
-? "https://schema.org/InStock"
-: "https://schema.org/OutOfStock",
-      },
-
-      mainEntityOfPage: {
-        "@type":
-          "WebPage",
-
-        "@id": `https://nhangoc.vercel.app/products/${data.slug}`,
-      },
-    }),
-  }}
-/>
-      <BackButton />
-
+    <div className="pageContent">
       <h1 className="title">
         {data.name}
       </h1>
 
-  <p className="desc">
-  {data.description}
-</p>
+      <p className="desc">
+        {data.description}
+      </p>
 
-{/* PRICE */}
-{data.price && (
-<div className="priceBox">
+      {data.price && (
+        <div className="priceBox">
+          {data.sale_price !== null &&
+          Number(data.sale_price) > 0 ? (
+            <>
+              <span className="priceLabel">
+                Giá khuyến mãi
+              </span>
 
-  {data.sale_price !== null &&
-  Number(data.sale_price) > 0 ? (
-    <>
-      <span className="priceLabel">
-        Giá khuyến mãi
-      </span>
+              <div className="priceRow">
+                <div className="priceSale">
+                  {Number(data.sale_price).toLocaleString("vi-VN")}
+                  <span className="currency">đ</span>
+                </div>
 
-      <div className="priceRow">
+                <div className="priceOld">
+                  {Number(data.price).toLocaleString("vi-VN")}đ
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <span className="priceLabel">
+                Giá
+              </span>
 
-        <div className="priceSale">
-          {Number(data.sale_price).toLocaleString("vi-VN")}
-          <span className="currency">đ</span>
+              <div className="priceSale">
+                {Number(data.price).toLocaleString("vi-VN")}
+                <span className="currency">đ</span>
+              </div>
+            </>
+          )}
         </div>
+      )}
 
-        <div className="priceOld">
-          {Number(data.price).toLocaleString("vi-VN")}đ
+      {data.image && (
+        <div className="productImageWrap">
+          <Image
+            src={data.image}
+            alt={data.name}
+            width={1200}
+            height={800}
+            priority
+            quality={80}
+            sizes="(max-width:768px) 100vw, 750px"
+            className="productImage"
+          />
         </div>
+      )}
 
-      </div>
-    </>
-  ) : (
-    <>
-      <span className="priceLabel">
-        Giá
-      </span>
-
-      <div className="priceSale">
-        {Number(data.price).toLocaleString("vi-VN")}
-        <span className="currency">đ</span>
-      </div>
-    </>
-  )}
-
-</div>
-)}
-{data.image && (
-  <div className="productImageWrap">
-    <Image
-      src={data.image}
-      alt={data.name}
-      width={1200}
-      height={800}
-      priority
-      className="productImage"
-    />
-  </div>
-)}
       <div
         className="content"
         dangerouslySetInnerHTML={{
-          __html:
-            data.content || "",
+          __html: data.content || "",
         }}
       />
     </div>
-  );
+  </div>
+);
 }

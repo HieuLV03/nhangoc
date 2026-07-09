@@ -124,17 +124,35 @@
 .card:hover {
   transform: translateY(-4px);
 }
-/* MOBILE */
 @media (max-width: 768px) {
   .categoriesPage {
     padding: 15px;
   }
 
   .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
   }
 
   .card {
-    height: 200px;
+    height: 170px;
+  }
+
+  .content {
+    padding: 12px;
+  }
+
+  .content h2 {
+    font-size: 18px;
+  }
+
+  .content p {
+    font-size: 12px;
+  }
+
+  .editBtn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    font-size: 13px;
   }
 }

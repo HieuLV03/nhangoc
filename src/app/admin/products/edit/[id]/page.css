@@ -192,37 +192,34 @@
   width: auto;
 }
 
-/* BUTTON */
+.saveBtn{
+  width:100%;
+  height:50px;
 
-.editProductCard button {
-  width: 100%;
-  height: 50px;
+  border:none;
+  border-radius:12px;
 
-  border: none;
+  background:#111;
+  color:#fff;
 
-  border-radius: 12px;
+  font-size:15px;
+  font-weight:600;
 
-  background: #111;
-
-  color: #fff;
-
-  font-size: 15px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: 0.2s ease;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.editProductCard button:hover {
-  background: #000;
-  transform: translateY(-1px);
+.saveBtn:hover{
+  background:#000;
+  transform:translateY(-1px);
 }
 
-.editProductCard button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.saveBtn:disabled{
+  opacity:.6;
+  cursor:not-allowed;
 }
+
+
 
 /* MOBILE */
 
@@ -246,4 +243,14 @@
   .editor h3 {
     font-size: 20px;
   }
+}
+.headerLeft{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:20px;
+}
+
+.headerLeft h1{
+  margin:0;
 }

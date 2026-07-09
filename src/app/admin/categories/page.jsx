@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import "./page.css";
+import BackButton from "../components/BackButton/BackButton";
 
 export const revalidate = 0;
 
@@ -24,6 +25,8 @@ export default async function CategoriesPage() {
     <div className="categoriesPage">
       <div className="pageHeader">
         <div>
+                <BackButton />
+
           <h1>Danh mục</h1>
           <p>Quản lý danh mục sản phẩm</p>
         </div>

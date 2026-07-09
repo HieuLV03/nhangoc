@@ -64,26 +64,27 @@
   border: 1px solid #ddd;
 }
 
-.editCategoryCard button {
+.saveBtn {
+  width: 100%;
   height: 52px;
-
   border: none;
-
   border-radius: 12px;
-
   background: #111;
-
-  color: white;
-
+  color: #fff;
   font-size: 16px;
-
   font-weight: 600;
-
   cursor: pointer;
-
-  transition: 0.2s;
+  transition: .2s;
 }
 
+.saveBtn:hover {
+  background: #000;
+}
+
+.saveBtn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
 .editCategoryCard button:hover {
   background: #000;
 }

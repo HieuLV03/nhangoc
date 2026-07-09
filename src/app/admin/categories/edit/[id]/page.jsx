@@ -181,13 +181,13 @@ console.log("ERROR =", error);
             className="previewImage"
           />
         )}
-
-        <button
-          onClick={updateCategory}
-          disabled={loading}
-        >
-          {loading ? "Đang cập nhật..." : "Cập nhật"}
-        </button>
+<button
+  className="saveBtn"
+  onClick={updateCategory}
+  disabled={loading}
+>
+  {loading ? "Đang cập nhật..." : "Cập nhật"}
+</button>
 
       </div>
     </div>

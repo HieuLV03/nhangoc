@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import "./page.css";
+import BackButton from "@/components/BackButton/BackButton";
 
 export default function EditProductPage() {
   const params = useParams();
@@ -251,8 +252,12 @@ if (oldImage && oldImage !== form.image) {
 
   return (
     <div className="editProductPage">
-      <div className="editProductCard">
-        <h1>Sửa sản phẩm</h1>
+    <div className="editProductCard">
+
+  <div className="headerLeft">
+    <BackButton />
+    <h1>Sửa sản phẩm</h1>
+  </div>
 
 
         <input
@@ -437,14 +442,13 @@ if (oldImage && oldImage !== form.image) {
 
         {/* BUTTON */}
 
-        <button
-          onClick={update}
-          disabled={loading}
-        >
-          {loading
-            ? "Đang lưu..."
-            : "Cập nhật"}
-        </button>
+   <button
+  className="saveBtn"
+  onClick={update}
+  disabled={loading}
+>
+  {loading ? "Đang lưu..." : "Cập nhật"}
+</button>
       </div>
     </div>
   );

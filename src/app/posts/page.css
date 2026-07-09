@@ -5,17 +5,6 @@
   --gradient: linear-gradient(135deg, #3aa0ff, #ff4d8d);
 }
 
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: var(--font-inter);
-  background: #f7f9fc;
-}
 
 /* ================= HERO ================= */
 
@@ -129,7 +118,6 @@ body {
 
 .swiper-pagination-bullet-active {
   background: var(--primary);
-  opacity: 1;
 }
 /* ================= IMAGE CTA ================= */
 
@@ -138,8 +126,7 @@ body {
   position: relative;
   overflow: hidden;
 
-  aspect-ratio: 3 / 2;
-    height: 234px;      /* chiều cao khung ảnh */
+  aspect-ratio: 4/5; /* hoặc 4/5 nếu thích */
 
 }
 

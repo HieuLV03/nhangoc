@@ -62,14 +62,16 @@ export default async function HomePage() {
 
               <div className="blogImg">
 
-<Image
-  src={p.image}
-  alt={p.title}
-  width={600}
-  height={400}
-  sizes="(max-width:768px) 100vw, 33vw"
-  className="cardImage"
-/>
+{p.image && (
+  <Image
+    src={p.image}
+    alt={p.title || "Bài viết"}
+    width={600}
+    height={400}
+    sizes="(max-width:768px) 100vw, 33vw"
+    className="cardImage"
+  />
+)}
 
                 <div className="imgOverlay">
 
@@ -116,14 +118,16 @@ export default async function HomePage() {
             >
 
               <div className="productImg">
-<Image
-  src={s.image}
-  alt={s.title}
-  width={600}
-  height={400}
-  sizes="(max-width:768px) 100vw, 33vw"
-  className="cardImage"
-/>
+{s.image && (
+  <Image
+    src={s.image}
+    alt={s.name || "Sản phẩm"}
+    width={600}
+    height={400}
+    sizes="(max-width:768px) 100vw, 33vw"
+    className="cardImage"
+  />
+)}
 
                 <div className="imgOverlay">
 

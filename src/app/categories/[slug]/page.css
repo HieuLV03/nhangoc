@@ -1,7 +1,29 @@
 .categoryPage{
+
 padding:60px 20px;
 background:#f6f7fb;
 min-height:100vh;
+
+
+opacity:0;
+transform:translateY(20px);
+
+animation:
+categoryIn .45s ease forwards;
+
+}
+
+
+
+@keyframes categoryIn{
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
 }
 
 .container{
@@ -71,7 +93,77 @@ object-fit:cover;
 transition:.3s;
 
 }
+.categoryLoading{
+  padding:60px 20px;
+}
 
+
+.loadingTitle{
+
+width:300px;
+height:40px;
+
+background:#eee;
+border-radius:10px;
+
+margin-bottom:40px;
+
+animation:skeleton 1.5s infinite;
+
+}
+
+
+.loadingGrid{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:25px;
+
+}
+
+
+.loadingCard{
+
+height:350px;
+
+background:#eee;
+
+border-radius:18px;
+
+animation:skeleton 1.5s infinite;
+
+}
+
+
+
+@keyframes skeleton{
+
+0%{
+opacity:.5;
+}
+
+50%{
+opacity:1;
+}
+
+100%{
+opacity:.5;
+}
+
+}
+
+
+
+@media(max-width:768px){
+
+.loadingGrid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
 .productCard:hover img{
 
 transform:scale(1.06);
