@@ -50,7 +50,7 @@ export default function Slider({
                     item.image_desktop ||
                     item.image
                   }
-                  alt={item.title}
+                  alt={item.title || "Banner trang chủ"}
                   fill
                   priority={index === 0}
                   sizes="100vw"
@@ -63,7 +63,7 @@ export default function Slider({
                     item.image_desktop ||
                     item.image
                   }
-                  alt={item.title}
+                  alt={item.title || "Banner trang chủ"}
                   fill
                   priority={index === 0}
                   sizes="100vw"

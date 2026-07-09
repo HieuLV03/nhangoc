@@ -50,9 +50,6 @@
   transition: .3s;
 }
 
-.productCard:hover .imgOverlay {
-  opacity: 1;
-}
 
 .imgCta {
   padding: 10px 18px;

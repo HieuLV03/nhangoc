@@ -39,62 +39,73 @@
   font-weight: 700;
   color: #111;
 }
-.categoryBox {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 10px;
+.categoryBox{
+  margin:18px 0;
+  padding:18px;
+  background:#fafafa;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:12px;
 }
 
-.categoryItem {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.categoryItem{
+  display:flex;
+  align-items:center;
+  gap:12px;
 
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  padding:12px 14px;
 
-  padding: 10px 14px;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
 
-  cursor: pointer;
-
-  transition: .2s;
+  cursor:pointer;
+  transition:.25s;
 }
 
-.categoryItem:hover {
-  background: #f8f8f8;
+.categoryItem:hover{
+  border-color:#2563eb;
+  background:#eff6ff;
+  transform:translateY(-2px);
 }
 
-.categoryItem input {
-  width: 18px;
-  height: 18px;
+.categoryItem:has(input:checked){
+  border-color:#2563eb;
+  background:#dbeafe;
 }
-.editProductCard input,
+
+.categoryItem input{
+  width:18px;
+  height:18px;
+  accent-color:#2563eb;
+  flex-shrink:0;
+}
+
+.categoryItem input:focus-visible{
+  outline:2px solid #93c5fd;
+  outline-offset:2px;
+}
+.editProductCard input:not([type="checkbox"]),
 .editProductCard textarea,
 .editProductCard select {
   width: 100%;
-
   padding: 14px;
-
   border: 1px solid #e5e7eb;
-
   border-radius: 12px;
-
   font-size: 15px;
-
   background: #fff;
-
   outline: none;
-
-  transition: 0.2s ease;
+  transition: .2s ease;
 }
 
-.editProductCard input:focus,
+.editProductCard input:not([type="checkbox"]):focus,
 .editProductCard textarea:focus,
 .editProductCard select:focus {
   border-color: #111;
-
-  box-shadow: 0 0 0 3px
-    rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 0 3px rgba(0,0,0,.08);
 }
 
 .editProductCard textarea {
@@ -226,6 +237,10 @@
 @media (max-width: 768px) {
   .editProductCard {
     padding: 18px;
+  }
+  .categoryBox{
+    grid-template-columns:1fr;
+    padding:14px;
   }
 
   .editor {

@@ -65,10 +65,7 @@ width: 100%;
   backdrop-filter: blur(2px);
 }
 
-/* hover hiện overlay */
-.productCard:hover .imgOverlay,
-.blogCard:hover .imgOverlay {
-}
+
 
 .productCard:hover .imgCta span,
 .blogCard:hover .imgCta span {
@@ -86,10 +83,7 @@ width: 100%;
     0 12px 30px rgba(212,175,55,0.35);
 }
 
-.productCard:hover .imgCta span::after,
-.blogCard:hover .imgCta span::after {
-  transform: translateX(4px);
-}
+
 .imgCta span {
   position: relative;
   padding: 14px 24px;
@@ -108,11 +102,6 @@ width: 100%;
     0 8px 25px rgba(0,0,0,0.15);
 
   animation: ctaFloat 2.5s ease-in-out infinite;
-}
-
-
-.imgCta span:hover::after {
-  transform: translateX(4px);
 }
 
 /* floating animation */

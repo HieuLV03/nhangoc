@@ -55,9 +55,7 @@ const filteredProducts = products.filter((item) =>
 
 
   <div className="imgOverlay">
-                <div className="imgCta">
-                  <span>Xem chi tiết</span>
-                </div>
+              
               </div>
             </div>
 

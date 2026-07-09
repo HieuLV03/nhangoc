@@ -14,7 +14,6 @@
 }
 .productCard.opening{
     transform:scale(.96);
-    opacity:.85;
     transition:.18s;
 }
 @media(max-width:768px){
