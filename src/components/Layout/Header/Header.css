@@ -176,19 +176,29 @@
 
 .menuOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
 
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0,0,0,.35);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity .3s ease,
+    visibility 0s linear .3s;
 
   z-index: 9998;
 }
-@keyframes fade{
-    to{
-        opacity:1;
-    }
+
+.menuOverlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transition:
+    opacity .3s ease,
+    visibility 0s;
 }
 @media (max-width: 768px) {
   .menuToggle {
@@ -198,7 +208,8 @@
     top: 0; /* mặc định user */
 
 }
- .nav {
+ 
+.nav {
   position: absolute;
   top: 100%;
   left: 0;
@@ -212,16 +223,16 @@
 
   overflow: hidden;
 
-  transform-origin: top;
-  transform: scaleY(.9);
-
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 
+  transform: translateY(-12px) scale(.98);
+
   transition:
+    opacity .3s ease,
     transform .35s cubic-bezier(.22,1,.36,1),
-    opacity .25s ease;
+    visibility 0s linear .35s;
 
   border-bottom: 1px solid rgba(58,160,255,.15);
   box-shadow: 0 20px 40px rgba(0,0,0,.08);
@@ -233,8 +244,15 @@
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+
   transform: translateY(0) scale(1);
+
+  transition:
+    opacity .3s ease,
+    transform .35s cubic-bezier(.22,1,.36,1),
+    visibility 0s;
 }
+
 .logo {
   display: flex;
   align-items: center;

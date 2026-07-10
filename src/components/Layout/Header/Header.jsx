@@ -97,12 +97,10 @@ if (loading || isAdminPage) {
     </Link>
         </div>
       )}
-  {menuOpen && (
   <div
-    className="menuOverlay"
-    onClick={() => setMenuOpen(false)}
-  />
-)}
+  className={`menuOverlay ${menuOpen ? "active" : ""}`}
+  onClick={() => setMenuOpen(false)}
+/>
       {/* HEADER */}
 <header className={`header ${showHeader ? "show" : "hide"} ${role === "admin" ? "hasAdminBar" : ""}`}>
 
