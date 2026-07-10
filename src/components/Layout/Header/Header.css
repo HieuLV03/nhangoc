@@ -185,6 +185,11 @@
 
   z-index: 9998;
 }
+@keyframes fade{
+    to{
+        opacity:1;
+    }
+}
 @media (max-width: 768px) {
   .menuToggle {
     display: block;
@@ -225,22 +230,16 @@
 }
 
 .nav.active {
-  transform: scaleY(1);
-
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  transform: translateY(0) scale(1);
 }
 .logo {
   display: flex;
   align-items: center;
   text-decoration: none;
 }
-  .nav.active {
-    max-height: 500px;
-    opacity: 1;
-    transform: translateY(0);
-  }
 
  .nav a {
   padding: 16px 22px;

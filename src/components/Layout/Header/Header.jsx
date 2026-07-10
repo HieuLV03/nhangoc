@@ -118,12 +118,12 @@ if (loading || isAdminPage) {
 </Link>
         </div>
 
-        <button
-          className="menuToggle"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          ☰
-        </button>
+  <button
+  className="menuToggle"
+  onClick={() => setMenuOpen(!menuOpen)}
+>
+  {menuOpen ? "✕" : "☰"}
+</button>
 
         <nav className={`nav ${menuOpen ? "active" : ""}`}>
           <Link href="/" onClick={() => setMenuOpen(false)}>Trang chủ</Link>
