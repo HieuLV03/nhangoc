@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import "./page.css";
+import ScrollReveal from "@/components/ScrollReveal/ScrollReveal";
 
 export const revalidate = 600;
 
@@ -30,12 +31,18 @@ export default async function CategoriesPage() {
         </p>
 
         <div className="categoryGrid">
-          {categories?.map((item) => (
-            <Link
-              key={item.id}
-              href={`/categories/${item.slug}`}
-              className="categoryCard"
-            >
+
+  {categories?.map((item, index) => (
+
+    <ScrollReveal
+      key={item.id}
+      delay={index * 0.1}
+    >
+
+      <Link
+        href={`/categories/${item.slug}`}
+        className="categoryCard"
+      >
               {item.img ? (
                 <img
                   src={item.img}
@@ -55,9 +62,13 @@ export default async function CategoriesPage() {
                   <p>{item.description}</p>
                 )}
               </div>
-            </Link>
-          ))}
-        </div>
+               </Link>
+
+    </ScrollReveal>
+
+  ))}
+
+</div>
       </div>
     </div>
   );

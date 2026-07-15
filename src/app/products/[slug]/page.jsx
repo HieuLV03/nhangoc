@@ -3,6 +3,8 @@ import "./page.css";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import BackButton from "@/components/BackButton/BackButton";
+import ScrollReveal from "@/components/ScrollReveal/ScrollReveal";
+
 import Link from "next/link";
 
 // FIX CACHE
@@ -182,13 +184,22 @@ return (
     <BackButton />
 
     <div className="pageContent">
-      <h1 className="title">
-        {data.name}
-      </h1>
+   <ScrollReveal>
 
-      <p className="desc">
-        {data.description}
-      </p>
+<h1 className="title">
+ {data.name}
+</h1>
+
+</ScrollReveal>
+
+   <ScrollReveal delay={0.1}>
+
+<p className="desc">
+ {data.description}
+</p>
+
+</ScrollReveal>
+<ScrollReveal delay={0.2}>
 
       {data.price && (
         <div className="priceBox">
@@ -224,21 +235,34 @@ return (
           )}
         </div>
       )}
+</ScrollReveal>
 
-      {data.image && (
-        <div className="productImageWrap">
-          <Image
-            src={data.image}
-            alt={data.name}
-            width={1200}
-            height={800}
-            priority
-            quality={80}
-            sizes="(max-width:768px) 100vw, 750px"
-            className="productImage"
-          />
-        </div>
-      )}
+   {data.image && (
+
+<ScrollReveal delay={0.3}>
+
+
+<div className="productImageWrap">
+
+
+<Image
+src={data.image}
+alt={data.name}
+width={1200}
+height={800}
+priority
+quality={80}
+sizes="(max-width:768px) 100vw,750px"
+className="productImage"
+/>
+
+
+</div>
+
+
+</ScrollReveal>
+
+)}
 
       <div
         className="content"

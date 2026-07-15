@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
+import { motion } from "framer-motion";
 import ButtonSearch from "../ButtonSearch/ButtonSearch";
 
 import "./ProductList.css";
@@ -30,73 +30,108 @@ const filteredProducts = products.filter((item) =>
         onSearch={setKeyword}
       />
 
-      <div className="productGrid">
-        {filteredProducts.map((item) => (
-       <Link
-  key={item.id}
-  href={`/products/${item.slug}`}
-  className="productCard"
-  onClick={(e) => {
-    e.currentTarget.classList.add("opening");
-  }}
->
-           <div className="productImg">
+   <div className="productGrid">
 
-  {item.image && (
-    <Image
-      src={item.image}
-      alt={item.name || "Sản phẩm"}
-      width={1000}
-      height={1500}
-      sizes="(max-width:768px) 50vw, 33vw"
-      className="cardImage"
-    />
+  {filteredProducts.map((item, index) => (
+
+    <motion.div
+      key={item.id}
+      initial={{
+        opacity: 0,
+        y: 50,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.2,
+      }}
+      transition={{
+        duration: 0.6,
+        delay: index * 0.12,
+        ease: "easeOut",
+      }}
+    >
+
+      <Link
+        href={`/products/${item.slug}`}
+        className="productCard"
+      >
+
+        <div className="productImg">
+
+          {item.image && (
+            <Image
+              src={item.image}
+              alt={item.name || "Sản phẩm"}
+              width={1000}
+              height={1500}
+              sizes="(max-width:768px) 50vw, 33vw"
+              className="cardImage"
+            />
+          )}
+
+          <div className="imgOverlay"></div>
+
+        </div>
+
+
+        <div className="productBody">
+
+          <h3 className="productTitle">
+            {item.name}
+          </h3>
+
+
+          <p className="productDesc">
+            {item.description}
+          </p>
+
+
+          <div className="productFooter">
+
+            <div className="productPrice">
+
+              {item.sale_price ? (
+                <>
+                  <span className="priceSale">
+                    {Number(item.sale_price).toLocaleString("vi-VN")}₫
+                  </span>
+
+                  <span className="priceOld">
+                    {Number(item.price).toLocaleString("vi-VN")}₫
+                  </span>
+                </>
+              ) : (
+                <span className="priceSale">
+                  {Number(item.price).toLocaleString("vi-VN")}₫
+                </span>
+              )}
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </Link>
+
+    </motion.div>
+
+  ))}
+
+
+  {filteredProducts.length === 0 && (
+    <div className="emptyProduct">
+      Không tìm thấy sản phẩm.
+    </div>
   )}
 
-
-  <div className="imgOverlay">
-              
-              </div>
-            </div>
-
-            <div className="productBody">
-              <h3 className="productTitle">
-                {item.name}
-              </h3>
-
-              <p className="productDesc">
-                {item.description}
-              </p>
-
-              <div className="productFooter">
-                <div className="productPrice">
-                  {item.sale_price ? (
-                    <>
-                      <span className="priceSale">
-                        {Number(item.sale_price).toLocaleString("vi-VN")}₫
-                      </span>
-
-                      <span className="priceOld">
-                        {Number(item.price).toLocaleString("vi-VN")}₫
-                      </span>
-                    </>
-                  ) : (
-                    <span className="priceSale">
-                      {Number(item.price).toLocaleString("vi-VN")}₫
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-          </Link>
-        ))}
-
-        {filteredProducts.length === 0 && (
-          <div className="emptyProduct">
-            Không tìm thấy sản phẩm.
-          </div>
-        )}
-      </div>
+</div>
     </>
   );
 }
+
+

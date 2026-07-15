@@ -3,6 +3,7 @@ import { supabase } from "@/lib/supabase";
 import Image from "next/image";
 import ListProduct from "../components/ProductList/ProductList";
 import "./page.css";
+import ScrollReveal from "@/components/ScrollReveal/ScrollReveal";
 import Slider from "@/components/Slider/Slider";
 
 export const revalidate = 600;
@@ -52,6 +53,8 @@ console.log("sliderError", sliderRes.error);
 
       {/* HERO */}
 <Slider sliders={sliders} />
+<ScrollReveal>
+
       <section className="section">
 
         <div className="sectionHeader">
@@ -67,6 +70,7 @@ console.log("sliderError", sliderRes.error);
       <ListProduct products={products} />
 
       </section>
+</ScrollReveal>
 
       {/* BLOG */}
       <section className="section">

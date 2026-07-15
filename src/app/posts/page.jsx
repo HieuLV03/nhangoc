@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabase";
 import Image from "next/image";
 import "./page.css";
 import BackButton from "@/components/BackButton/BackButton";
+import ScrollReveal from "@/components/ScrollReveal/ScrollReveal";
 
 export const revalidate = 600;
 
@@ -40,141 +41,214 @@ export default async function HomePage() {
     postRes.data || [];
 
   return (
-    <main className="home">
+<main className="home">
 
-      {/* HERO */}
-      {/* POSTS */}
-      <section className="section">
 
-        <div className="sectionHeader">
-          <h2>Bài viết mới</h2>
-        </div>
+<ScrollReveal>
 
-        <div className="blogGrid">
+<section className="section">
 
-          {posts.map((p) => (
+<div className="sectionHeader">
+<h2>Bài viết mới</h2>
+</div>
 
-            <Link
-              key={p.id}
-              href={`/posts/${p.slug}`}
-              className="blogCard"
-            >
 
-              <div className="blogImg">
+<div className="blogGrid">
+
+{posts.map((p)=>(
+
+<Link
+key={p.id}
+href={`/posts/${p.slug}`}
+className="blogCard"
+>
+
+
+<div className="blogImg">
 
 {p.image && (
-  <Image
-    src={p.image}
-    alt={p.title || "Bài viết"}
-    width={600}
-    height={400}
-    sizes="(max-width:768px) 100vw, 33vw"
-    className="cardImage"
-  />
+
+<Image
+src={p.image}
+alt={p.title || "Bài viết"}
+width={600}
+height={400}
+sizes="(max-width:768px) 100vw, 33vw"
+className="cardImage"
+/>
+
 )}
 
-                <div className="imgOverlay">
 
-                  <span className="imgBtn">
-                    Xem bài viết
-                  </span>
+<div className="imgOverlay">
 
-                </div>
+<span className="imgBtn">
+Xem bài viết
+</span>
 
-              </div>
+</div>
 
-              <div className="blogBody">
 
-                <h3>{p.title}</h3>
+</div>
 
-                <p>{p.description}</p>
 
-              </div>
 
-            </Link>
+<div className="blogBody">
 
-          ))}
+<h3>
+{p.title}
+</h3>
 
-        </div>
 
-      </section>
+<p>
+{p.description}
+</p>
 
-      <section className="section">
 
-        <div className="sectionHeader">
-              <BackButton />
-          
-          <h2>Sản phẩm bán chạy</h2>
-        </div>
+</div>
 
-        <div className="productGrid">
 
-          {products.map((s) => (
+</Link>
 
-            <Link
-              key={s.id}
-              href={`/products/${s.slug}`}
-              className="productCard"
-            >
+))}
 
-              <div className="productImg">
+
+</div>
+
+
+</section>
+
+</ScrollReveal>
+
+
+
+
+
+<ScrollReveal delay={0.2}>
+
+
+<section className="section">
+
+
+<div className="sectionHeader">
+
+<BackButton />
+
+<h2>
+Sản phẩm bán chạy
+</h2>
+
+
+</div>
+
+
+
+<div className="productGrid">
+
+
+{products.map((s)=>(
+
+<Link
+key={s.id}
+href={`/products/${s.slug}`}
+className="productCard"
+>
+
+
+<div className="productImg">
+
+
 {s.image && (
-  <Image
-    src={s.image}
-    alt={s.name || "Sản phẩm"}
-    width={600}
-    height={400}
-    sizes="(max-width:768px) 100vw, 33vw"
-    className="cardImage"
-  />
+
+<Image
+src={s.image}
+alt={s.name || "Sản phẩm"}
+width={600}
+height={400}
+sizes="(max-width:768px) 100vw, 33vw"
+className="cardImage"
+/>
+
 )}
 
-                <div className="imgOverlay">
 
-                  <span className="imgBtn">
-                    Xem chi tiết
-                  </span>
+<div className="imgOverlay">
 
-                </div>
+<span className="imgBtn">
+Xem chi tiết
+</span>
 
-              </div>
+</div>
 
-              <div className="productBody">
 
-                <h3>{s.name}</h3>
+</div>
 
-                <div className="priceBox">
-    <div className="priceOld">
-          {Number(s.price).toLocaleString("vi-VN")}đ
-        </div>
-                  <span className="priceLabel">
-                    Giá khuyến mãi
-                  </span>
 
-                  <div className="priceValue">
 
-                    {Number(
-                      s.sale_price || 0
-                    ).toLocaleString("vi-VN")}
+<div className="productBody">
 
-                    <span className="currency">
-                      đ
-                    </span>
 
-                  </div>
+<h3>
+{s.name}
+</h3>
 
-                </div>
 
-              </div>
 
-            </Link>
+<div className="priceBox">
 
-          ))}
 
-        </div>
+<div className="priceOld">
 
-      </section>
+{Number(s.price)
+.toLocaleString("vi-VN")}đ
 
-    </main>
-  );
+</div>
+
+
+<span className="priceLabel">
+Giá khuyến mãi
+</span>
+
+
+
+<div className="priceValue">
+
+{Number(
+s.sale_price || 0
+)
+.toLocaleString("vi-VN")}
+
+
+<span className="currency">
+đ
+</span>
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</Link>
+
+))}
+
+
+</div>
+
+
+</section>
+
+
+</ScrollReveal>
+
+
+
+</main>
+)
 }

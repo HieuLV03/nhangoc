@@ -399,7 +399,25 @@ height:35px;
   gap: 16px;
   flex-wrap: wrap;
 }
+.productImageWrap{
+overflow:hidden;
+border-radius:20px;
+}
 
+
+.productImage{
+
+transition:
+transform .8s ease;
+
+}
+
+
+.productImageWrap:hover .productImage{
+
+transform:scale(1.05);
+
+}
 .priceSale {
   display: flex;
   align-items: flex-end;
