@@ -5,7 +5,35 @@
   display: flex;
   justify-content: center;
 }
+.postImageWrap{
+  overflow:hidden;
+  border-radius:20px;
+}
 
+
+.postImage{
+  width:100%;
+  height:auto;
+  transition:transform .8s ease;
+}
+
+
+.postImageWrap:hover .postImage{
+  transform:scale(1.04);
+}
+
+
+
+.content{
+  animation:none;
+}
+
+
+
+.content img{
+  max-width:100%;
+  border-radius:16px;
+}
 .postContainer {
   width: 100%;
   max-width: 900px;

@@ -1,5 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import BackButton from "@/components/BackButton/BackButton";
+import ScrollReveal from "@/components/ScrollReveal/ScrollReveal";
+
 import "./page.css"
 import Image from "next/image";
 export const revalidate = 600;
@@ -36,80 +38,97 @@ export async function generateMetadata({
     };
   }
 
-return {
-  metadataBase: new URL(
-    "https://thammyvienhisu.online"
-  ),
+return (
+  <div className="postPage">
 
-  title:
-    data.meta_title ||
-    data.title,
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: data.title,
+          description: data.description,
+          image: data.image,
+          author: {
+            "@type": "Organization",
+            name: "Thẩm mỹ viện HiSu",
+          },
+          publisher: {
+            "@type": "Organization",
+            name: "Thẩm mỹ viện HiSu",
+          },
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": `https://thammyvienhisu.online/posts/${data.slug}`,
+          },
+        }),
+      }}
+    />
 
-  description:
-    data.meta_description ||
-    data.description,
 
-  robots: {
-    index: true,
-    follow: true,
-  },
+    <BackButton />
 
-  alternates: {
-    canonical: `/posts/${data.slug}`,
-  },
 
-openGraph: {
-  title:
-    data.meta_title ||
-    data.title,
+    <div className="postContainer">
 
-  description:
-    data.meta_description ||
-    data.description,
 
-  url: `/posts/${data.slug}`,
+      <ScrollReveal>
 
-  siteName:
-    "MIREC",
+        <h1>
+          {data.title}
+        </h1>
 
-  locale: "vi_VN",
 
-  type: "article",
+        <p className="desc">
+          {data.description}
+        </p>
 
-  publishedTime:
-    data.created_at,
+      </ScrollReveal>
 
-  modifiedTime:
-    data.updated_at,
 
-  images: data.image
-    ? [
-        {
-          url: data.image,
-          width: 1200,
-          height: 630,
-        },
-      ]
-    : [],
-},
 
-  twitter: {
-    card:
-      "summary_large_image",
+      <ScrollReveal delay={0.15}>
 
-    title:
-      data.meta_title ||
-      data.title,
 
-    description:
-      data.meta_description ||
-      data.description,
+        <div className="postImageWrap">
 
-    images: data.image
-      ? [data.image]
-      : [],
-  },
-};
+          <Image
+            src={data.image}
+            alt={data.title}
+            width={1200}
+            height={800}
+            priority
+            className="postImage"
+          />
+
+        </div>
+
+
+      </ScrollReveal>
+
+
+
+      <ScrollReveal delay={0.25}>
+
+
+        <div
+          className="content"
+          dangerouslySetInnerHTML={{
+            __html:data.content || "",
+          }}
+        />
+
+
+      </ScrollReveal>
+
+
+
+    </div>
+
+
+  </div>
+);
 }
 
 export default async function PostPage({

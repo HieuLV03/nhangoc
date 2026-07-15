@@ -2,6 +2,7 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import "./page.css";
 import ScrollReveal from "@/components/ScrollReveal/ScrollReveal";
+import BackButton from "@/components/BackButton/BackButton";
 
 export const revalidate = 600;
 
@@ -22,6 +23,8 @@ export default async function CategoriesPage() {
   return (
     <div className="categoriesPage">
       <div className="container">
+        <BackButton />
+        
         <h1 className="pageTitle">
           Danh mục sản phẩm
         </h1>

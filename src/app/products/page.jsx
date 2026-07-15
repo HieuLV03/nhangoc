@@ -1,109 +1,192 @@
 import Link from "next/link";
-
 import { supabase } from "@/lib/supabase";
-
 import Image from "next/image";
-import ListProduct from "../../components/ProductList/ProductList"
+import ListProduct from "../../components/ProductList/ProductList";
 import "./page.css";
 import BackButton from "@/components/BackButton/BackButton";
+import ScrollReveal from "@/components/ScrollReveal/ScrollReveal";
+
 
 export const revalidate = 600;
 
+
 export default async function HomePage() {
 
+
  const [productRes, postRes] = await Promise.all([
+
   supabase
     .from("products")
     .select("*")
-    .eq("status", "available")
-    .order("created_at", { ascending: false }),
+    .eq("status","available")
+    .order("created_at",{ascending:false}),
+
 
   supabase
     .from("posts")
     .select("*")
-    .eq("status", "published")
-    .order("created_at", { ascending: false })
-    .limit(5),
-]);
+    .eq("status","published")
+    .order("created_at",{ascending:false})
+    .limit(5)
 
-console.log("PRODUCT ERROR:", productRes.error);
-console.log("POST ERROR:", postRes.error);
+ ]);
 
-console.log("PRODUCT DATA:", productRes.data);
-console.log("POST DATA:", postRes.data);
 
 const products = productRes.data || [];
 const posts = postRes.data || [];
-  return (
-    <main className="home">
 
-      {/* HERO */}
 
-      <section className="section">
+return (
 
-        <div className="sectionHeader">
-              <BackButton />
-          
-          <h2>Sản phẩm</h2>
-        </div>
+<main className="home">
 
-         <ListProduct products={products} />
-      
-      </section>
 
-      {/* BLOG */}
-      <section className="section">
+{/* PRODUCT */}
 
-        <div className="sectionHeader">
-          <h2>Bài viết mới</h2>
-        </div>
+<ScrollReveal>
 
-        <div className="blogGrid">
+<section className="section">
 
-          {posts.map((p) => (
 
-            <Link
-              key={p.id}
-              href={`/posts/${p.slug}`}
-              className="blogCard"
-            >
+<div className="sectionHeader">
 
-              <div className="blogImg">
+<BackButton />
 
-          <Image
-  src={p.image}
-  alt={p.title}
-  width={600}
-  height={400}
-  sizes="(max-width:768px) 100vw, 33vw"
-  className="cardImage"
+<h2>
+Sản phẩm
+</h2>
+
+</div>
+
+
+<ListProduct products={products}/>
+
+
+</section>
+
+
+</ScrollReveal>
+
+
+
+
+
+{/* BLOG */}
+
+
+<ScrollReveal delay={0.2}>
+
+<section className="section">
+
+
+<div className="sectionHeader">
+
+<h2>
+Bài viết mới
+</h2>
+
+</div>
+
+
+
+<div className="blogGrid">
+
+
+{
+posts.map((p,index)=>(
+
+
+<ScrollReveal
+key={p.id}
+delay={index*0.1}
+>
+
+
+<Link
+
+href={`/posts/${p.slug}`}
+
+className="blogCard"
+
+>
+
+
+<div className="blogImg">
+
+
+<Image
+
+src={p.image}
+
+alt={p.title}
+
+width={600}
+
+height={400}
+
+sizes="(max-width:768px) 100vw,33vw"
+
+className="cardImage"
+
 />
-                <div className="imgOverlay">
 
-                  <span className="imgBtn">
-                    Xem bài viết
-                  </span>
 
-                </div>
+<div className="imgOverlay">
 
-              </div>
+<span className="imgBtn">
 
-              <div className="blogBody">
+Xem bài viết
 
-                <h3>{p.name}</h3>
+</span>
 
-                <p>{p.description}</p>
+</div>
 
-              </div>
 
-            </Link>
+</div>
 
-          ))}
 
-        </div>
 
-      </section>
+<div className="blogBody">
 
-    </main>
-  );
+
+<h3>
+{p.title}
+</h3>
+
+
+<p>
+{p.description}
+</p>
+
+
+</div>
+
+
+
+</Link>
+
+
+</ScrollReveal>
+
+
+))
+
+}
+
+
+
+</div>
+
+
+</section>
+
+
+</ScrollReveal>
+
+
+
+</main>
+
+);
+
 }
