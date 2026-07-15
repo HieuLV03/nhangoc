@@ -263,11 +263,19 @@
 /* title */
 .productBody h3,
 .blogBody h3 {
-  font-size: 20px;
+ font-size: 20px;
   font-weight: 700;
   line-height: 1.5;
-
   color: #222;
+
+  /* luôn giữ 2 dòng */
+  min-height: calc(20px * 1.5 * 2);
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
 }
 
 /* desc */
@@ -337,7 +345,18 @@
 /* ================= MOBILE ================= */
 
 @media (max-width: 768px) {
+.productBody h3 {
+  font-size: 16px;
+  line-height: 1.4;
 
+  min-height: calc(16px * 1.4 * 2);
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+}
   .section {
     margin-top: 9px;
     padding: 27px 15px;
