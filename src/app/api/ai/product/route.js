@@ -6,9 +6,10 @@ const ai = new GoogleGenAI({
 });
 
 export async function POST(req) {
-  const { name } = await req.json();
+  try {
+    const { name } = await req.json();
 
-  const prompt = `
+    const prompt = `
 Viết JSON:
 
 {
@@ -20,17 +21,34 @@ Tên sản phẩm:
 ${name}
 `;
 
-  const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
-    contents: prompt,
-  });
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: prompt,
+    });
 
-  let text = response.text;
+    console.log("===== RESPONSE =====");
+    console.log(response);
 
-  text = text
-    .replace(/```json/g, "")
-    .replace(/```/g, "")
-    .trim();
+    console.log("===== TEXT =====");
+    console.log(response.text);
 
-  return NextResponse.json(JSON.parse(text));
+    return NextResponse.json({
+      success: true,
+      data: response,
+      text: response.text,
+    });
+  } catch (err) {
+    console.error("===== ERROR =====");
+    console.error(err);
+
+    return NextResponse.json(
+      {
+        error: err.message,
+        stack: String(err),
+      },
+      {
+        status: 500,
+      }
+    );
+  }
 }
