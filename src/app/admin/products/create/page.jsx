@@ -7,6 +7,7 @@ import BackButton from "../../components/BackButton/BackButton";
 
 export default function CreateProductPage() {
   const [loading, setLoading] = useState(false);
+  const [aiLoading, setAiLoading] = useState(false);
   const [file, setFile] = useState(null);
   const [categories, setCategories] = useState([]);
 
@@ -76,7 +77,43 @@ export default function CreateProductPage() {
 
     fetchCategories();
   }, []);
+useEffect(() => {
+  if (!form.name.trim()) return;
 
+  const timer = setTimeout(async () => {
+    try {
+      setAiLoading(true);
+
+      const res = await fetch("/api/ai/product", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Không thể tạo nội dung AI");
+      }
+
+      const data = await res.json();
+
+      setForm((prev) => ({
+        ...prev,
+        description: prev.description || data.description,
+        content: prev.content || data.content,
+      }));
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setAiLoading(false);
+    }
+  }, 1500);
+
+  return () => clearTimeout(timer);
+}, [form.name]);
   // =========================
   // CREATE PRODUCT
   // =========================
@@ -235,7 +272,11 @@ category_ids: form.category_ids,
             setForm({ ...form, sale_price: e.target.value })
           }
         />
-
+{aiLoading && (
+  <p style={{ color: "#666", marginBottom: 10 }}>
+    AI đang tạo nội dung...
+  </p>
+)}
         <textarea
           placeholder="Mô tả"
           value={form.description}
