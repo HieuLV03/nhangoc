@@ -16,7 +16,8 @@ export default function EditProductPage() {
 
   const [uploading, setUploading] =
     useState(false);
-
+const [descLoading, setDescLoading] = useState(false);
+const [contentLoading, setContentLoading] = useState(false);
   const [loading, setLoading] =
     useState(false);
 const [categories, setCategories] = useState([]);
@@ -33,6 +34,81 @@ const [form, setForm] = useState({
   status: "available",
   featured: false,
 });
+const generateDescription = async () => {
+  if (!form.name.trim()) {
+    return alert("Nhập tên sản phẩm trước");
+  }
+
+  try {
+    setDescLoading(true);
+
+    const res = await fetch("/api/ai/product", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        type: "description",
+        name: form.name,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error || "AI lỗi");
+    }
+
+    setForm((prev) => ({
+      ...prev,
+      description: data.description,
+    }));
+
+  } catch (err) {
+    alert(err.message);
+  } finally {
+    setDescLoading(false);
+  }
+};
+
+
+
+const generateContent = async () => {
+  if (!form.name.trim()) {
+    return alert("Nhập tên sản phẩm trước");
+  }
+
+  try {
+    setContentLoading(true);
+
+    const res = await fetch("/api/ai/product", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        type: "content",
+        name: form.name,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error || "AI lỗi");
+    }
+
+    setForm((prev) => ({
+      ...prev,
+      content: data.content,
+    }));
+
+  } catch (err) {
+    alert(err.message);
+  } finally {
+    setContentLoading(false);
+  }
+};
   // =========================
   // SLUG
   // =========================
@@ -361,21 +437,52 @@ if (oldImage && oldImage !== form.image) {
   onChange={(e) =>
     setForm({
       ...form,
-      description: e.target.value,
+      description:e.target.value,
     })
   }
 />
+
+
+<button
+  type="button"
+  className="aiBtn"
+  onClick={generateDescription}
+  disabled={descLoading}
+>
+{
+ descLoading
+ ? "Đang tạo..."
+ : "✨ Tạo mô tả"
+}
+</button>
+
+
+
 <textarea
   className="editor"
   placeholder="Nội dung HTML"
   value={form.content}
-  onChange={(e) =>
+  onChange={(e)=>
     setForm({
       ...form,
-      content: e.target.value,
+      content:e.target.value,
     })
   }
 />
+
+
+<button
+  type="button"
+  className="aiBtn"
+  onClick={generateContent}
+  disabled={contentLoading}
+>
+{
+ contentLoading
+ ? "Đang tạo..."
+ : "✨ Tạo content"
+}
+</button>
         {/* IMAGE */}
 
         <div className="uploadBox">

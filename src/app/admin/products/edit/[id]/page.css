@@ -269,3 +269,31 @@
 .headerLeft h1{
   margin:0;
 }
+.aiBtn{
+  width:100%;
+  height:45px;
+
+  border:none;
+  border-radius:12px;
+
+  background:#2563eb;
+  color:white;
+
+  font-size:15px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.2s;
+}
+
+
+.aiBtn:hover{
+  background:#1d4ed8;
+}
+
+
+.aiBtn:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
