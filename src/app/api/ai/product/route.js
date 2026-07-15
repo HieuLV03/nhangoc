@@ -1,17 +1,22 @@
 import { GoogleGenAI } from "@google/genai";
 import { NextResponse } from "next/server";
-const { name, type } = await req.json();
+
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
 
 export async function POST(req) {
   try {
-    const prompt = `
-Viết JSON.
+    const { name, type } = await req.json();
+
+    let prompt = "";
+
+    if (type === "description") {
+      prompt = `
+Viết JSON:
 
 {
-"description":"..."
+  "description":""
 }
 
 Tên sản phẩm:
@@ -19,15 +24,34 @@ ${name}
 
 Chỉ trả về JSON.
 `;
+    } else {
+      prompt = `
+Viết JSON:
 
-    const { name } = await req.json();
+{
+  "content":""
+}
+
+Tên sản phẩm:
+${name}
+
+Chỉ trả về JSON.
+`;
+    }
 
     const response = await ai.models.generateContent({
       model: "gemini-3.1-flash-lite",
-      contents: `Tên sản phẩm: ${name}`,
+      contents: prompt,
     });
 
-    return NextResponse.json(response);
+    let text = response.text;
+
+    text = text
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
+
+    return NextResponse.json(JSON.parse(text));
   } catch (err) {
     return NextResponse.json(
       {
