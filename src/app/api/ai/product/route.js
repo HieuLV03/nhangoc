@@ -23,7 +23,7 @@ Tên sản phẩm:
 ${name}
 
 Yêu cầu:
-- Viết mô tả ngắn 36 từ.
+- Viết mô tả ngắn 24 từ.
 - Tập trung vào lợi ích sản phẩm.
 - Văn phong bán hàng.
 - Không dùng markdown.
@@ -44,6 +44,7 @@ Chỉ trả về JSON đúng format:
 Yêu cầu HTML:
 - Chỉ trả về HTML bên trong content.
 - Không dùng markdown.
+- Văn phong bán hàng.
 - Không bọc trong \`\`\`html.
 - HTML phải sạch, có thể render trực tiếp trên website.
 
@@ -87,7 +88,7 @@ Kêu gọi mua hàng.
 
 
 Yêu cầu nội dung:
-- Khoảng 500-800 từ.
+- Khoảng 510 từ.
 - SEO tự nhiên.
 - Văn phong bán hàng cao cấp.
 - Không nhồi nhét từ khóa.
