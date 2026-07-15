@@ -129,7 +129,33 @@
   margin-bottom: 20px;
   font-weight: 700;
 }
+.aiBtn{
+  margin-top:-2px;
+  margin-bottom:18px;
 
+  padding:10px 16px;
+
+  border:none;
+  border-radius:10px;
+
+  background:#2563eb;
+  color:#fff;
+
+  cursor:pointer;
+  font-size:14px;
+  font-weight:600;
+
+  transition:.2s;
+}
+
+.aiBtn:hover{
+  background:#1d4ed8;
+}
+
+.aiBtn:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
 /* INPUT + TEXTAREA + SELECT */
 .createPostCard input:not([type="checkbox"]),
 .createPostCard textarea,

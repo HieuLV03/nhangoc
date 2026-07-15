@@ -7,7 +7,8 @@ import BackButton from "../../components/BackButton/BackButton";
 
 export default function CreateProductPage() {
   const [loading, setLoading] = useState(false);
-  const [aiLoading, setAiLoading] = useState(false);
+const [descLoading, setDescLoading] = useState(false);
+const [contentLoading, setContentLoading] = useState(false);
   const [file, setFile] = useState(null);
   const [categories, setCategories] = useState([]);
 
@@ -77,43 +78,78 @@ export default function CreateProductPage() {
 
     fetchCategories();
   }, []);
-useEffect(() => {
-  if (!form.name.trim()) return;
 
-  const timer = setTimeout(async () => {
-    try {
-      setAiLoading(true);
+  const generateDescription = async () => {
+  if (!form.name.trim()) {
+    return alert("Nhập tên sản phẩm trước");
+  }
 
-      const res = await fetch("/api/ai/product", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: form.name,
-        }),
-      });
+  try {
+    setDescLoading(true);
 
-      if (!res.ok) {
-        throw new Error("Không thể tạo nội dung AI");
-      }
+    const res = await fetch("/api/ai/product", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        type: "description",
+        name: form.name,
+      }),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      setForm((prev) => ({
-        ...prev,
-        description: prev.description || data.description,
-        content: prev.content || data.content,
-      }));
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setAiLoading(false);
+    if (!res.ok) {
+      throw new Error(data.error || "AI lỗi");
     }
-  }, 1500);
 
-  return () => clearTimeout(timer);
-}, [form.name]);
+    setForm((prev) => ({
+      ...prev,
+      description: data.description,
+    }));
+  } catch (err) {
+    alert(err.message);
+  } finally {
+    setDescLoading(false);
+  }
+};
+
+const generateContent = async () => {
+  if (!form.name.trim()) {
+    return alert("Nhập tên sản phẩm trước");
+  }
+
+  try {
+    setContentLoading(true);
+
+    const res = await fetch("/api/ai/product", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        type: "content",
+        name: form.name,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error || "AI lỗi");
+    }
+
+    setForm((prev) => ({
+      ...prev,
+      content: data.content,
+    }));
+  } catch (err) {
+    alert(err.message);
+  } finally {
+    setContentLoading(false);
+  }
+};
   // =========================
   // CREATE PRODUCT
   // =========================
@@ -272,35 +308,47 @@ category_ids: form.category_ids,
             setForm({ ...form, sale_price: e.target.value })
           }
         />
-{aiLoading && (
-  <p style={{ color: "#666", marginBottom: 10 }}>
-    AI đang tạo nội dung...
-  </p>
-)}
-        <textarea
-          placeholder="Mô tả"
-          value={form.description}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              description: e.target.value,
-            })
-          }
-        />
 
+    <textarea
+  placeholder="Mô tả"
+  value={form.description}
+  onChange={(e)=>
+    setForm({
+      ...form,
+      description:e.target.value,
+    })
+  }
+/>
+
+<button
+  type="button"
+  className="aiBtn"
+  onClick={generateDescription}
+  disabled={descLoading}
+>
+  {descLoading ? "Đang tạo..." : "✨ Tạo mô tả"}
+</button>
         {/* CONTENT */}
-        <textarea
-          className="editor"
-          placeholder="Nhập HTML..."
-          value={form.content}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              content: e.target.value,
-            })
-          }
-        />
+    <textarea
+  className="editor"
+  placeholder="Nhập HTML..."
+  value={form.content}
+  onChange={(e)=>
+    setForm({
+      ...form,
+      content:e.target.value,
+    })
+  }
+/>
 
+<button
+  type="button"
+  className="aiBtn"
+  onClick={generateContent}
+  disabled={contentLoading}
+>
+  {contentLoading ? "Đang tạo..." : "✨ Tạo content"}
+</button>
         {/* FEATURED */}
         <label style={{ display: "flex", gap: 8 }}>
           <input
