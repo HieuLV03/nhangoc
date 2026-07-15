@@ -23,17 +23,17 @@ Tên sản phẩm:
 ${name}
 
 Yêu cầu:
-- Viết mô tả ngắn 100 từ.
+- Viết mô tả ngắn 36 từ.
 - Tập trung vào lợi ích sản phẩm.
 - Văn phong bán hàng.
 - Không dùng markdown.
 - Chỉ trả về JSON.
 `;
     } else {
-      prompt = `
-Bạn là chuyên gia viết nội dung marketing và SEO cho sản phẩm.
+     prompt = `
+Bạn là chuyên gia viết nội dung marketing, SEO và thiết kế HTML cho trang sản phẩm.
 
-Hãy viết một bài mô tả sản phẩm chi tiết bằng tiếng Việt.
+Hãy tạo nội dung sản phẩm bằng HTML thuần.
 
 Chỉ trả về JSON đúng format:
 
@@ -41,17 +41,59 @@ Chỉ trả về JSON đúng format:
   "content": ""
 }
 
-Yêu cầu:
-- Độ dài 300 từ.
-- Có mở đầu thu hút.
-- Giới thiệu sản phẩm.
-- Công dụng và lợi ích.
-- Điểm nổi bật.
-- Hướng dẫn sử dụng.
-- Đối tượng phù hợp.
-- Kêu gọi mua hàng.
-- SEO tự nhiên.
+Yêu cầu HTML:
+- Chỉ trả về HTML bên trong content.
 - Không dùng markdown.
+- Không bọc trong \`\`\`html.
+- HTML phải sạch, có thể render trực tiếp trên website.
+
+Cấu trúc bắt buộc:
+
+<h2>Tiêu đề giới thiệu sản phẩm</h2>
+
+<p>Đoạn mô tả mở đầu hấp dẫn.</p>
+
+<h3>Điểm nổi bật</h3>
+
+<ul>
+<li>Lợi ích 1</li>
+<li>Lợi ích 2</li>
+<li>Lợi ích 3</li>
+</ul>
+
+<h3>Công dụng sản phẩm</h3>
+
+<p>Nội dung chi tiết...</p>
+
+<h3>Hướng dẫn sử dụng</h3>
+
+<ol>
+<li>Bước 1</li>
+<li>Bước 2</li>
+</ol>
+
+<h3>Ai nên sử dụng?</h3>
+
+<p>Nội dung...</p>
+
+<div class="product-highlight">
+<strong>Lý do nên chọn sản phẩm</strong>
+<p>Nội dung nổi bật.</p>
+</div>
+
+<p class="call-to-action">
+Kêu gọi mua hàng.
+</p>
+
+
+Yêu cầu nội dung:
+- Khoảng 500-800 từ.
+- SEO tự nhiên.
+- Văn phong bán hàng cao cấp.
+- Không nhồi nhét từ khóa.
+- Có tiêu đề H2,H3 rõ ràng.
+- Có danh sách ul/ol.
+- Có đoạn nhấn mạnh bằng strong.
 - Không thêm ký tự ngoài JSON.
 
 Tên sản phẩm:
