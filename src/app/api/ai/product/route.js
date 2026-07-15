@@ -66,12 +66,6 @@ Cấu trúc bắt buộc:
 
 <p>Nội dung chi tiết...</p>
 
-<h3>Hướng dẫn sử dụng</h3>
-
-<ol>
-<li>Bước 1</li>
-<li>Bước 2</li>
-</ol>
 
 <h3>Ai nên sử dụng?</h3>
 
