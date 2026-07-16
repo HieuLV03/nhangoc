@@ -1,6 +1,5 @@
 import "./globals.css";
 import ClientLayout from "@/components/Layout/ClientLayout";
-import Script from "next/script";
 
 import { Inter, Playfair_Display, Poppins } from "next/font/google";
 
@@ -23,12 +22,20 @@ const playfair = Playfair_Display({
   display: "swap",
   variable: "--font-playfair",
 });
+
 export const metadata = {
-  title: "Nhà Ngọc",
+  metadataBase: new URL("https://nhangoc.vercel.app"),
+  title: {
+    default: "Trà sữa Nhà Ngọc | Trà sữa ngon, trà trái cây, đồ uống & ăn vặt chất lượng",
+    template: "%s | Trà sữa Nhà Ngọc",
+  },
+  description:
+    "Trà sữa Nhà Ngọc chuyên phục vụ trà sữa, trà trái cây, cà phê và nhiều loại đồ uống thơm ngon.",
   verification: {
     google: "iMhkqfnYHYPZ2e7ZhvNa8URs0nteVRjtS03F9CKa0sU",
   },
 };
+
 export default function RootLayout({ children }) {
   return (
     <html
