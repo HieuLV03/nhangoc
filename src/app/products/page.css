@@ -28,15 +28,22 @@
   padding: 27px 15px;
 }
 
-.sectionHeader {
-  margin-bottom: 30px;
+.sectionHeader{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
 }
 
-.sectionHeader h2 {
-  text-align: center;
-  font-size: 42px;
-  font-weight: 800;
-  color: #111;
+.sectionHeader h2{
+    margin: 0;
+    text-align: center;
+}
+
+.sectionHeader .backButton{
+    position: absolute;
+    left: 0;
 }
 
 /* ================= GRID ================= */
@@ -79,9 +86,7 @@
 .blogImg {
   position: relative;
   overflow: hidden;
-    height: 234px;      /* chiều cao khung ảnh */
-
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 4 / 5;
 
 }
 .cardImage {
@@ -363,7 +368,12 @@
   }
 
   .sectionHeader h2 {
-    font-size: 32px;
+    display: flex;
+    text-align: center;
+  align-items: center;
+  font-size: 42px;
+  font-weight: 800;
+
   }
 
   .productGrid {

@@ -6,6 +6,6 @@ export default function robots() {
     },
 
     sitemap:
-      "https://thammyvienhisu.online/sitemap.xml",
+      "https://nhangoc.vercel.app/sitemap.xml",
   };
 }

@@ -180,7 +180,12 @@ Xem bài viết
 
 </section>
 
-
+<div className="viewMoreWrap">
+  <Link href="/posts" className="viewMoreBtn">
+    Xem thêm bài viết
+    <span>→</span>
+  </Link>
+</div>
 </ScrollReveal>
 
 

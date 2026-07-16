@@ -224,61 +224,104 @@ width: 100%;
 .blogBody {
   padding: 20px;
 }
+.viewMoreWrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
 
-/* MOBILE */
-@media (max-width: 768px) {
-
-  .section{
-    padding:24px 16px;
-  }
-
-  .sectionHeader h2{
-    font-size:32px;
-  }
-
-  .productGrid,
-  .blogGrid{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:14px;
-  }
-
-  .productBody,
-  .blogBody{
-    padding:12px;
-  }
-
-.productTitle {
+.viewMoreBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: 1px solid #d8c2b0;
+  background: #fff;
+  color: #8b6b4f;
+  text-decoration: none;
   font-size: 15px;
   font-weight: 600;
-  line-height: 1.4;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-
-  overflow: hidden;
-
-  min-height: calc(15px * 1.4 * 2);
+  transition: .3s;
 }
-  .productDesc{
-    display:none;
-  }
 
-  .priceSale{
-    font-size:16px;
-  }
+.viewMoreBtn:hover {
+  background: #8b6b4f;
+  color: #fff;
+  transform: translateY(-2px);
+}
+/* MOBILE */
+@media (max-width:768px){
 
-  .priceOld{
+.section{
+    padding:24px 16px;
+}
+
+.sectionHeader{
+    margin-bottom:24px;
+}
+
+.sectionHeader h2{
+    font-size:30px;
+}
+
+.sectionTag{
     font-size:13px;
-  }
+    letter-spacing:3px;
+}
 
-  .cardImage{
-    width:100%;
-    aspect-ratio:1/1;
+.productGrid,
+.blogGrid{
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.productCard,
+.blogCard{
+    border-radius:14px;
+}
+
+.cardImage{
+    aspect-ratio:4/5;
     object-fit:cover;
-  }
+}
 
+.productBody,
+.blogBody{
+    padding:12px;
+}
+
+.productTitle{
+    font-size:15px;
+    line-height:1.45;
+    margin-bottom:6px;
+
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+}
+
+.productDesc{
+    display:none;
+}
+
+.priceSale{
+    font-size:17px;
+}
+
+.priceOld{
+    font-size:13px;
+}
+
+.viewMoreWrap{
+    margin-top:22px;
+}
+
+.viewMoreBtn{
+    padding:12px 22px;
+    font-size:14px;
+}
 }
 .homeContent {
   opacity: 0;

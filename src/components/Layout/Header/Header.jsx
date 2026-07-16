@@ -108,7 +108,7 @@ if (loading || isAdminPage) {
         <Link href="/" className="logo">
   <Image
     src="/logokhongnen.png"
-    alt="MIREC"
+    alt="Nhà Ngọc"
     width={72}
     height={54}
     priority

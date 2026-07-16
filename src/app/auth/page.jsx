@@ -147,7 +147,7 @@ const handleRegister = async () => {
     <div className="successPopup">
       <div className="successIcon">💚</div>
 
-      <h2>MIREC thông báo</h2>
+      <h2>Nhà Ngọc thông báo</h2>
 
       <p>{successPopup}</p>
 
@@ -162,7 +162,7 @@ const handleRegister = async () => {
     <div className="successPopup errorPopup">
       <div className="successIcon">⚠️</div>
 
-      <h2>MIREC thông báo</h2>
+      <h2>Nhà Ngọc thông báo</h2>
 
       <p>{errorPopup}</p>
 

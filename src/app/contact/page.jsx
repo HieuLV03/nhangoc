@@ -103,7 +103,7 @@ const handleSubmit = async (e) => {
         <div className="successOverlay">
           <div className="successPopup errorPopup">
             <div className="successIcon">⚠️</div>
-            <h2>MIREC thông báo</h2>
+            <h2>Nhà Ngọc thông báo</h2>
             <p>{errorPopup}</p>
             <button onClick={() => setErrorPopup("")}>Đóng</button>
           </div>
@@ -232,10 +232,10 @@ const handleSubmit = async (e) => {
                     <p>📍Trụ sở: 354/47 Quốc lộ 1, Phường Bình Tân, TP.HCM</p>
           <p>📍Cơ sở: 15A Sông Đà, Phường Tân Sơn Hòa, TP.HCM</p>
           <p>📞 0372 089 821</p>
-          <p>📧 thammyvienhisu@gmail.com</p>
+          <p>📧 nguyentinhngoc@gmail.com</p>
 
           <div className="contact-note">
-            Cảm ơn bạn đã tin tưởng MIREC
+            Cảm ơn bạn đã tin tưởng Nhà Ngọc
           </div>
         </div>
       </div>

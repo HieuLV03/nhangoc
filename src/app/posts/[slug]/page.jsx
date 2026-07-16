@@ -52,15 +52,15 @@ return (
           image: data.image,
           author: {
             "@type": "Organization",
-            name: "Thẩm mỹ viện HiSu",
+            name: "Trà sữa Nhà Ngọc",
           },
           publisher: {
             "@type": "Organization",
-            name: "Thẩm mỹ viện HiSu",
+            name: "Trà Sữa Nhà Ngọc",
           },
           mainEntityOfPage: {
             "@type": "WebPage",
-            "@id": `https://thammyvienhisu.online/posts/${data.slug}`,
+            "@id": `https://nhangoc.vercel.app/posts/${data.slug}`,
           },
         }),
       }}
@@ -168,15 +168,15 @@ return (
       image: data.image,
       author: {
         "@type": "Organization",
-        name: "Thẩm mỹ viện HiSu",
+        name: "Trà sữa Nhà Ngọc",
       },
       publisher: {
         "@type": "Organization",
-        name: "Thẩm mỹ viện HiSu",
+        name: "Trà sữa Nhà Ngọc",
       },
       mainEntityOfPage: {
         "@type": "WebPage",
-        "@id": `https://thammyvienhisu.online/posts/${data.slug}`,
+        "@id": `https://nhangoc.vercel.app/posts/${data.slug}`,
       },
     }),
   }}

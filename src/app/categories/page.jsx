@@ -26,7 +26,7 @@ export default async function CategoriesPage() {
         <BackButton />
         
         <h1 className="pageTitle">
-          Danh mục sản phẩm
+          Danh mục
         </h1>
 
         <p className="pageDesc">

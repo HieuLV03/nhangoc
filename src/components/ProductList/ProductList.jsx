@@ -176,10 +176,6 @@ className="cardImage"
 </p>
 
 
-
-<div className="productFooter">
-
-
 <div className="productPrice">
 
 
@@ -229,10 +225,6 @@ Number(item.price)
 
 
 </div>
-
-
-</div>
-
 
 </div>
 

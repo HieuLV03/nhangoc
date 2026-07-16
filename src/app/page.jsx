@@ -68,7 +68,13 @@ console.log("sliderError", sliderRes.error);
         </div>
 
       <ListProduct products={products} />
+<div className="viewMoreWrap">
+  <Link href="/products" className="viewMoreBtn">
+    Xem thêm sản phẩm
+        <span>→</span>
 
+  </Link>
+</div>
       </section>
 </ScrollReveal>
 
@@ -128,7 +134,12 @@ console.log("sliderError", sliderRes.error);
           ))}
 
         </div>
-
+<div className="viewMoreWrap">
+  <Link href="/posts" className="viewMoreBtn">
+    Xem thêm bài viết
+    <span>→</span>
+  </Link>
+</div>
       </section>
 
     </main>

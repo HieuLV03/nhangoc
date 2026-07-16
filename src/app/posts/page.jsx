@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import ListProduct from "@/components/ProductList/ProductList";
 import { supabase } from "@/lib/supabase";
 import Image from "next/image";
 import "./page.css";
@@ -140,108 +140,14 @@ Sản phẩm bán chạy
 
 
 </div>
+<ListProduct products={products} />
+<div className="viewMoreWrap">
+  <Link href="/products" className="viewMoreBtn">
+    Xem thêm sản phẩm
+        <span>→</span>
 
-
-
-<div className="productGrid">
-
-
-{products.map((s)=>(
-
-<Link
-key={s.id}
-href={`/products/${s.slug}`}
-className="productCard"
->
-
-
-<div className="productImg">
-
-
-{s.image && (
-
-<Image
-src={s.image}
-alt={s.name || "Sản phẩm"}
-width={600}
-height={400}
-sizes="(max-width:768px) 100vw, 33vw"
-className="cardImage"
-/>
-
-)}
-
-
-<div className="imgOverlay">
-
-<span className="imgBtn">
-Xem chi tiết
-</span>
-
+  </Link>
 </div>
-
-
-</div>
-
-
-
-<div className="productBody">
-
-
-<h3>
-{s.name}
-</h3>
-
-
-
-<div className="priceBox">
-
-
-<div className="priceOld">
-
-{Number(s.price)
-.toLocaleString("vi-VN")}đ
-
-</div>
-
-
-<span className="priceLabel">
-Giá khuyến mãi
-</span>
-
-
-
-<div className="priceValue">
-
-{Number(
-s.sale_price || 0
-)
-.toLocaleString("vi-VN")}
-
-
-<span className="currency">
-đ
-</span>
-
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
-</Link>
-
-))}
-
-
-</div>
-
-
 </section>
 
 
