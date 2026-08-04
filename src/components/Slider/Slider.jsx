@@ -43,33 +43,14 @@ export default function Slider({
 
               <div className="heroSlide">
 
-                {/* Mobile */}
-                <Image
-                  src={
-                    item.image_mobile ||
-                    item.image_desktop ||
-                    item.image
-                  }
-                  alt={item.title || "Banner trang chủ"}
-                  fill
-                  priority={index === 0}
-                  sizes="100vw"
-                  className="heroImg mobileOnly"
-                />
-
-                {/* Desktop */}
-                <Image
-                  src={
-                    item.image_desktop ||
-                    item.image
-                  }
-                  alt={item.title || "Banner trang chủ"}
-                  fill
-                  priority={index === 0}
-                  sizes="100vw"
-                  className="heroImg desktopOnly"
-                />
-
+        <Image
+  src={item.image}
+  alt={item.title || "Banner trang chủ"}
+  fill
+  priority={index === 0}
+  sizes="100vw"
+  className="heroImg"
+/>
                 <div className="heroOverlay" />
 
                 <div className="heroContent">

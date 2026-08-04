@@ -139,60 +139,16 @@ margin: 10px;
   object-fit: cover;
 }
 
-/* Desktop mặc định */
-.mobileOnly {
-  display: none;
-}
+@media (max-width:768px){
 
-.desktopOnly {
-  display: block;
-}
+.heroSlider,
+.heroSwiper,
+.heroSlide{
 
-/* Mobile */
-@media (max-width: 768px) {
-
-  .mobileOnly {
-    display: block;
-  }
-
-  .desktopOnly {
-    display: none;
-  }
+height:45vh;
+min-height:280px;
+max-height:420px;
 
 }
-/* MOBILE */
-/* MOBILE */
-@media (max-width: 768px) {
-  .heroSlider,
-  .heroSwiper,
-  .heroSlide {
-    height: 79dvh;
-  }
 
-  .heroContent h1 {
-    font-size: 38px;
-  }
-
-  .heroContent p {
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
-  .heroActions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 90%;
-    gap: 6px;
-  }
-
-  .btnPrimary,
-  .btnOutline {
-    width: 90%;
-    max-width: 260px;
-margin: 6px;
-    height: 50px;
-
-    font-size: 14px;
-  }
 }
