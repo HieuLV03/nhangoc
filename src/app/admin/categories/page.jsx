@@ -1,51 +1,121 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import "./page.css";
 import BackButton from "../components/BackButton/BackButton";
 
-export const revalidate = 0;
+export default function CategoriesPage() {
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-export default async function CategoriesPage() {
-  const { data: categories, error } = await supabase
-    .from("categories")
-    .select("*")
-    .order("created_at", { ascending: false });
+  // =========================
+  // LOAD DATA
+  // =========================
+  const fetchCategories = async () => {
+    setLoading(true);
 
-  if (error) {
-    return (
-      <div className="categoriesPage">
-        <p>❌ Lỗi: {error.message}</p>
-      </div>
+    const { data, error } = await supabase
+      .from("categories")
+      .select("*")
+      .order("created_at", {
+        ascending: false,
+      });
+
+    if (error) {
+      alert(error.message);
+    } else {
+      setCategories(data || []);
+    }
+
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  // =========================
+  // DELETE
+  // =========================
+  const deleteCategory = async (category) => {
+    if (!category?.id) return;
+
+    const ok = confirm(
+      "Bạn có chắc muốn xóa danh mục này?"
     );
-  }
 
-  const list = categories || [];
+    if (!ok) return;
+
+    try {
+      // Xóa ảnh storage nếu có
+      if (category.path) {
+        const { error: storageError } =
+          await supabase.storage
+            .from("categories")
+            .remove([category.path]);
+
+        if (storageError) {
+          console.log(storageError.message);
+        }
+      }
+
+      // Xóa database
+      const { error } = await supabase
+        .from("categories")
+        .delete()
+        .eq("id", category.id);
+
+      if (error) {
+        alert(error.message);
+        return;
+      }
+
+      // Update UI
+      setCategories((prev) =>
+        prev.filter((item) => item.id !== category.id)
+      );
+
+      alert("Đã xóa danh mục!");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="categoriesPage">
       <div className="pageHeader">
         <div>
-                <BackButton />
+          <BackButton />
 
           <h1>Danh mục</h1>
+
           <p>Quản lý danh mục sản phẩm</p>
         </div>
 
-        <Link href="/admin/categories/create" className="createBtn">
+        <Link
+          href="/admin/categories/create"
+          className="createBtn"
+        >
           + Thêm danh mục
         </Link>
       </div>
 
-      <div className="grid">
-        {list.length > 0 ? (
-          list.map((item) => (
+      {loading ? (
+        <p>Đang tải...</p>
+      ) : categories.length === 0 ? (
+        <p>Không có dữ liệu</p>
+      ) : (
+        <div className="grid">
+          {categories.map((item) => (
             <div
               key={item.id}
               className="card"
               style={{
                 backgroundImage: item.img
                   ? `url(${item.img})`
-                  : "none",
+                  : "linear-gradient(135deg,#334155,#111827)",
               }}
             >
               <div className="overlay" />
@@ -53,29 +123,41 @@ export default async function CategoriesPage() {
               <div className="content">
                 <h2>{item.name}</h2>
 
-                <p>Slug: {item.slug}</p>
+                <p>
+                  <strong>Slug:</strong> {item.slug}
+                </p>
 
                 <p>
+                  <strong>Ngày tạo:</strong>{" "}
                   {item.created_at
-                    ? new Date(item.created_at).toLocaleDateString(
-                        "vi-VN"
-                      )
+                    ? new Date(
+                        item.created_at
+                      ).toLocaleDateString("vi-VN")
                     : "-"}
                 </p>
 
-                <Link
-                  href={`/admin/categories/edit/${item.id}`}
-                  className="editBtn"
-                >
-                  Sửa
-                </Link>
+                <div className="categoryActions">
+                  <Link
+                    href={`/admin/categories/edit/${item.id}`}
+                    className="cardEditBtn"
+                  >
+                    Sửa
+                  </Link>
+
+                  <button
+                    className="deleteBtn"
+                    onClick={() =>
+                      deleteCategory(item)
+                    }
+                  >
+                    Xóa
+                  </button>
+                </div>
               </div>
             </div>
-          ))
-        ) : (
-          <p>Không có dữ liệu</p>
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

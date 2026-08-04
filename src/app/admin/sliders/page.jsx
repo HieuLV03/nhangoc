@@ -7,23 +7,20 @@ import BackButton from "../components/BackButton/BackButton";
 
 export default function AdminSlidersPage() {
   const [sliders, setSliders] = useState([]);
-
-  const [title, setTitle] = useState("");
-  const [imageDesktop, setImageDesktop] = useState(null);
-  const [imageMobile, setImageMobile] = useState(null);
-
+  const [image, setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
 
-  const desktopRef = useRef();
-  const mobileRef = useRef();
-const cleanFileName = (name) =>
-  name
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/đ/g, "d")
-    .replace(/Đ/g, "D")
-    .replace(/\s+/g, "-")
-    .replace(/[^a-zA-Z0-9.-]/g, "");
+  const imageRef = useRef();
+
+  const cleanFileName = (name) =>
+    name
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/đ/g, "d")
+      .replace(/Đ/g, "D")
+      .replace(/\s+/g, "-")
+      .replace(/[^a-zA-Z0-9.-]/g, "");
+
   useEffect(() => {
     fetchSliders();
   }, []);
@@ -31,193 +28,175 @@ const cleanFileName = (name) =>
   // =========================
   // GET SLIDERS
   // =========================
+
   async function fetchSliders() {
     const { data, error } = await supabase
       .from("sliders")
       .select("*")
-      .order("created_at", { ascending: false });
+      .order("created_at", {
+        ascending: false,
+      });
 
-    if (!error) setSliders(data || []);
+    if (!error) {
+      setSliders(data || []);
+    }
   }
 
   // =========================
   // ADD SLIDER
   // =========================
- const handleAddSlider = async (e) => {
-  e.preventDefault();
 
-  if (!imageDesktop || !imageMobile) {
-    alert("Vui lòng chọn đủ ảnh Desktop và Mobile");
-    return;
-  }
+  async function handleAddSlider(e) {
+    e.preventDefault();
 
-  try {
-    setUploading(true);
-
-    const uid = Date.now();
-
-const desktopName = `${uid}-desktop-${cleanFileName(imageDesktop.name)}`;
-const mobileName = `${uid}-mobile-${cleanFileName(imageMobile.name)}`;
-    // Upload desktop
-    const { error: desktopError } = await supabase.storage
-      .from("images_slider")
-      .upload(desktopName, imageDesktop);
-
-    if (desktopError) throw desktopError;
-
-    // Upload mobile
-    const { error: mobileError } = await supabase.storage
-      .from("images_slider")
-      .upload(mobileName, imageMobile);
-
-    if (mobileError) throw mobileError;
-
-    const {
-      data: { publicUrl: desktopUrl },
-    } = supabase.storage
-      .from("images_slider")
-      .getPublicUrl(desktopName);
-
-    const {
-      data: { publicUrl: mobileUrl },
-    } = supabase.storage
-      .from("images_slider")
-      .getPublicUrl(mobileName);
-
-    const { error: insertError } = await supabase
-      .from("sliders")
-      .insert([
-        {
-          image_desktop: desktopUrl,
-          image_mobile: mobileUrl,
-          desktop_path: desktopName,
-          mobile_path: mobileName,
-          status: true,
-        },
-      ]);
-
-    if (insertError) throw insertError;
-
-    alert("Thêm slider thành công");
-
-    setImageDesktop(null);
-    setImageMobile(null);
-
-    desktopRef.current.value = "";
-    mobileRef.current.value = "";
-
-    fetchSliders();
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  } finally {
-    setUploading(false);
-  }
-};
-
-  // =========================
-  // DELETE SLIDER (FIXED)
-  // =========================
-  async function handleDelete(item) {
-    if (!confirm("Xóa slider?")) return;
+    if (!image) {
+      alert("Vui lòng chọn ảnh slider.");
+      return;
+    }
 
     try {
-      const filesToDelete = [];
+      setUploading(true);
 
-      if (item.desktop_path) filesToDelete.push(item.desktop_path);
-      if (item.mobile_path) filesToDelete.push(item.mobile_path);
+      const fileName =
+        `${Date.now()}-${cleanFileName(image.name)}`;
 
-      // 1. DELETE STORAGE
-      if (filesToDelete.length > 0) {
-        const { error: storageErr } = await supabase.storage
+      const { error: uploadError } =
+        await supabase.storage
           .from("images_slider")
-          .remove(filesToDelete);
+          .upload(fileName, image);
 
-        if (storageErr) {
-          console.log(storageErr.message);
-          alert("Lỗi xóa ảnh storage");
-          return;
-        }
-      }
+      if (uploadError) throw uploadError;
 
-      // 2. DELETE DATABASE
-      const { error } = await supabase
-        .from("sliders")
-        .delete()
-        .eq("id", item.id);
+      const {
+        data: { publicUrl },
+      } = supabase.storage
+        .from("images_slider")
+        .getPublicUrl(fileName);
 
-      if (error) {
-        alert(error.message);
-        return;
+      const { error: insertError } =
+        await supabase
+          .from("sliders")
+          .insert([
+            {
+              image: publicUrl,
+              path: fileName,
+              status: true,
+            },
+          ]);
+
+      if (insertError) throw insertError;
+
+      alert("Thêm slider thành công.");
+
+      setImage(null);
+
+      if (imageRef.current) {
+        imageRef.current.value = "";
       }
 
       fetchSliders();
-      alert("Xóa slider thành công");
     } catch (err) {
-      console.log(err);
-      alert("Có lỗi xảy ra");
+      console.error(err);
+      alert(err.message);
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  // =========================
+  // DELETE
+  // =========================
+
+  async function handleDelete(item) {
+    if (!confirm("Bạn có chắc muốn xóa slider này?")) {
+      return;
+    }
+
+    try {
+      if (item.path) {
+        const { error: storageError } =
+          await supabase.storage
+            .from("images_slider")
+            .remove([item.path]);
+
+        if (storageError) {
+          throw storageError;
+        }
+      }
+
+      const { error } =
+        await supabase
+          .from("sliders")
+          .delete()
+          .eq("id", item.id);
+
+      if (error) throw error;
+
+      fetchSliders();
+
+      alert("Xóa slider thành công.");
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
     }
   }
 
   // =========================
   // UI
   // =========================
+
   return (
-  <main className="adminSliderPage">
+    <main className="adminSliderPage">
+      <div className="headerRow">
+        <div className="headerLeft">
+          <BackButton />
+          <h1>Quản lý Slider</h1>
+        </div>
+      </div>
 
-  <div className="headerRow">
-    <div className="headerLeft">
-      <BackButton />
-      <h1>Quản lý Slider</h1>
-    </div>
-  </div>
-      {/* FORM */}
-      <form onSubmit={handleAddSlider} className="sliderForm">
-  
+      <form
+        onSubmit={handleAddSlider}
+        className="sliderForm"
+      >
+        <label>Ảnh Slider</label>
 
-        <label>Ảnh Desktop</label>
         <input
-          ref={desktopRef}
+          ref={imageRef}
           type="file"
           accept="image/*"
-          onChange={(e) => setImageDesktop(e.target.files[0])}
+          onChange={(e) =>
+            setImage(e.target.files[0])
+          }
         />
 
-        <label>Ảnh Mobile</label>
-        <input
-          ref={mobileRef}
-          type="file"
-          accept="image/*"
-          onChange={(e) => setImageMobile(e.target.files[0])}
-        />
-
-        <button type="submit" disabled={uploading}>
-          {uploading ? "Đang upload..." : "Thêm Slider"}
+        <button
+          type="submit"
+          disabled={uploading}
+        >
+          {uploading
+            ? "Đang tải lên..."
+            : "Thêm Slider"}
         </button>
       </form>
 
-      {/* LIST */}
       <div className="sliderList">
         {sliders.map((item) => (
-          <div key={item.id} className="sliderCard">
+          <div
+            key={item.id}
+            className="sliderCard"
+          >
             <img
-              src={item.image_desktop}
+              src={item.image}
+              alt="Slider"
               className="sliderImg"
             />
 
-            {item.image_mobile && (
-              <img
-                src={item.image_mobile}
-                alt="mobile"
-                className="sliderMobileImg"
-              />
-            )}
-
             <div className="sliderBody">
-
               <button
                 className="deleteBtn"
-                onClick={() => handleDelete(item)}
+                onClick={() =>
+                  handleDelete(item)
+                }
               >
                 Xóa
               </button>
