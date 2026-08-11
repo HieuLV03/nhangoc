@@ -26,7 +26,10 @@ export default function Header(){
   const [menuOpen,setMenuOpen] =
     useState(false);
 
-
+// Đóng mobile menu khi chuyển trang
+useEffect(() => {
+  setMenuOpen(false);
+}, [pathname]);
   const [user,setUser] =
     useState(null);
 
@@ -466,9 +469,7 @@ export default function Header(){
 
           className="menuToggle"
 
-          onClick={()=>
-            setMenuOpen(!menuOpen)
-          }
+      onClick={() => setMenuOpen(prev => !prev)}
 
         >
 
