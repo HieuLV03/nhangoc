@@ -32,7 +32,9 @@ useEffect(() => {
 }, [pathname]);
   const [user,setUser] =
     useState(null);
-
+const handleMenuClick = () => {
+  setMenuOpen(false);
+};
 
   const [profile,setProfile] =
     useState(null);
@@ -143,7 +145,9 @@ useEffect(() => {
 
 
     });
-
+const handleMenuClick = () => {
+  setMenuOpen(false);
+};
 
 
     return ()=>{
@@ -488,56 +492,33 @@ useEffect(() => {
 
 
 
+<nav
+  className={`nav ${menuOpen ? "active" : ""}`}
+>
+  <Link href="/" onClick={handleMenuClick}>
+    Trang chủ
+  </Link>
 
+  <Link href="/products" onClick={handleMenuClick}>
+    Sản phẩm
+  </Link>
 
-        <nav
+  <Link href="/categories" onClick={handleMenuClick}>
+    Danh mục
+  </Link>
 
-          className={
-            `nav ${
-              menuOpen
-              ?
-              "active"
-              :
-              ""
-            }`
-          }
+  <Link href="/posts" onClick={handleMenuClick}>
+    Bài viết
+  </Link>
 
-        >
+  <Link href="/about" onClick={handleMenuClick}>
+    Giới thiệu
+  </Link>
 
-
-          <Link href="/">
-            Trang chủ
-          </Link>
-
-
-          <Link href="/products">
-            Sản phẩm
-          </Link>
-
-
-          <Link href="/categories">
-            Danh mục
-          </Link>
-
-
-          <Link href="/posts">
-            Bài viết
-          </Link>
-
-
-          <Link href="/about">
-            Giới thiệu
-          </Link>
-
-
-          <Link href="/contact">
-            Liên hệ
-          </Link>
-
-
-
-        </nav>
-
+  <Link href="/contact" onClick={handleMenuClick}>
+    Liên hệ
+  </Link>
+</nav>
 
 
 
