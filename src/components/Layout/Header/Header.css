@@ -33,7 +33,7 @@ padding:0 14px;
 background:
 var(--gradient);
 
-z-index:10001;
+z-index:99999;
 
 }
 
