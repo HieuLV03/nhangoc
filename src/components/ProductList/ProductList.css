@@ -78,14 +78,6 @@ transform .6s ease;
 
 
 
-.productCard:hover .cardImage {
-
-transform:scale(1.02);
-
-}
-
-
-
 .imgOverlay {
 
 position:absolute;
