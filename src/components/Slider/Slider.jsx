@@ -57,24 +57,6 @@ export default function Slider({
 
                   <div className="heroActions">
 
-                    <Link
-                      href="/products"
-                      className="btnOutline"
-                        aria-label="Xem danh sách sản phẩm"
-
-                    >
-                      Xem sản phẩm
-                    </Link>
-
-                    <Link
-                      href="/posts"
-                      className="btnOutline"
-                        aria-label="Xem bài viết làm đẹp"
-
-                    >
-                      Xem bài viết
-                    </Link>
-
                   </div>
 
                 </div>
