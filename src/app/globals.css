@@ -9,19 +9,40 @@
 }
 
 /* ================= BASE ================= */
-html, body {
+html {
   width: 100%;
-  height: 100%;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
 }
 
-.section {
+body {
   width: 100%;
-  padding: 60px 7%;
-  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+
+  background-image:
+    radial-gradient(
+      circle at top,
+      rgba(58, 160, 255, 0.08),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at bottom,
+      rgba(255, 77, 141, 0.08),
+      transparent 40%
+    );
+
+  -webkit-overflow-scrolling: touch;
 }
+
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
@@ -93,11 +114,12 @@ a {
 }
 
 /* ================= SECTION ================= */
-
 .section {
-  padding: 80px 7%;
+  width: 100%;
   max-width: 1200px;
   margin: auto;
+  padding: 80px 7%;
+  box-sizing: border-box;
 }
 
 .sectionHeader {
