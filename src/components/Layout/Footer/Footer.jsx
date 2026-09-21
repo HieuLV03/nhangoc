@@ -39,9 +39,13 @@ export default function Footer() {
       <h3>Kết nối</h3>
       <div className="social">
         <a href="https://www.facebook.com/tinh.ngoc.240401">Facebook</a>
-    <a href="https://zalo.me/84332605121" target="_blank" rel="noopener noreferrer">
-      Zalo
-    </a>
+  <a
+  href="https://zalo.me/0332605121"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Zalo
+</a>
           </div>
     </div>
 

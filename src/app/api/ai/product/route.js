@@ -23,7 +23,7 @@ Tên sản phẩm:
 ${name}
 
 Yêu cầu:
-- Viết mô tả ngắn 24 từ.
+- Viết mô tả ngắn 18 từ.
 - Tập trung vào lợi ích sản phẩm.
 - Văn phong bán hàng.
 - Không dùng markdown.

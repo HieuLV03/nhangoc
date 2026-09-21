@@ -281,22 +281,14 @@ top:100%;
 left:0;
 
 right:0;
-
-
-
 background:white;
 
-
-
 flex-direction:column;
-
-
-
 opacity:0;
 
 visibility:hidden;
 
-
+gap: 12px;
 
 transform:
 translateY(-15px);
