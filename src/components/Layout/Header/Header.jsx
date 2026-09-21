@@ -60,111 +60,29 @@ const handleMenuClick = () => {
   ================================
   */
 
+useEffect(() => {
+  let lastY = 0;
 
-  useEffect(()=>{
+  const handleScroll = () => {
+    const currentY = window.scrollY;
 
+    if (currentY > lastY && currentY > 80) {
+      setShowHeader(false);
+    } else {
+      setShowHeader(true);
+    }
 
-    let lastY = 0;
+    lastY = currentY;
+  };
 
+  window.addEventListener("scroll", handleScroll, {
+    passive: true,
+  });
 
-
-    const handleScroll = ()=>{
-
-
-      const currentY =
-        document.documentElement.scrollTop ||
-        document.body.scrollTop;
-
-
-
-      if(
-        currentY > lastY &&
-        currentY > 80
-      ){
-
-        // scroll xuống
-        setShowHeader(false);
-
-      }
-      else{
-
-        // scroll lên
-        setShowHeader(true);
-
-      }
-
-
-
-      lastY=currentY;
-
-
-    };
-
-
-
-
-    window.addEventListener(
-      "scroll",
-      handleScroll,
-      {
-        passive:true
-      }
-    );
-
-
-
-
-    // hỗ trợ container scroll
-    const containers =
-      document.querySelectorAll("*");
-
-
-
-    containers.forEach(el=>{
-
-
-      const style =
-        window.getComputedStyle(el);
-
-
-
-      if(
-        style.overflowY==="auto" ||
-        style.overflowY==="scroll"
-      ){
-
-        el.addEventListener(
-          "scroll",
-          handleScroll,
-          {
-            passive:true
-          }
-        );
-
-      }
-
-
-    });
-const handleMenuClick = () => {
-  setMenuOpen(false);
-};
-
-
-    return ()=>{
-
-
-      window.removeEventListener(
-        "scroll",
-        handleScroll
-      );
-
-
-    };
-
-
-  },[]);
-
-
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
 
 
 
