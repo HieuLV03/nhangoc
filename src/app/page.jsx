@@ -55,22 +55,22 @@ console.log("sliderError", sliderRes.error);
 <Slider sliders={sliders} />
 <section className="section introSection">
   <div className="introContent">
-    <span className="sectionTag">TRÀ SỮA NHÀ NGỌC</span>
+    <span className="sectionTag">NHÀ NGỌC</span>
 
-    <h1>Trà sữa Nhà Ngọc – Thức uống thơm ngon, chất lượng mỗi ngày</h1>
+    <h1>Nhà Ngọc – Thức uống thơm ngon, chất lượng mỗi ngày</h1>
 
     <p>
-      Trà sữa Nhà Ngọc chuyên phục vụ các loại trà sữa, trà trái cây,
+      Nhà Ngọc chuyên phục vụ các loại trà sữa, trà trái cây,
       cà phê và đồ uống được pha chế từ nguyên liệu chất lượng.
       Với thực đơn đa dạng, hương vị thơm ngon và mức giá hợp lý,
-      chúng tôi mong muốn mang đến cho khách hàng những ly đồ uống
+      Nhà Ngọc mong muốn mang đến cho khách hàng những ly đồ uống
       tươi ngon trong từng lần thưởng thức.
     </p>
 
     <p>
       Ngoài các món bán chạy như trà sữa truyền thống, trà sữa khoai môn,
       trà đào, trà vải và nhiều loại topping hấp dẫn,
-      Trà sữa Nhà Ngọc luôn cập nhật những thức uống mới để đáp ứng
+      Nhà Ngọc luôn cập nhật những thức uống mới để đáp ứng
       sở thích của mọi khách hàng.
     </p>
   </div>

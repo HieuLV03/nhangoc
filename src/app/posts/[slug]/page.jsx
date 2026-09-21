@@ -52,11 +52,11 @@ return (
           image: data.image,
           author: {
             "@type": "Organization",
-            name: "Trà sữa Nhà Ngọc",
+            name: "Nhà Ngọc",
           },
           publisher: {
             "@type": "Organization",
-            name: "Trà Sữa Nhà Ngọc",
+            name: "Nhà Ngọc",
           },
           mainEntityOfPage: {
             "@type": "WebPage",
@@ -168,11 +168,11 @@ return (
       image: data.image,
       author: {
         "@type": "Organization",
-        name: "Trà sữa Nhà Ngọc",
+        name: "Nhà Ngọc",
       },
       publisher: {
         "@type": "Organization",
-        name: "Trà sữa Nhà Ngọc",
+        name: "Nhà Ngọc",
       },
       mainEntityOfPage: {
         "@type": "WebPage",
