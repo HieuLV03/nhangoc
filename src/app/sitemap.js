@@ -2,101 +2,127 @@ import { supabase } from "@/lib/supabase";
 
 export const revalidate = 600;
 
+const BASE_URL = "https://nhangoc.vercel.app";
+
 function safeDate(dateString) {
-  if (!dateString) return new Date().toISOString();
+  if (!dateString) {
+    return new Date();
+  }
 
   const date = new Date(dateString);
 
-  return isNaN(date.getTime())
-    ? new Date().toISOString()
-    : date.toISOString();
+  return isNaN(date.getTime()) ? new Date() : date;
 }
 
 export default async function sitemap() {
+  // =========================
   // POSTS
-  const { data: posts, error: postError } =
-    await supabase
-      .from("posts")
-      .select("slug, updated_at")
-      .eq("status", "published");
+  // =========================
+  const { data: posts, error: postError } = await supabase
+    .from("posts")
+    .select("slug, updated_at")
+    .eq("status", "published");
 
-  const {
-    data: products,
-    error: productError,
-  } = await supabase
+  // =========================
+  // PRODUCTS
+  // =========================
+  const { data: products, error: productError } = await supabase
     .from("products")
     .select("slug, updated_at")
     .eq("status", "published");
 
+  // =========================
   // ERROR
+  // =========================
   if (postError || productError) {
+    console.error("Sitemap error:", {
+      postError,
+      productError,
+    });
+
     return [
       {
-      url: "https://nhangoc.vercel.app",
-        lastModified: new Date().toISOString(),
+        url: BASE_URL,
+        lastModified: new Date(),
+        changeFrequency: "daily",
+        priority: 1,
       },
     ];
   }
 
-  // POSTS URLS
+  // =========================
+  // POSTS
+  // =========================
   const postUrls = (posts || []).map((post) => ({
-    url: `https://nhangoc.vercel.app/posts/${post.slug}`,
+    url: `${BASE_URL}/posts/${post.slug}`,
     lastModified: safeDate(post.updated_at),
     changeFrequency: "weekly",
     priority: 0.8,
   }));
 
+  // =========================
+  // PRODUCTS
+  // =========================
   const productUrls = (products || []).map((product) => ({
-    url: `https://nhangoc.vercel.app/products/${product.slug}`,
+    url: `${BASE_URL}/products/${product.slug}`,
     lastModified: safeDate(product.updated_at),
     changeFrequency: "weekly",
     priority: 0.9,
   }));
 
-return [
-  {
-    url: "https://nhangoc.vercel.app",
-    lastModified: new Date().toISOString(),
-    changeFrequency: "daily",
-    priority: 1,
-  },
+  // =========================
+  // STATIC PAGES
+  // =========================
+  const staticUrls = [
+    {
+      url: BASE_URL,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 1,
+    },
 
-  {
-    url: "https://nhangoc.vercel.app/about",
-    lastModified: new Date().toISOString(),
-    changeFrequency: "monthly",
-    priority: 0.8,
-  },
+    {
+      url: `${BASE_URL}/about`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
 
-  {
-    url: "https://nhangoc.vercel.app/contact",
-    lastModified: new Date().toISOString(),
-    changeFrequency: "monthly",
-    priority: 0.8,
-  },
+    {
+      url: `${BASE_URL}/contact`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
 
-  {
-    url: "https://nhangoc.vercel.app/booking",
-    lastModified: new Date().toISOString(),
-    changeFrequency: "weekly",
-    priority: 0.9,
-  },
+    {
+      url: `${BASE_URL}/booking`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
 
-  {
-    url: "https://nhangoc.vercel.app/posts",
-    lastModified: new Date().toISOString(),
-    changeFrequency: "daily",
-    priority: 0.9,
-  },
+    {
+      url: `${BASE_URL}/posts`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.9,
+    },
 
-  {
-    url: "https://nhangoc.vercel.app/products",
-    lastModified: new Date().toISOString(),
-    changeFrequency: "daily",
-    priority: 0.9,
-  },
+    {
+      url: `${BASE_URL}/products`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.9,
+    },
+  ];
 
-  ...postUrls,
-  ...productUrls,
-];
+  // =========================
+  // RETURN
+  // =========================
+  return [
+    ...staticUrls,
+    ...postUrls,
+    ...productUrls,
+  ];
 }
