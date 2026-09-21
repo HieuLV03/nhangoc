@@ -18,7 +18,7 @@ export default function Footer() {
       <h3>Thông tin quán</h3>
 
       <p><strong>🏢 Trụ sở:</strong><br />
-        16 Ấp Tường Thắng B, xã Phước Long, tỉnh Cà Mau (Chợ Trưởng Tòa)
+        16 Ấp Tường Thắng B, xã Phước Long, tỉnh Cà Mau <br></br> (Chợ Trưởng Tòa)
       </p>
 
       <p><strong>📞 Hotline:</strong>0332 605 121 </p>
