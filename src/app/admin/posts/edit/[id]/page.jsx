@@ -19,9 +19,6 @@ export default function EditPostPage() {
     description: "",
     content: "",
     image: "",
-    meta_title: "",
-    meta_description: "",
-    category: "",
     status: "hidden",
     featured: false,
   });
@@ -148,14 +145,6 @@ const updatePost = async () => {
         content: form.content,
 
         image: form.image,
-
-        meta_title: form.meta_title,
-
-        meta_description:
-          form.meta_description,
-
-        category: form.category,
-
         status: form.status,
 
         featured: form.featured,
@@ -247,40 +236,6 @@ const updatePost = async () => {
             className="previewImage"
           />
         )}
-
-        <input
-          placeholder="Meta title"
-          value={form.meta_title}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              meta_title: e.target.value,
-            })
-          }
-        />
-
-        <input
-          placeholder="Meta description"
-          value={form.meta_description}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              meta_description: e.target.value,
-            })
-          }
-        />
-
-
-        <input
-          placeholder="Category"
-          value={form.category}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              category: e.target.value,
-            })
-          }
-        />
 
         <select
           value={form.status}
