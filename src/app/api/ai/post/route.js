@@ -1,37 +1,37 @@
-import OpenAI from "openai";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+import { GoogleGenAI } from "@google/genai";
+import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
-    const body = await req.json();
-
-    const { type, name } = body;
+    const { name, type } = await req.json();
 
     if (!name?.trim()) {
-      return Response.json(
+      return NextResponse.json(
         { error: "Thiếu tiêu đề bài viết" },
         { status: 400 }
       );
     }
+
+    // Kiểm tra API key
+    if (!process.env.GEMINI_API_KEY) {
+      return NextResponse.json(
+        { error: "Chưa cấu hình GEMINI_API_KEY" },
+        { status: 500 }
+      );
+    }
+
+    // Khởi tạo Gemini khi API được gọi
+    const ai = new GoogleGenAI({
+      apiKey: process.env.GEMINI_API_KEY,
+    });
+
     // =========================
     // DESCRIPTION
     // =========================
     if (type === "description") {
-      const response = await openai.responses.create({
-        model: "gpt-5-mini",
-        input: [
-          {
-            role: "system",
-            content:
-              "Bạn là chuyên gia viết nội dung SEO tiếng Việt.",
-          },
-          {
-            role: "user",
-            content: `
-Viết mô tả SEO ngắn cho bài viết có tiêu đề:
+      const prompt = `
+Viết mô tả SEO ngắn cho một bài viết có tiêu đề:
 
 "${name}"
 
@@ -40,17 +40,26 @@ Yêu cầu:
 - Khoảng 120-160 ký tự.
 - Tự nhiên, dễ đọc.
 - Có chứa từ khóa chính liên quan đến tiêu đề.
+- Phù hợp với SEO Google.
 - Không dùng HTML.
-- Không thêm tiêu đề hoặc giải thích.
+- Không dùng Markdown.
+- Không thêm tiêu đề.
+- Không thêm lời giải thích.
 - Chỉ trả về phần mô tả.
-            `,
-          },
-        ],
+`;
+
+      const response = await ai.models.generateContent({
+        model: "gemini-3.1-flash-lite",
+        contents: prompt,
+        config: {
+          maxOutputTokens: 300,
+          temperature: 0.8,
+        },
       });
 
-      const description = response.output_text?.trim();
+      const description = response.text?.trim();
 
-      return Response.json({
+      return NextResponse.json({
         description,
       });
     }
@@ -59,18 +68,10 @@ Yêu cầu:
     // CONTENT
     // =========================
     if (type === "content") {
-      const response = await openai.responses.create({
-        model: "gpt-5-mini",
-        input: [
-          {
-            role: "system",
-            content:
-              "Bạn là chuyên gia viết bài blog SEO tiếng Việt và HTML semantic.",
-          },
-          {
-            role: "user",
-            content: `
-Viết một bài blog SEO hoàn chỉnh với tiêu đề:
+      const prompt = `
+Bạn là chuyên gia viết bài blog SEO tiếng Việt và HTML semantic.
+
+Hãy viết một bài blog SEO hoàn chỉnh với tiêu đề:
 
 "${name}"
 
@@ -81,49 +82,88 @@ Yêu cầu:
 3. Không bịa thông tin cụ thể nếu không có cơ sở.
 4. Bài viết có cấu trúc rõ ràng.
 5. Sử dụng HTML semantic.
-6. Chỉ trả về HTML, không markdown.
-7. Không dùng <html>, <head>, <body>.
-8. Không dùng <script>.
-9. Không dùng CSS inline.
-10. Không dùng Markdown.
-- Không bọc trong \`\`\`html.
+6. Chỉ trả về HTML.
+7. Không dùng Markdown.
+8. Không dùng <html>, <head>, <body>.
+9. Không dùng <script>.
+10. Không dùng CSS inline.
+11. Không bọc HTML trong \`\`\`.
+12. Không thêm lời giải thích bên ngoài bài viết.
+13. Không viết "Dưới đây là bài viết".
+14. Không viết "Hy vọng bài viết".
+15. Không nói về quá trình tạo nội dung.
 
-Cấu trúc nên có:
+Cấu trúc bài viết nên gồm:
 
-<h2> cho các phần chính.
+<h2>Tiêu đề phần chính</h2>
 
-<h3> cho các phần nhỏ khi cần.
+<p>Đoạn mở đầu hấp dẫn.</p>
 
-<p> cho đoạn văn.
+<h3>Tiêu đề phần nhỏ</h3>
 
-<ul> hoặc <ol> khi cần liệt kê.
+<p>Nội dung chi tiết.</p>
 
-<strong> để nhấn mạnh những thông tin quan trọng.
+<h3>Điểm nổi bật</h3>
 
-Có thể sử dụng <table> nếu nội dung phù hợp.
+<ul>
+<li>Điểm nổi bật 1</li>
+<li>Điểm nổi bật 2</li>
+<li>Điểm nổi bật 3</li>
+</ul>
 
-Cuối bài có một phần FAQ sử dụng:
+<h3>Thông tin chi tiết</h3>
+
+<p>Nội dung chi tiết.</p>
+
+<strong>Thông tin quan trọng</strong>
+
+<p>Nội dung giải thích.</p>
+
+Có thể sử dụng <ol> hoặc <table> nếu nội dung phù hợp.
+
+Cuối bài bắt buộc có:
 
 <h2>Câu hỏi thường gặp</h2>
 
-Sau đó sử dụng <h3> cho từng câu hỏi và <p> cho câu trả lời.
+<h3>Câu hỏi 1</h3>
+<p>Câu trả lời.</p>
 
-Không được viết:
-- "Dưới đây là bài viết..."
-- "Hy vọng bài viết..."
-- Lời giải thích về quá trình tạo bài.
-- Markdown.
-- Code fence.
+<h3>Câu hỏi 2</h3>
+<p>Câu trả lời.</p>
 
-Chỉ trả về HTML của bài viết.
-            `,
-          },
-        ],
+<h3>Câu hỏi 3</h3>
+<p>Câu trả lời.</p>
+
+Yêu cầu nội dung:
+- Khoảng 500-700 từ.
+- SEO tự nhiên.
+- Không nhồi nhét từ khóa.
+- Nội dung có giá trị cho người đọc.
+- Có H2 và H3 rõ ràng.
+- Có danh sách khi phù hợp.
+- Có <strong> để nhấn mạnh thông tin quan trọng.
+- Chỉ trả về HTML của bài viết.
+`;
+
+      const response = await ai.models.generateContent({
+        model: "gemini-3.1-flash-lite",
+        contents: prompt,
+        config: {
+          maxOutputTokens: 5000,
+          temperature: 0.8,
+        },
       });
 
-      const content = response.output_text?.trim();
+      let content = response.text?.trim() || "";
 
-      return Response.json({
+      // Nếu Gemini vô tình bọc trong code fence
+      content = content
+        .replace(/^```html\s*/i, "")
+        .replace(/^```\s*/i, "")
+        .replace(/\s*```$/i, "")
+        .trim();
+
+      return NextResponse.json({
         content,
       });
     }
@@ -131,7 +171,7 @@ Chỉ trả về HTML của bài viết.
     // =========================
     // INVALID TYPE
     // =========================
-    return Response.json(
+    return NextResponse.json(
       {
         error: "Type không hợp lệ",
       },
@@ -140,9 +180,9 @@ Chỉ trả về HTML của bài viết.
       }
     );
   } catch (error) {
-    console.error("AI POST ERROR:", error);
+    console.error("GEMINI POST ERROR:", error);
 
-    return Response.json(
+    return NextResponse.json(
       {
         error: error?.message || "Không thể tạo nội dung AI",
       },
