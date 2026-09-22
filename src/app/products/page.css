@@ -10,6 +10,9 @@
   --radius: 24px;
 }
 
+/* =========================================================
+   COMMON
+========================================================= */
 
 .productCard,
 .blogCard {
@@ -21,49 +24,57 @@
 .blogBody {
   flex: 1;
 }
-/* ================= SECTION ================= */
+
+/* =========================================================
+   SECTION
+========================================================= */
 
 .section {
+  width: 100%;
   max-width: 1200px;
+  margin: 0 auto;
   padding: 27px 15px;
 }
 
-.sectionHeader{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
+.sectionHeader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
 }
 
-.sectionHeader h2{
-    margin: 0;
-    text-align: center;
+.sectionHeader h2 {
+  margin: 0;
+  text-align: center;
 }
 
-.sectionHeader .backButton{
-    position: absolute;
-    left: 0;
+.sectionHeader .backButton {
+  position: absolute;
+  left: 0;
 }
 
-/* ================= GRID ================= */
+/* =========================================================
+   GRID
+========================================================= */
 
 .productGrid,
 .blogGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
 }
 
-/* ================= CARD ================= */
+/* =========================================================
+   CARD
+========================================================= */
 
 .productCard,
 .blogCard {
-  background: white;
+  background: var(--white);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: var(--shadow);
-
   text-decoration: none;
   color: inherit;
 
@@ -75,37 +86,50 @@
 .productCard:hover,
 .blogCard:hover {
   transform: translateY(-8px);
-
-  box-shadow:
-    0 18px 50px rgba(67, 167, 255, 0.18);
+  box-shadow: 0 18px 50px rgba(67, 167, 255, 0.18);
 }
 
-/* ================= IMAGE ================= */
+/* =========================================================
+   IMAGE
+========================================================= */
 
 .productImg,
 .blogImg {
   position: relative;
+  width: 100%;
   overflow: hidden;
-    aspect-ratio: 4 / 5;
-
 }
+
+/* Sản phẩm */
+.productImg {
+  aspect-ratio: 4 / 5;
+}
+
+/* Bài viết */
+.blogImg {
+  aspect-ratio: 4 / 3;
+}
+
 .cardImage {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
+
   transition:
     transform 0.7s ease,
     filter 0.5s ease;
 }
-/* image hover */
+
 .productCard:hover .cardImage,
 .blogCard:hover .cardImage {
   transform: scale(1.08);
   filter: brightness(1.05);
 }
 
-/* ================= OVERLAY ================= */
+/* =========================================================
+   OVERLAY
+========================================================= */
 
 .imgOverlay {
   position: absolute;
@@ -117,25 +141,29 @@
 
   opacity: 0;
 
-  transition: 0.4s ease;
+  transition:
+    opacity 0.4s ease;
 
-  background:
-    linear-gradient(
-      to top,
-      rgba(0,0,0,0.72),
-      rgba(0,0,0,0.08)
-    );
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.72),
+    rgba(0, 0, 0, 0.08)
+  );
 
   backdrop-filter: blur(2px);
 }
 
-/* overlay hover */
+/* QUAN TRỌNG:
+   trước đó phần này của bạn đang để trống
+*/
 .productCard:hover .imgOverlay,
 .blogCard:hover .imgOverlay {
-  
+  opacity: 1;
 }
 
-/* ================= CTA BUTTON ================= */
+/* =========================================================
+   CTA BUTTON
+========================================================= */
 
 .imgBtn {
   position: relative;
@@ -148,104 +176,103 @@
 
   border-radius: 999px;
 
-  background:
-    rgba(255,255,255,0.16);
-
-  border:
-    1px solid rgba(255,255,255,0.28);
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.28);
 
   color: #fff;
 
   font-size: 14px;
   font-weight: 700;
-
   letter-spacing: 0.4px;
 
   backdrop-filter: blur(14px);
 
   overflow: hidden;
 
-  transition: 0.35s ease;
+  transition:
+    transform 0.35s ease,
+    background 0.35s ease,
+    box-shadow 0.35s ease;
 
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.18);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
 
-  animation:
-    floatBtn 2.5s ease-in-out infinite;
+  animation: floatBtn 2.5s ease-in-out infinite;
 }
 
-/* shine effect */
+/* Shine effect */
+
 .imgBtn::before {
   content: "";
 
   position: absolute;
-
   top: 0;
   left: -120%;
 
   width: 70%;
   height: 100%;
 
-  background:
-    linear-gradient(
-      120deg,
-      transparent,
-      rgba(255,255,255,0.45),
-      transparent
-    );
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.45),
+    transparent
+  );
 
   transform: skewX(-20deg);
 
-  transition: 0.7s;
+  transition: left 0.7s;
 }
 
-/* arrow */
+/* Arrow */
+
 .imgBtn::after {
   content: "→";
 
   margin-left: 10px;
 
-  transition: 0.3s ease;
+  transition:
+    transform 0.3s ease;
 }
 
-/* button hover */
+/* Hover button */
+
 .productCard:hover .imgBtn,
 .blogCard:hover .imgBtn {
   transform:
     translateY(-4px)
     scale(1.04);
 
-  background:
-    linear-gradient(
-      135deg,
-      #ff4f93,
-      #ff7db4
-    );
+  background: linear-gradient(
+    135deg,
+    #ff4f93,
+    #ff7db4
+  );
 
   border-color: transparent;
 
   color: white;
 
   box-shadow:
-    0 15px 35px rgba(255,79,147,0.35);
+    0 15px 35px rgba(255, 79, 147, 0.35);
 }
 
-/* arrow move */
 .productCard:hover .imgBtn::after,
 .blogCard:hover .imgBtn::after {
   transform: translateX(5px);
 }
 
-/* shine move */
 .productCard:hover .imgBtn::before,
 .blogCard:hover .imgBtn::before {
   left: 140%;
 }
 
-/* floating */
+/* =========================================================
+   BUTTON FLOAT ANIMATION
+========================================================= */
+
 @keyframes floatBtn {
   0% {
-    transform: translateY(0px);
+    transform: translateY(0);
   }
 
   50% {
@@ -253,26 +280,29 @@
   }
 
   100% {
-    transform: translateY(0px);
+    transform: translateY(0);
   }
 }
 
-/* ================= BODY ================= */
+/* =========================================================
+   BODY
+========================================================= */
 
 .productBody,
 .blogBody {
   padding: 18px;
 }
 
-/* title */
 .productBody h3,
 .blogBody h3 {
- font-size: 20px;
+  margin: 0;
+
+  font-size: 20px;
   font-weight: 700;
   line-height: 1.5;
+
   color: #222;
 
-  /* luôn giữ 2 dòng */
   min-height: calc(20px * 1.5 * 2);
 
   display: -webkit-box;
@@ -282,7 +312,8 @@
   overflow: hidden;
 }
 
-/* desc */
+/* Blog description */
+
 .blogBody p {
   margin-top: 10px;
 
@@ -290,28 +321,40 @@
   line-height: 1.7;
 
   color: #666;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
 }
 
-/* ================= PRICE ================= */
+/* =========================================================
+   PRICE
+========================================================= */
 
 .priceBox {
   margin-top: 14px;
 
   display: flex;
   flex-direction: column;
+
   gap: 4px;
 }
 
 .priceRow {
   display: flex;
   align-items: center;
+
   gap: 12px;
+
   flex-wrap: wrap;
 }
 
 .priceSale {
   display: flex;
   align-items: flex-end;
+
   gap: 3px;
 
   font-size: 28px;
@@ -329,85 +372,336 @@
 
 .priceOld {
   font-size: 17px;
+
   color: #999;
+
   text-decoration: line-through;
 }
 
 .currency {
   font-size: 15px;
   font-weight: 700;
+
   margin-bottom: 3px;
 }
 
-.currency {
+/* =========================================================
+   VIEW MORE
+========================================================= */
+
+.viewMoreWrap {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 30px;
+}
+
+.viewMoreBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 14px 28px;
+
+  border-radius: 999px;
+
+  background: var(--gradient);
+
+  color: white;
+
+  text-decoration: none;
+
   font-size: 15px;
   font-weight: 700;
 
-  margin-bottom: 3px;
+  box-shadow:
+    0 10px 30px rgba(67, 167, 255, 0.18);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-/* ================= MOBILE ================= */
+.viewMoreBtn span {
+  transition:
+    transform 0.3s ease;
+}
+
+.viewMoreBtn:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 35px rgba(67, 167, 255, 0.25);
+}
+
+.viewMoreBtn:hover span {
+  transform: translateX(5px);
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 992px) {
+  .productGrid,
+  .blogGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 768px) {
-.productBody h3 {
-  font-size: 16px;
-  line-height: 1.4;
+  /* SECTION */
 
-  min-height: calc(16px * 1.4 * 2);
-
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-
-  overflow: hidden;
-}
   .section {
+    width: 100%;
+
     margin-top: 27px;
-    padding: 27px 15px;
+
+    padding: 27px 12px;
+  }
+
+  /* HEADER */
+
+  .sectionHeader {
+    margin-bottom: 22px;
   }
 
   .sectionHeader h2 {
-    display: flex;
-    text-align: center;
-  align-items: center;
-  font-size: 42px;
-  font-weight: 800;
-
+    font-size: 32px;
+    line-height: 1.2;
+    font-weight: 800;
   }
 
-  .productGrid {
+  .sectionHeader .backButton {
+    left: 0;
+  }
+
+  /* =====================================================
+     2 CỘT MOBILE
+  ===================================================== */
+
+  .productGrid,
+  .blogGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+
     gap: 12px;
   }
 
-  .blogGrid {
-    grid-template-columns: 1fr;
-    gap: 18px;
+  /* =====================================================
+     CARD MOBILE
+  ===================================================== */
+
+  .productCard,
+  .blogCard {
+    border-radius: 14px;
   }
 
-  .imgOverlay {
+  /* =====================================================
+     PRODUCT IMAGE
+  ===================================================== */
 
-    background:
-      linear-gradient(
-        to top,
-        rgba(0,0,0,0.55),
-        rgba(0,0,0,0.05)
-      );
+  .productImg {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+  }
+
+  /* =====================================================
+     BLOG IMAGE
+     
+     ẢNH POST RỘNG HƠN
+  ===================================================== */
+
+  .blogImg {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+  }
+
+  .cardImage {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+  }
+
+  /* =====================================================
+     OVERLAY MOBILE
+  ===================================================== */
+
+  .imgOverlay {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0.05)
+    );
   }
 
   .imgBtn {
-    padding: 12px 18px;
-    font-size: 13px;
+    padding: 8px 12px;
+
+    font-size: 11px;
 
     backdrop-filter: blur(10px);
   }
 
-  .productBody h3,
-  .blogBody h3 {
-    font-size: 18px;
+  .imgBtn::after {
+    margin-left: 6px;
   }
 
-  .priceValue {
-    font-size: 24px;
+  /* =====================================================
+     PRODUCT BODY
+  ===================================================== */
+
+  .productBody {
+    padding: 10px;
+  }
+
+  .productBody h3 {
+    margin: 0;
+
+    font-size: 15px;
+    line-height: 1.4;
+
+    min-height: calc(15px * 1.4 * 2);
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+  }
+
+  /* =====================================================
+     BLOG BODY
+  ===================================================== */
+
+  .blogBody {
+    padding: 10px;
+  }
+
+  .blogBody h3 {
+    margin: 0;
+
+    font-size: 15px;
+    line-height: 1.4;
+
+    min-height: calc(15px * 1.4 * 2);
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+  }
+
+  .blogBody p {
+    margin-top: 6px;
+
+    font-size: 12px;
+    line-height: 1.4;
+
+    color: #666;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+  }
+
+  /* =====================================================
+     PRICE MOBILE
+  ===================================================== */
+
+  .priceBox {
+    margin-top: 8px;
+  }
+
+  .priceSale {
+    font-size: 22px;
+  }
+
+  .priceOld {
+    font-size: 13px;
+  }
+
+  .currency {
+    font-size: 11px;
+  }
+
+  /* =====================================================
+     VIEW MORE MOBILE
+  ===================================================== */
+
+  .viewMoreWrap {
+    margin-top: 22px;
+  }
+
+  .viewMoreBtn {
+    padding: 12px 22px;
+
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+  .section {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .productGrid,
+  .blogGrid {
+    gap: 10px;
+  }
+
+  .productCard,
+  .blogCard {
+    border-radius: 12px;
+  }
+
+  .productBody,
+  .blogBody {
+    padding: 9px;
+  }
+
+  .productBody h3,
+  .blogBody h3 {
+    font-size: 14px;
+    line-height: 1.4;
+
+    min-height: calc(14px * 1.4 * 2);
+  }
+
+  .blogBody p {
+    font-size: 11px;
+  }
+
+  .priceSale {
+    font-size: 20px;
+  }
+
+  .priceOld {
+    font-size: 12px;
+  }
+
+  .currency {
+    font-size: 10px;
+  }
+
+  .imgBtn {
+    padding: 7px 10px;
+    font-size: 10px;
   }
 }
