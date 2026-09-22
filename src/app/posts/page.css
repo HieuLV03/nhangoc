@@ -435,8 +435,12 @@
 }
 
 /* RESPONSIVE */
+
+/* ================= MOBILE ================= */
+
 @media (max-width: 768px) {
 
+  /* HERO */
   .heroContent h1 {
     font-size: 34px;
   }
@@ -445,20 +449,69 @@
     height: 70dvh;
   }
 
-  .productGrid {
+  .heroContent p {
+    font-size: 15px;
+  }
+
+
+  /* ================= SECTION ================= */
+
+  .section {
+    margin-top: 27px;
+    padding: 27px 12px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 22px;
+  }
+
+  .sectionHeader h2 {
+    font-size: 32px;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+
+  /* ================= GRID 2 CỘT ================= */
+
+  .productGrid,
+  .blogGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
 
-  /* Bài viết vẫn 1 cột */
-  .blogGrid {
-    grid-template-columns: 1fr;
-    gap: 18px;
+
+  /* ================= CARD ================= */
+
+  .productCard,
+  .blogCard {
+    border-radius: 14px;
   }
 
-  .heroContent p {
-    font-size: 15px;
+
+  /* ================= IMAGE ================= */
+
+  .productImg,
+  .blogImg {
+    aspect-ratio: 4 / 5;
   }
+
+  .cardImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+
+  /* ================= BUTTON TRÊN ẢNH ================= */
+
+  .imgBtn {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+
+
+  /* ================= PRODUCT ================= */
 
   .productBody {
     padding: 12px;
@@ -468,10 +521,18 @@
     font-size: 15px;
     line-height: 1.4;
     margin-bottom: 6px;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    overflow: hidden;
+
+    min-height: calc(15px * 1.4 * 2);
   }
 
   .productBody p {
-    display: none; /* Ẩn mô tả để card gọn hơn */
+    display: none;
   }
 
   .priceLabel {
@@ -486,28 +547,58 @@
     font-size: 12px;
   }
 
-  .imgBtn {
-    padding: 8px 14px;
-    font-size: 12px;
+
+  /* ================= BLOG ================= */
+
+  .blogBody {
+    padding: 12px;
   }
-  .viewMoreWrap{
-    margin-top:22px;
-}
 
-.viewMoreBtn{
-    padding:12px 22px;
-    font-size:14px;
-}
+  .blogBody h3 {
+    font-size: 15px;
+    line-height: 1.4;
 
-}
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    overflow: hidden;
+
+    min-height: calc(15px * 1.4 * 2);
+  }
+
+  .blogBody p {
+    font-size: 13px;
+    line-height: 1.4;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    overflow: hidden;
+  }
 
 
-/* ⭐ QUAN TRỌNG: ảnh full cover */
-.heroImg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+  /* ================= XEM THÊM ================= */
+
+  .viewMoreWrap {
+    margin-top: 22px;
+  }
+
+  .viewMoreBtn {
+    padding: 12px 22px;
+    font-size: 14px;
+  }
+
+
+  /* ================= HERO IMAGE ================= */
+
+  .heroImg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 }

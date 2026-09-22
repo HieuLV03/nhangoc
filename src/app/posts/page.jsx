@@ -27,7 +27,7 @@ export default async function HomePage() {
     supabase
       .from("posts")
       .select("*")
-      .eq("status",)
+      .eq("status", "published")
       .order("created_at", {
         ascending: false,
       })
