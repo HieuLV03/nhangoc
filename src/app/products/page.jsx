@@ -26,6 +26,7 @@ export default async function HomePage() {
     .from("posts")
     .select("*")
     .eq("status","published")
+    .eq("featured", true)
     .order("created_at",{ascending:false})
     .limit(5)
 
