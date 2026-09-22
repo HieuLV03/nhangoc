@@ -508,7 +508,7 @@
 
   .productImg {
     width: 100%;
-    aspect-ratio: 4 / 5;
+    height: 100%;
   }
 
   /* =====================================================
@@ -519,7 +519,7 @@
 
   .blogImg {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    height: 100%;
   }
 
   .cardImage {
