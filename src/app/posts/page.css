@@ -10,38 +10,13 @@
    HERO
 ========================================================= */
 
-.heroSlider {
-  width: 100%;
-  height: 79dvh;
-
-  position: relative;
-
-  overflow: hidden;
-}
-
 .heroSwiper {
   width: 100%;
   height: 100%;
 }
 
-.heroSlide {
-  width: 100%;
-  height: 100%;
-
-  position: relative;
-
-  background-size: cover;
-  background-position: center;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-}
-
 .heroOverlay {
   position: absolute;
-
   inset: 0;
 
   background:
@@ -56,31 +31,24 @@
 
 .heroContent {
   position: relative;
-
   z-index: 2;
 
   text-align: center;
-
   color: white;
 
   max-width: 900px;
-
   padding: 20px;
 }
 
 .heroContent h1 {
   font-size: 60px;
-
   font-weight: 800;
-
   font-family: var(--font-inter);
 }
 
 .heroContent p {
   margin-top: 15px;
-
   font-size: 18px;
-
   opacity: 0.9;
 }
 
@@ -93,7 +61,6 @@
   margin-top: 30px;
 
   display: flex;
-
   flex-direction: column;
 
   gap: 12px;
@@ -106,7 +73,6 @@
 
 .btnPrimary {
   background: white;
-
   color: #ff4d8d;
 
   padding: 12px 22px;
@@ -114,7 +80,6 @@
   border-radius: 999px;
 
   font-weight: 700;
-
   text-decoration: none;
 
   transition: 0.3s;
@@ -126,7 +91,6 @@
 
 .btnOutline {
   border: 1px solid white;
-
   color: white;
 
   padding: 12px 22px;
@@ -155,7 +119,6 @@
 
 .swiper-pagination-bullet {
   background: white;
-
   opacity: 0.5;
 }
 
@@ -170,7 +133,6 @@
 
 .section {
   width: 100%;
-
   max-width: 1200px;
 
   margin: 0 auto;
@@ -205,11 +167,6 @@
 /* =========================================================
    BLOG GRID
 ========================================================= */
-
-/*
-  ProductGrid KHÔNG style ở đây.
-  ProductList.css sẽ quản lý sản phẩm.
-*/
 
 .blogGrid {
   display: grid;
@@ -260,20 +217,19 @@
    BLOG IMAGE
 ========================================================= */
 
+/*
+  ĐỔI TỪ 3/2 → 4/5
+
+  Ảnh sẽ cao hơn và card Blog sẽ có dạng dọc
+  giống bộ CSS trước của bạn.
+*/
+
 .blogImg {
   position: relative;
 
   width: 100%;
 
-  /*
-    Image của bạn đang:
-    width={600}
-    height={400}
-
-    => tỷ lệ 3 / 2
-  */
-
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 4 / 5;
 
   overflow: hidden;
 
@@ -306,7 +262,7 @@
 
 .blogImg .imgOverlay {
   position: absolute;
-
+aspect-ratio: 4/5;
   inset: 0;
 
   display: flex;
@@ -595,10 +551,11 @@
   ===================================================== */
 
   .section {
-    margin-top: 27px;
+        margin-top: 27px;
 
-    padding:
-      27px 12px;
+    padding: 27px 12px;
+padding-top: 39px;
+    
   }
 
   .sectionHeader {
@@ -638,18 +595,13 @@
   ===================================================== */
 
   /*
-    QUAN TRỌNG:
-
-    Không dùng 4/5 nữa.
-
-    Post dùng ảnh 600x400
-    nên dùng 3/2.
+    Giữ tỷ lệ 4/5 trên mobile
+    để card vẫn cao giống desktop.
   */
 
   .blogImg {
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 4 / 5;
   }
-
 
   .blogImg .cardImage {
     width: 100%;
@@ -737,7 +689,6 @@
 
   .section {
     padding-left: 10px;
-
     padding-right: 10px;
   }
 
@@ -747,6 +698,10 @@
 
   .blogCard {
     border-radius: 12px;
+  }
+
+  .blogImg {
+    aspect-ratio: 4 / 5;
   }
 
   .blogBody {

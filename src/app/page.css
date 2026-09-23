@@ -19,25 +19,28 @@ body {
 
 /* ================= CENTER CONTENT ================= */
 /* IMAGE WRAP */
-.productImg,
 .blogImg {
   position: relative;
   width: 100%;
-  display: flex;
-    justify-content: center;
-  aspect-ratio: 4/5; /* hoặc 4/5 nếu thích */
-
-  align-items: center;
-
-  justify-content: center;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
 }
 
+.blogImg .cardImage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 16px;
+  transition: transform 0.4s ease;
+}
 .cardImage {
   width: 100%;
-    display: block;
-
-  height: 100%;        /* 👈 giữ nguyên tỷ lệ gốc */
+  height: 100%;
+  display: block;
+  object-fit: contain;
   border-radius: 16px;
+  transition: transform 0.4s ease;
 }
 
 .productCard:hover .cardImage,
@@ -59,7 +62,8 @@ body {
   justify-content: center;
 width: 100%;
   opacity: 0;
-
+height: 100%;
+aspect-ratio: 4/5;
   transition: 0.35s ease;
 
   backdrop-filter: blur(2px);
@@ -128,6 +132,9 @@ width: 100%;
         rgba(0,0,0,0.5),
         rgba(0,0,0,0.08)
       );
+
+        height: 100%;
+
   }
   /* CTA gọn lại */
 
@@ -302,10 +309,6 @@ width: 100%;
     border-radius:14px;
 }
 
-.cardImage{
-    aspect-ratio:4/5;
-    object-fit:cover;
-}
 
 .productBody,
 .blogBody{

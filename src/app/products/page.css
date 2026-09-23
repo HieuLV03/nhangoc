@@ -590,6 +590,7 @@
 
     padding:
       27px 12px;
+      padding-top: 36px;
   }
 
   .sectionHeader {
@@ -638,7 +639,7 @@
   .blogImg {
     width: 100%;
 
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 4/5;
   }
 
 
@@ -655,6 +656,7 @@
   ===================================================== */
 
   .blogImg .imgOverlay {
+    aspect-ratio: 4/5;
     background:
       linear-gradient(
         to top,

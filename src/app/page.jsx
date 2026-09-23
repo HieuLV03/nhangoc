@@ -56,23 +56,16 @@ console.log("sliderError", sliderRes.error);
 <section className="section introSection">
   <div className="introContent">
     <span className="sectionTag">NHÀ NGỌC</span>
+<h1>Nhà Ngọc – Trà sữa, trà trái cây và cà phê thơm ngon</h1>
 
-    <h1>Nhà Ngọc – Thức uống thơm ngon, chất lượng mỗi ngày</h1>
+<p>
+  Nhà Ngọc chuyên phục vụ trà sữa, trà trái cây, cà phê và nhiều loại đồ uống thơm ngon từ nguyên liệu chất lượng, hương vị đa dạng và giá hợp lý.
+</p>
 
-    <p>
-      Nhà Ngọc chuyên phục vụ các loại trà sữa, trà trái cây,
-      cà phê và đồ uống được pha chế từ nguyên liệu chất lượng.
-      Với thực đơn đa dạng, hương vị thơm ngon và mức giá hợp lý,
-      Nhà Ngọc mong muốn mang đến cho khách hàng những ly đồ uống
-      tươi ngon trong từng lần thưởng thức.
-    </p>
+<p>
+  Thực đơn nổi bật gồm trà sữa truyền thống, trà sữa khoai môn, trà đào, trà vải cùng nhiều loại topping hấp dẫn, phù hợp với nhiều sở thích.
+</p>
 
-    <p>
-      Ngoài các món bán chạy như trà sữa truyền thống, trà sữa khoai môn,
-      trà đào, trà vải và nhiều loại topping hấp dẫn,
-      Nhà Ngọc luôn cập nhật những thức uống mới để đáp ứng
-      sở thích của mọi khách hàng.
-    </p>
   </div>
 </section>
 <ScrollReveal>
@@ -126,14 +119,14 @@ console.log("sliderError", sliderRes.error);
 
               {post.image && (
 <div className="blogImg">
-  <Image
-    src={post.image}
-    alt={post.title}
-     width={0}
-  height={0}
-  sizes="100vw"
-    className="cardImage"
-  />
+<Image
+  src={post.image}
+  alt={post.title || "Bài viết"}
+  width={600}
+  height={400}
+  sizes="(max-width: 768px) 50vw, 33vw"
+  className="cardImage"
+/>
 
   <div className="imgOverlay">
     <div className="imgCta">
